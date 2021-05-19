@@ -1,13 +1,13 @@
 :root {
   /* color */
-  --color-primary: hsl(20, 100%, 57%);
-  --color-secondary: hsl(263, 100%, 53%);
+  --color-primary: hsl(202, 100%, 50%);
+  --color-secondary: hsl(266, 100%, 58%);
 
-  --color-text-main: hsl(0, 0%, 30%);
-  --color-text-optional: hsl(198, 6%, 60%);
+  --color-text-main: hsl(0, 0%, 9%);
+  --color-text-optional: hsl(0, 0%, 50%);
   --color-text-invert: hsl(0, 0%, 100%);
 
-  --color-bg: hsl(195, 77%, 97%);
+  --color-bg: hsl(0, 0%, 100%);
   --color-border: hsl(196, 40%, 88%);
   --color-pad: hsl(0, 0%, 100%);
   --color-over: hsla(197, 10%, 5%, 0.3);
@@ -66,11 +66,11 @@
     --color-text-optional: hsl(198, 10%, 45%);
     --color-text-invert: hsl(0, 0%, 100%);
 
-    --color-bg: hsl(0, 0%, 14%);
+    --color-bg: hsl(300, 5%, 11%);
     --color-border: hsl(0, 0%, 12%);
     --color-pad: hsl(0, 0%, 16%);
     --color-over: hsla(197, 10%, 5%, 0.9);
-    --color-picture-over: hsla(197, 10%, 5%, 0.4);
+    --color-picture-over: hsla(197, 10%, 5%, 0.3);
 
     --gradient-glass: linear-gradient(
       180deg,
@@ -97,7 +97,7 @@ html[data-theme='dark'] {
   --color-text-optional: hsl(198, 10%, 45%);
   --color-text-invert: hsl(0, 0%, 100%);
 
-  --color-bg: hsl(0, 0%, 14%);
+  --color-bg: hsl(300, 5%, 11%);
   --color-border: hsl(0, 0%, 12%);
   --color-pad: hsl(0, 0%, 16%);
   --color-over: hsla(197, 10%, 5%, 0.9);
@@ -155,33 +155,37 @@ code {
 h1,
 h2,
 h3 {
-  font-weight: 500;
+  font-weight: 700;
 }
 
 h1 {
-  font-size: 22px;
-  line-height: 26px;
+  font-size: max(32px, 6vmax);
+  line-height: max(32px, 6.8vmax);
 }
 
 h2 {
-  font-size: 18px;
-  line-height: 22px;
+  font-size: max(26px, 4vmax);
+  line-height: max(20px, 4vmax);
 }
 
-h3,
-p {
-  font-size: 14px;
-  line-height: 16px;
+h3 {
+  font-size: max(20px, 2vmax);
+  line-height: max(20px, 2vmax);
 }
 
-p,
+p{
+  font-size: max(16px, 2vmax);
+  line-height: max(16px, 2vmax);
+}
+
+
 small {
   font-weight: 300;
 }
 
 small {
-  font-size: 12px;
-  line-height: 14px;
+  font-size: max(8px, 0.5vmax);
+  line-height: max(8px, 0.5vmax);
   color: var(--color-text-optional);
 }
 
@@ -195,16 +199,14 @@ a:link {
 
 a:link,
 a:visited {
-  color: var(--color-secondary);
-}
-
-a:active,
-a:hover {
-  color: var(--color-primary);
+  color: var(--color-text-main);
+  transition: color ease-out 150ms;
 }
 
 a:hover {
   cursor: pointer;
+  color: var(--color-primary);
+  transition: color ease-in 150ms;
 }
 
 /* adaptive */
@@ -224,12 +226,16 @@ a:hover {
   #root {
     overflow-y: scroll;
   }
+
+  /* h1 {
+    font-size: 32px;
+    line-height: 36px;
+  } */
 }
 
 /* prefers-reduced-motion */
 
 @media (prefers-reduced-motion: no-preference) {
-
 }
 
 /* effect */

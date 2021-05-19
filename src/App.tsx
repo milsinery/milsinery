@@ -1,25 +1,53 @@
-import React from 'react';
 import avatar from '../src/avatar.png';
+import Plugins from './components/Plugins';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <div className="Main__wrapper">
-      <div className="App__avatar">
-        <img src={avatar} alt="avatar" />
-      </div>
-      <div className="App__links">
-        <a href="https://t.me/pluginsforfigma" target="_blank" rel="noopener noreferrer">Канал, где я рассказываю про свои плагины — Plugins for Figma</a>
-        <a href="https://t.me/milsinery" target="_blank" rel="noopener noreferrer">Инста</a>
-        <a href="https://behance.net/milsinery" target="_blank" rel="noopener noreferrer">Биханс</a>
-        <a href="https://instagram.com/milsinery" target="_blank" rel="noopener noreferrer">Телега</a>
-        <a href="https://career.habr.com/milsinery" target="_blank" rel="noopener noreferrer">Профиль на Хабр Карьере</a>
-        <a href="mailto:milsinery@icloud.com">milsinery@icloud.com</a>
-      </div>
+        <header className="App__header">
+          <div className="App__logo">
+            <div className="App__avatar">
+              <img src={avatar} alt="avatar" />
+            </div>
+            <h3>Владимир Быков</h3>
+          </div>
+        </header>
+
+        <div className="App__description">
+          <h1 className="App__title">
+            Разрабатываю интерфейсы, пишу к ним текст и рисую графику.
+          </h1>
+        </div>
+        <div className="App__plugins">
+          <h3 className="App__plugins-title">Создаю плагины для Фигмы</h3>
+          <Plugins></Plugins>
+        </div>
+        <div className="App__links">
+          <p className="App__link">
+            <a
+              href="https://career.habr.com/milsinery"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Хабр Карьера
+            </a>
+          </p>
+          <p className="App__link">
+            <a
+              href="https://t.me/milsinery"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Телеграм
+            </a>
+          </p>
+        </div>
+        <small className="App__version">Предварительная версия сайта</small>
       </div>
     </div>
   );
-}
+};
 
 export default App;
