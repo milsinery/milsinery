@@ -1,7 +1,7 @@
 .plugins {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8vmax;
+  margin-bottom: 6vmax;
 }
 
 .plugin {
@@ -15,8 +15,8 @@
 
 .plugin__cover {
   display: flex;
-  height: max(16px, 8vmax);
-  width: max(16px, 8vmax);
+  height: max(16px, 6vmax);
+  width: max(16px, 6vmax);
   border-radius: 4vmax;
   overflow: hidden;
   flex-shrink: 0;
@@ -32,4 +32,17 @@
 
 .plugin__title {
   margin-bottom: max(8px, 0.5vmax);
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 4vmax;
+    line-height: 5vmax;
+  }
+
+  .plugin {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5vmax;
+  }
 }

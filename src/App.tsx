@@ -1,4 +1,5 @@
 import avatar from '../src/avatar.png';
+import figure1 from './pictures/graphic/figure1.svg'
 import Plugins from './components/Plugins';
 import './App.css';
 
@@ -21,7 +22,7 @@ const App = () => {
           </h1>
         </div>
         <div className="App__plugins">
-          <h3 className="App__plugins-title">Создаю плагины для Фигмы</h3>
+          <h3 className="App__plugins-title">Плагины для Фигмы</h3>
           <Plugins></Plugins>
         </div>
         <div className="App__links">
@@ -44,7 +45,7 @@ const App = () => {
             </a>
           </p>
         </div>
-        <small className="App__version">Предварительная версия сайта</small>
+        <small className="App__version">Предварительная версия</small>
       </div>
     </div>
   );

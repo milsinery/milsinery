@@ -90,36 +90,6 @@
   }
 }
 
-/* dark theme, manual toggle */
-
-html[data-theme='dark'] {
-  --color-text-main: hsl(0, 0%, 85%);
-  --color-text-optional: hsl(198, 10%, 45%);
-  --color-text-invert: hsl(0, 0%, 100%);
-
-  --color-bg: hsl(300, 5%, 11%);
-  --color-border: hsl(0, 0%, 12%);
-  --color-pad: hsl(0, 0%, 16%);
-  --color-over: hsla(197, 10%, 5%, 0.9);
-  --color-picture-over: hsla(197, 10%, 5%, 0.3);
-
-  --gradient-glass: linear-gradient(
-    180deg,
-    hsla(0, 0%, 40%, 0.28) 0%,
-    hsla(0, 0%, 40%, 0.07) 100%
-  );
-
-  /* shadow */
-  --shadow-big: 0px 32px 40px hsla(0, 0%, 0%, 0.3),
-    0px 8px 8px hsla(0, 0%, 0%, 0.1);
-  --shadow-med: 0px 0px 8px hsla(0, 0%, 0%, 0.1),
-    0px 1px 1px hsla(0, 0%, 0%, 0.2);
-  --shadow-little: 0px 2px 6px hsla(0, 0%, 0%, 0.1),
-    0px 1px 1px hsla(0, 0%, 0%, 0.2);
-  --shadow-reverse: 0px -2px 8px hsla(0, 0%, 0%, 0.1),
-    0px -1px 1px hsla(0, 0%, 0%, 0.1);
-}
-
 /* main style */
 
 * {
@@ -156,36 +126,32 @@ h1,
 h2,
 h3 {
   font-weight: 700;
+  line-height: 110%;
 }
 
 h1 {
-  font-size: max(32px, 6vmax);
-  line-height: max(32px, 6.8vmax);
+  font-size: max(32px, 5.8vmax);
+  /* line-height: 110%; */
 }
 
 h2 {
-  font-size: max(26px, 4vmax);
-  line-height: max(20px, 4vmax);
+  font-size: max(20px, 3vmax);
+  /* line-height: max(20px, 3vmax); */
 }
 
 h3 {
-  font-size: max(20px, 2vmax);
-  line-height: max(20px, 2vmax);
-}
-
-p{
   font-size: max(16px, 2vmax);
-  line-height: max(16px, 2vmax);
+  /* line-height: max(16px, 2vmax); */
 }
 
+p {
+  font-size: max(16px, 2vmax);
+  /* line-height: max(16px, 2vmax); */
+}
 
 small {
   font-weight: 300;
-}
-
-small {
-  font-size: max(8px, 0.5vmax);
-  line-height: max(8px, 0.5vmax);
+  font-size: max(8px, 1vmax);
   color: var(--color-text-optional);
 }
 
@@ -211,32 +177,32 @@ a:hover {
 
 /* adaptive */
 
-@media (max-width: 480px) {
-  body:after {
-    content: 'Emulating mobile device on desktop or laptop';
+@media screen and (max-width: 640px) {
+  h1 {
+    font-size: 5vmax;
+    line-height: 6vmax;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 4vmax;
+    line-height: 5vmax;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  h1 {
+    font-size: 2vmax;
+    line-height: 4vmax;
   }
 }
 
 /* mobile  */
 
-@media (hover: none) and (pointer: coarse) and (max-width: 480px) {
-  :root {
-    --space-bottom: 40px;
-  }
-  #root {
-    overflow-y: scroll;
-  }
+/* @media (hover: none) and (pointer: coarse) and (max-width: 480px) {
+} */
 
-  /* h1 {
-    font-size: 32px;
-    line-height: 36px;
-  } */
-}
-
-/* prefers-reduced-motion */
-
-@media (prefers-reduced-motion: no-preference) {
-}
 
 /* effect */
 
