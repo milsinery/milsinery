@@ -52,15 +52,12 @@
   background-color: var(--color-picture-over);
 }
 
-.App__description,
+.App__title,
 .App__plugins {
   margin: 0 0 11vmax 0;
 }
 
-.App__description {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+.App__title {
   max-width: 90%;
 }
 
@@ -82,13 +79,13 @@
   margin-bottom: 1.5vmax;
 }
 
-@media screen and (max-width: 375) {
+@media screen and (max-width: 480px) {
   .Main__wrapper {
     margin: 3vmax 2vmax 4vmax 2vmax;
   }
 
-  .App__description,
+  .App__title,
   .App__plugins {
-    margin: 0 0 6vmax 0;
+    margin: 0 0 8vmax 0;
   }
 }

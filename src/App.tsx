@@ -19,11 +19,9 @@ const App = () => {
           </div>
         </header>
 
-        <div className="App__description">
-          <h1 className="App__title">
-            Разрабатываю интерфейсы, пишу к ним текст и рисую графику.
-          </h1>
-        </div>
+        <h1 className="App__title">
+          Разрабатываю интерфейсы, пишу к ним текст и рисую графику.
+        </h1>
         <div className="App__plugins">
           <h3 className="App__plugins-title">Плагины для Фигмы</h3>
           <Plugins></Plugins>
