@@ -130,23 +130,19 @@ h3 {
 }
 
 h1 {
-  font-size: max(32px, 5.8vmax);
-  /* line-height: 110%; */
+  font-size: 5.8vmax;
 }
 
 h2 {
   font-size: max(20px, 3vmax);
-  /* line-height: max(20px, 3vmax); */
 }
 
 h3 {
   font-size: max(16px, 2vmax);
-  /* line-height: max(16px, 2vmax); */
 }
 
 p {
   font-size: max(16px, 2vmax);
-  /* line-height: max(16px, 2vmax); */
 }
 
 small {
@@ -180,34 +176,17 @@ a:hover {
 @media screen and (max-width: 640px) {
   h1 {
     font-size: 5vmax;
-    line-height: 6vmax;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  h1 {
-    font-size: 4vmax;
-    line-height: 5vmax;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  h1 {
-    font-size: 2vmax;
-    line-height: 4vmax;
   }
 }
 
 /* mobile  */
 
-/* @media (hover: none) and (pointer: coarse) and (max-width: 480px) {
-} */
-
+/* @media (hover: none) and (pointer: coarse) and (max-width: 640px) {} */
 
 /* effect */
 
 .effect-fade-in {
-  animation-duration: var(--speed-slow, 600ms);
+  animation-duration: var(--speed-slow, 600ms), var(--speed-slow, 600ms);
   animation-name: fade-in;
 }
 
@@ -291,7 +270,7 @@ a:hover {
 }
 
 .effect-zoom-in {
-  animation-duration: var(--speed-med, 300ms), var(--speed-slow, 600ms);
+  animation-duration: var(--speed-slow, 600ms), var(--speed-slow, 600ms);
   animation-name: zoom-in, fade-in;
 }
 

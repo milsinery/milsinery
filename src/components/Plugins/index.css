@@ -1,48 +1,4 @@
 .plugins {
   display: flex;
   flex-direction: column;
-  margin-bottom: 6vmax;
-}
-
-.plugin {
-  display: flex;
-  margin-bottom: 5vmax;
-}
-
-.plugin:last-child {
-  margin: 0;
-}
-
-.plugin__cover {
-  display: flex;
-  height: max(16px, 6vmax);
-  width: max(16px, 6vmax);
-  border-radius: 4vmax;
-  overflow: hidden;
-  flex-shrink: 0;
-  margin: 0 2vmax 0 0;
-}
-
-.plugin__info {
-  display: flex;
-  flex-direction: column;
-  padding-top: 1vmax;
-  width: 100%;
-}
-
-.plugin__title {
-  margin-bottom: max(8px, 0.5vmax);
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 4vmax;
-    line-height: 5vmax;
-  }
-
-  .plugin {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5vmax;
-  }
 }
