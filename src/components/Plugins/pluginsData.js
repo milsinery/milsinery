@@ -7,7 +7,7 @@ import coft2 from '../../pictures/plugins/coft.png';
 import abracadabra2 from '../../pictures/plugins/abracadabra.png';
 import nowInside2 from '../../pictures/plugins/nowinside.png';
 
-const plugins = [
+const PluginsData = [
   {
     webp: meow,
     png: meow2,
@@ -38,4 +38,4 @@ const plugins = [
   },
 ];
 
-export default plugins;
+export default PluginsData;

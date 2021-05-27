@@ -19,7 +19,7 @@ const Plugin = ({ webp, png, name, info, link }: PluginProps) => {
             src={png}
             width="100%"
             height="100%"
-            alt="Cover picture"
+            alt="Cover"
           />
         </picture>
       </div>

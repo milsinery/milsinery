@@ -1,12 +1,12 @@
-import './index.css';
 import Plugin from '../plugin';
-import pluginsData from './pluginsData';
+import PluginsData from './pluginsData';
+import './index.css';
 
 const Plugins = () => {
   return (
     <>
       <div className="plugins">
-        {pluginsData.map((item, key) => {
+        {PluginsData.map((item, key) => {
           return (
             <Plugin
               webp={item.webp}
