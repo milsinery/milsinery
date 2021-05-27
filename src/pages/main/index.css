@@ -29,8 +29,8 @@
     display: flex;
     position: relative;
     border-radius: 100%;
-    width: 3.5vmax;
-    height: 3.5vmax;
+    width: max(18px, 3.5vmax);
+    height: max(18px, 3.5vmax);
     overflow: hidden;
     flex-shrink: 0;
     margin-right: 1vmax;
@@ -78,10 +78,6 @@
   }
   
   @media screen and (max-width: 480px) {
-    .Main__wrmainer {
-      margin: 3vmax 2vmax 4vmax 2vmax;
-    }
-  
     .main__title,
     .main__plugins {
       margin: 0 0 8vmax 0;
