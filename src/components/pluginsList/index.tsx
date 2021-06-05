@@ -1,11 +1,11 @@
 import Plugin from '../plugin';
-import PluginsData from './pluginsData';
+import PluginsData from '../../data/pluginsData';
 import './index.css';
 
-const Plugins = () => {
+const PluginsList = () => {
   return (
     <>
-      <div className="plugins">
+      <div className="pluginsList">
         {PluginsData.map((item, key) => {
           return (
             <Plugin
@@ -23,4 +23,4 @@ const Plugins = () => {
   );
 };
 
-export default Plugins;
+export default PluginsList;

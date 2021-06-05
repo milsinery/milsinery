@@ -1,11 +1,11 @@
-import meow from '../../pictures/plugins/meow.webp';
-import coft from '../../pictures/plugins/coft.webp';
-import abracadabra from '../../pictures/plugins/abracadabra.webp';
-import nowInside from '../../pictures/plugins/nowinside.webp';
-import meow2 from '../../pictures/plugins/meow.png';
-import coft2 from '../../pictures/plugins/coft.png';
-import abracadabra2 from '../../pictures/plugins/abracadabra.png';
-import nowInside2 from '../../pictures/plugins/nowinside.png';
+import meow from '../pictures/plugins/meow.webp';
+import coft from '../pictures/plugins/coft.webp';
+import abracadabra from '../pictures/plugins/abracadabra.webp';
+import nowInside from '../pictures/plugins/nowinside.webp';
+import meow2 from '../pictures/plugins/meow.png';
+import coft2 from '../pictures/plugins/coft.png';
+import abracadabra2 from '../pictures/plugins/abracadabra.png';
+import nowInside2 from '../pictures/plugins/nowinside.png';
 
 const PluginsData = [
   {

@@ -1,7 +1,7 @@
+import { Route, Switch } from 'react-router-dom';
 import Main from './pages/main/index';
 import Plugins from './pages/plugins/index';
 import Error from './pages/error/index';
-import { Route, Switch } from 'react-router-dom';
 
 const App = () => {
   return (
