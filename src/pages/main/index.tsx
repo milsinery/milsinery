@@ -20,6 +20,7 @@ const Main = () => {
           content="ui, ux, figma, дизайн, интерфейс, разработка, фигма, плагины"
         />
         <meta property="og:url" content="https://milsinery.com" />
+        <meta property="og:site_name" content="Владимир Быков"/>
         <meta property="og:title" content="Владимир Быков" />
         <meta
           property="og:description"
