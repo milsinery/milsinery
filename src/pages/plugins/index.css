@@ -1,35 +1,31 @@
 .plugins {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    overflow-y: auto;
-  }
-  
-  .plugins__wrapper {
-    display: flex;
-    flex-direction: column;
-    max-width: 1280px;
-    margin: 6vmax 4vmax 12vmax 4vmax;
-  }
-  
-  .plugins__header {
-    display: flex;
-    flex: 1 0;
-    margin-bottom: 5vmax;
-  }
-  
-  .plugins__title {
-    margin: 0 0 2vmax 0;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
 
-  .plugins__telegram-link {
-    margin: 0 0 6vmax 0;
-  }
-  
-  
-  .plugins__plugins-list {
-    display: flex;
-    flex-direction: column;
-  }
+.plugins__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 6vmax 4vmax 12vmax 4vmax;
+}
+
+.plugins__header {
+  margin: 0 0 4vmax 0;
+}
+
+.plugins__title {
+  margin: 0 0 2vmax 0;
+}
+
+.plugins__plugins-list {
+  margin: 0 0 4vmax 0;
+}
+
+.plugins__telegram-link {
+  margin: 0 0 6vmax 0;
+}

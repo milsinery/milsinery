@@ -3,3 +3,11 @@
   flex-direction: column;
   width: 100%;
 }
+
+.pluginsList > .plugin{
+  margin-bottom: 1vmax;
+}
+
+.pluginsList > .plugin:last-child {
+  margin-bottom: 0;
+}

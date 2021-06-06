@@ -36,7 +36,6 @@ const Main = () => {
             <Link to="/plugins">
               <h3 className="main__plugins-title">Плагины для Фигмы</h3>
             </Link>
-
             <PluginsList></PluginsList>
           </div>
           <div className="main__links">

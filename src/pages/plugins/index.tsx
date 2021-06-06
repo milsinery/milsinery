@@ -22,16 +22,18 @@ const Plugins = () => {
             </Link>
           </header>
           <h1 className="plugins__title">Плагины для Фигмы</h1>
-          <p className="plugins__telegram-link">
+          <div className="plugins__plugins-list">
+            <PluginsList></PluginsList>
+          </div>
+          <h3 className="plugins__telegram-link">
             <a
               href="https://t.me/pluginsforfigma"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Канал о плагинах, Фигме и дизайне
+              Канал с описанием и примерами
             </a>
-          </p>
-          <PluginsList></PluginsList>
+          </h3>
         </div>
       </div>
     </>
