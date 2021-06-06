@@ -8,7 +8,7 @@ const App = () => {
     <Switch>
       <Route exact path="/" component={Main} />
       <Route path="/plugins" component={Plugins} />
-      <Route component={Error} />
+      <Route component={Main} />
     </Switch>
   );
 };
