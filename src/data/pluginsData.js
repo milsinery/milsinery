@@ -14,6 +14,8 @@ const PluginsData = [
     name: 'Meow!',
     info: 'Cоздаёт компонент из выбранного фрейма, а все остальные такие же делает его копиями.',
     link: 'https://www.figma.com/community/plugin/946844618678350922/Meow!',
+    title: "Просто магия какая-то",
+    author: "Бойко Константин"
   },
   {
     webp: abracadabra,
@@ -21,6 +23,8 @@ const PluginsData = [
     name: 'Abracadabra!',
     info: 'Генерирует и вставляет текст и изображения в слои.',
     link: 'https://www.figma.com/community/plugin/919546417582505589/Abracadabra!',
+    title: "Omg this is magical! Thank you for this! ",
+    author: "Tony Shi"
   },
   {
     webp: coft,
@@ -35,6 +39,8 @@ const PluginsData = [
     name: 'Now Inside!',
     info: 'Вставляет выпавшие слои в выбранный фрейм.',
     link: 'https://www.figma.com/community/plugin/945329982331973175/Now-inside!',
+    title: "Ну вот, теперь идеален 👌",
+    author: "Андрей"
   },
 ];
 
