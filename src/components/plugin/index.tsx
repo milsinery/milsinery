@@ -6,8 +6,7 @@ type PluginProps = {
   name: string;
   info: string;
   link: string;
-  title?: string;
-  author?: string;
+  comment?: Array<{author: string, text: string}>
 };
 
 const Plugin = ({
@@ -16,9 +15,14 @@ const Plugin = ({
   name,
   info,
   link,
-  title,
-  author,
+  comment
 }: PluginProps) => {
+  const symbols = ["❤️", "☺️", "🥰", "👏", "😎", "🔥", "💔", "😍", "💪", "🎉", "🥳", "🍾"];
+
+  const getRandom = (arr: Array<any>) => {
+    return arr[Math.floor(Math.random() * (arr.length - 1))];
+  }
+
   return (
     <div className="plugin">
       <div className="plugin__cover">
@@ -45,12 +49,12 @@ const Plugin = ({
         <div className="plugin__glass"></div>
       </div>
 
-      {title && author && (
+      {comment && (
         <div className="plugin__commentary">
-          <h3 className="plugin__commentary-title">{title}</h3>
-          <small className="plugin__commentary-author">{author}</small>
-          <h2 className="plugin__commentary-sym-1">❤️</h2>
-          <h1 className="plugin__commentary-sym-2">👏</h1>
+          <h3 className="plugin__commentary-title">{comment[0].text}</h3>
+          <small className="plugin__commentary-author">{comment[0].author}</small>
+          <h2 className="plugin__commentary-sym-1">{getRandom(symbols)}</h2>
+          <h1 className="plugin__commentary-sym-2">{getRandom(symbols)}</h1>
         </div>
       )}
     </div>

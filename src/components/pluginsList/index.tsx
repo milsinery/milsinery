@@ -14,9 +14,8 @@ const PluginsList = () => {
               name={item.name}
               info={item.info}
               link={item.link}
+              comment={item.comment}
               key={key}
-              title={item.title}
-              author={item.author}
             ></Plugin>
           );
         })}
