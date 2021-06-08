@@ -6,22 +6,32 @@ type PluginProps = {
   name: string;
   info: string;
   link: string;
-  comment?: Array<{author: string, text: string}>
+  comment?: Array<{ author: string; text: string }>;
 };
 
-const Plugin = ({
-  webp,
-  png,
-  name,
-  info,
-  link,
-  comment
-}: PluginProps) => {
-  const symbols = ["❤️", "☺️", "🥰", "👏", "😎", "🔥", "💔", "😍", "💪", "🎉", "🥳", "🍾"];
+const Plugin = ({ webp, png, name, info, link, comment }: PluginProps) => {
+  const symbols = [
+    '❤️',
+    '☺️',
+    '🥰',
+    '👏',
+    '😎',
+    '🔥',
+    '💔',
+    '😍',
+    '💪',
+    '🎉',
+    '🥳',
+    '🍾',
+    '😜',
+    '😽',
+    '🤟',
+    '🤌',
+  ];
 
   const getRandom = (arr: Array<any>) => {
-    return arr[Math.floor(Math.random() * (arr.length - 1))];
-  }
+    return Math.floor(Math.random() * (arr.length - 1));
+  };
 
   return (
     <div className="plugin">
@@ -39,22 +49,24 @@ const Plugin = ({
       </div>
 
       <div className="plugin__info">
-        <a href={link} target="_blank" rel="noopener noreferrer">
-          <h2 className="plugin__title">{name}</h2>
-        </a>
-        <p>{info}</p>
-      </div>
-      <div className="plugin__bg-first">
-        <div className="plugin__bg-second"></div>
-        <div className="plugin__glass"></div>
+        <h2 className="plugin__title">{name}</h2>
+        <p className="plugin__description">{info}</p>
+        <div className="plugin__links">
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            <h3 className="plugin__link">Установить</h3>
+          </a>
+          {/* <h3 className="plugin__link">Описание</h3> */}
+        </div>
       </div>
 
       {comment && (
         <div className="plugin__commentary">
           <h3 className="plugin__commentary-title">{comment[0].text}</h3>
-          <small className="plugin__commentary-author">{comment[0].author}</small>
-          <h2 className="plugin__commentary-sym-1">{getRandom(symbols)}</h2>
-          <h1 className="plugin__commentary-sym-2">{getRandom(symbols)}</h1>
+          <small className="plugin__commentary-author">
+            {comment[0].author}
+          </small>
+          <h2 className="plugin__commentary-sym-1">{symbols[getRandom(symbols)]}</h2>
+          <h1 className="plugin__commentary-sym-2">{symbols[getRandom(symbols)]}</h1>
         </div>
       )}
     </div>
