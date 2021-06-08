@@ -52,8 +52,8 @@ const Plugin = ({ webp, png, name, info, link, comment }: PluginProps) => {
         <h2 className="plugin__title">{name}</h2>
         <p className="plugin__description">{info}</p>
         <div className="plugin__links">
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            <h3 className="plugin__link">Установить</h3>
+          <a className="plugin__link" href={link} target="_blank" rel="noopener noreferrer">
+            <h3>Установить</h3>
           </a>
           {/* <h3 className="plugin__link">Описание</h3> */}
         </div>
