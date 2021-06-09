@@ -8,27 +8,6 @@ import './index.css';
 const Main = () => {
   return (
     <>
-      <Helmet>
-        <title>Владимир Быков</title>
-        <meta
-          name="description"
-          content="Разрабатываю интерфейсы, пишу к ним текст и рисую графику. Создаю плагины для Фигмы и рассказываю о них в канале Plugins for Figma."
-        />
-
-        <meta
-          name="keywords"
-          content="ui, ux, figma, дизайн, интерфейс, разработка, фигма, плагины"
-        />
-        <meta property="og:url" content="https://milsinery.com" />
-        <meta property="og:site_name" content="Владимир Быков"/>
-        <meta property="og:title" content="Владимир Быков" />
-        <meta
-          property="og:description"
-          content="Разрабатываю интерфейсы, пишу к ним текст и рисую графику. Создаю плагины для Фигмы и рассказываю о них в канале Plugins for Figma."
-        />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
       <div className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
           <header className="main__header">
