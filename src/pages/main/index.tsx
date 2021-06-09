@@ -43,7 +43,7 @@ const Main = () => {
             </div>
           </header>
           <h1 className="main__title">
-            Разрабатываю интерфейсы, пишу для них текст и рисую графику.
+            Разрабатываю интерфейсы, пишу для них текст и рисую графику.
           </h1>
           <div className="main__plugins">
             <Link to="/plugins">
