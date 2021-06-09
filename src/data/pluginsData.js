@@ -19,7 +19,11 @@ const PluginsData = [
       { author: 'Alina', text: 'Cool tool, will try, thank you!' },
       {
         author: 'Vitaly Z',
-        text: 'Very useful plugin and cool cat. Thank you! ',
+        text: 'Very useful plugin and cool cat. Thank you!',
+      },
+      {
+        author: 'Настя Кино',
+        text: 'Этот плагин делает за меня то, что я так не люблю делать. Это ли не счастье',
       },
     ],
   },
@@ -39,6 +43,9 @@ const PluginsData = [
     name: 'COFT',
     info: 'Создаёт копии объекта и подменяет в них текст.',
     link: 'https://www.figma.com/community/plugin/903936058293238810/COFT-%E2%80%94-create-objects-from-text',
+    comment: [
+      { author: 'Данила Щаников', text: 'Золото, а не плагин 😍' },
+    ],
   },
   {
     webp: nowInside,
