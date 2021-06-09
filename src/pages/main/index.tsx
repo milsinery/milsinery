@@ -99,7 +99,7 @@ const Main = () => {
               </a>
             </p>
           </div>
-          <small className="main__version">Предварительная версия</small>
+          <small className="main__version">Обновлён 9 июня. Добавлены отзывы к плагинам</small>
         </div>
       </div>
     </>
