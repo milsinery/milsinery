@@ -4,6 +4,7 @@ import PluginsList from '../../components/pluginsList/index';
 import './index.css';
 
 const Plugins = () => {
+  document.querySelector('html')?.setAttribute('data-theme', localStorage.getItem("theme") || "system");
   return (
     <>
       <Helmet>
