@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './index.css';
 
 type PluginProps = {
@@ -5,11 +6,12 @@ type PluginProps = {
   png: string;
   name: string;
   info: string;
-  link: string;
+  installLink: string;
+  infoLink: string;
   comment: Array<{ text: string; author: string }>;
 };
 
-const Plugin = ({ webp, png, name, info, link, comment }: PluginProps) => {
+const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: PluginProps) => {
   const symbols = [
     '❤️',
     '☺️',
@@ -56,13 +58,15 @@ const Plugin = ({ webp, png, name, info, link, comment }: PluginProps) => {
         <div className="plugin__links">
           <a
             className="plugin__link"
-            href={link}
+            href={installLink}
             target="_blank"
             rel="noopener noreferrer"
           >
             <h3>Установить</h3>
           </a>
-          {/* <h3 className="plugin__link">Описание</h3> */}
+          {/* <Link to={"/plugins/" + infoLink}>
+              <h3 className="plugin__link">Описание</h3>
+          </Link> */}
         </div>
       </div>
 

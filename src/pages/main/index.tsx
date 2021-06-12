@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import PluginsList from '../../components/pluginsList/index';
@@ -6,10 +7,17 @@ import avatar2 from '../../avatar.png';
 import './index.css';
 
 const Main = () => {
+  const [value, setValue] = useState(localStorage.getItem('theme') || 'system');
+  document.querySelector('html')?.setAttribute('data-theme', value);
+  localStorage.setItem('theme', value);
+
+  function handleChange(e: any) {
+    setValue(e.target.value);
+  }
+
   return (
     <>
       <Helmet>
-        <title>Владимир Быков</title>
         <meta
           name="description"
           content="Разрабатываю интерфейсы, пишу для них текст и рисую графику. Создаю плагины для Фигмы и рассказываю о них в канале Plugins for Figma."
@@ -27,6 +35,7 @@ const Main = () => {
           content="Разрабатываю интерфейсы, пишу для них текст и рисую графику. Создаю плагины для Фигмы и рассказываю о них в канале Plugins for Figma."
         />
         <meta property="og:type" content="website" />
+        <title>Владимир Быков</title>
       </Helmet>
 
       <div className="main effect-fade-in effect-zoom-in">
@@ -43,7 +52,7 @@ const Main = () => {
             </div>
           </header>
           <h1 className="main__title">
-            Разрабатываю интерфейсы, пишу для них текст и рисую графику.
+            Разрабатываю интерфейсы, пишу для них текст и рисую графику
           </h1>
           <div className="main__plugins">
             <Link to="/plugins">
@@ -99,7 +108,23 @@ const Main = () => {
               </a>
             </p>
           </div>
-          <small className="main__version">Обновлён 9 июня. Добавлены отзывы к плагинам</small>
+
+          <select
+            className="main__themeSwitcher"
+            name="themeSwitcher"
+            onChange={handleChange}
+            value={value}
+            defaultValue={value}
+          >
+            <option value="system">Тема устройства</option>
+            <option value="dark">Ночной режим</option>
+            <option value="light">Светлая тема</option>
+            <option value="trash">Ад для глаз</option>
+          </select>
+
+          <small className="main__version">
+            Обновлён 9 июня. Добавлены отзывы к плагинам
+          </small>
         </div>
       </div>
     </>

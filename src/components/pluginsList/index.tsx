@@ -13,8 +13,9 @@ const PluginsList = () => {
               png={item.webp}
               name={item.name}
               info={item.info}
-              link={item.link}
-              comment={item.comment}
+              installLink={item.installLink}
+              infoLink={item.infoLink}
+              comment={item.comments}
               key={key}
             ></Plugin>
           );

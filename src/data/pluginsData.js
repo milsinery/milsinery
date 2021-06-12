@@ -13,8 +13,9 @@ const PluginsData = [
     png: meow2,
     name: 'Meow!',
     info: 'Cоздаёт компонент из выбранного фрейма, а все остальные такие же делает его копиями.',
-    link: 'https://www.figma.com/community/plugin/946844618678350922/Meow!',
-    comment: [
+    installLink: 'https://www.figma.com/community/plugin/946844618678350922/Meow!',
+    infoLink: 'meow',
+    comments: [
       { author: 'Бойко Константин', text: 'Просто магия какая-то' },
       { author: 'Alina', text: 'Cool tool, will try, thank you!' },
       {
@@ -26,14 +27,19 @@ const PluginsData = [
         text: 'Этот плагин делает за меня то, что я так не люблю делать. Это ли не счастье',
       },
     ],
+    page: {
+      description: "",
+      instruction: {},
+    }
   },
   {
     webp: abracadabra,
     png: abracadabra2,
     name: 'Abracadabra!',
     info: 'Генерирует и вставляет текст и изображения в слои.',
-    link: 'https://www.figma.com/community/plugin/919546417582505589/Abracadabra!',
-    comment: [
+    installLink: 'https://www.figma.com/community/plugin/919546417582505589/Abracadabra!',
+    infoLink: 'abracadabra',
+    comments: [
       { author: 'Tony Shi', text: 'Omg this is magical! Thank you for this!' },
     ],
   },
@@ -42,8 +48,9 @@ const PluginsData = [
     png: coft2,
     name: 'COFT',
     info: 'Создаёт копии объекта и подменяет в них текст.',
-    link: 'https://www.figma.com/community/plugin/903936058293238810/COFT-%E2%80%94-create-objects-from-text',
-    comment: [
+    installLink: 'https://www.figma.com/community/plugin/903936058293238810/COFT-%E2%80%94-create-objects-from-text',
+    infoLink: 'coft',
+    comments: [
       { author: 'Данила Щаников', text: 'Золото, а не плагин 😍' },
     ],
   },
@@ -52,8 +59,9 @@ const PluginsData = [
     png: nowInside2,
     name: 'Now Inside!',
     info: 'Вставляет выпавшие слои в выбранный фрейм.',
-    link: 'https://www.figma.com/community/plugin/945329982331973175/Now-inside!',
-    comment: [{ author: 'Андрей', text: 'Ну вот, теперь идеален 👌' }],
+    installLink: 'https://www.figma.com/community/plugin/945329982331973175/Now-inside!',
+    infoLink: 'now-inside',
+    comments: [{ author: 'Андрей', text: 'Ну вот, теперь идеален 👌' }],
   },
 ];
 

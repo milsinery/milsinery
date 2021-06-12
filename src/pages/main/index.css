@@ -76,6 +76,10 @@
   .main__link {
     margin-bottom: 1.5vmax;
   }
+
+  .main__themeSwitcher {
+    margin: 0 auto 2vmax 0;
+  }
   
   @media screen and (max-width: 480px) {
     .main__title,

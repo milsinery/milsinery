@@ -99,14 +99,14 @@
   opacity: 1;
   top: -1.5vmax;
   left: -1.5vmax;
-  transition: all 600ms ease-in-out;
+  transition: all 600ms ease-out;
 }
 
 .plugin:hover .plugin__commentary-sym-2 {
   opacity: 1;
   right: -5vmax;
   bottom: 3vmax;
-  transition: all 600ms ease-in-out;
+  transition: all 600ms ease-out;
 }
 
 /* plugin card for mobile */
