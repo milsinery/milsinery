@@ -38,7 +38,7 @@ const Main = () => {
         <title>Владимир Быков</title>
       </Helmet>
 
-      <div className="main effect-fade-in effect-zoom-in">
+      <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
           <header className="main__header">
             <div className="main__logo">
@@ -54,13 +54,13 @@ const Main = () => {
           <h1 className="main__title">
             Разрабатываю интерфейсы, пишу для них текст и рисую графику
           </h1>
-          <div className="main__plugins">
+          <section className="main__plugins">
             <Link to="/plugins">
               <h3 className="main__plugins-title">Плагины для Фигмы</h3>
             </Link>
             <PluginsList></PluginsList>
-          </div>
-          <div className="main__links">
+          </section>
+          <section className="main__links">
             <h3 className="main__links-title">Контакты и портфолио</h3>
             <p className="main__link">
               <a
@@ -107,7 +107,7 @@ const Main = () => {
                 Канал о плагинах, Фигме и дизайне
               </a>
             </p>
-          </div>
+          </section>
 
           <select
             className="main__themeSwitcher"
@@ -116,17 +116,16 @@ const Main = () => {
             value={value}
             defaultValue={value}
           >
-            <option value="system">Тема устройства</option>
-            <option value="dark">Ночной режим</option>
+            <option value="system">Тема вашего устройства</option>
+            <option value="dark">Тёмная тема</option>
             <option value="light">Светлая тема</option>
-            <option value="trash">Ад для глаз</option>
           </select>
 
           <small className="main__version">
-            Обновлён 12 июня. Добавлен переключатель темы.
+            Обновлён 18-го сентября. Созданы простые странички для плагинов.
           </small>
         </div>
-      </div>
+      </main>
     </>
   );
 };

@@ -26,6 +26,6 @@
   margin: 0 0 4vmax 0;
 }
 
-.plugins__telegram-link {
-  margin: 0 0 6vmax 0;
+.plugins__link:not(:last-child) {
+  margin: 0 0 2vmax 0;
 }

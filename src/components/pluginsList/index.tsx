@@ -5,7 +5,7 @@ import './index.css';
 const PluginsList = () => {
   return (
     <>
-      <div className="pluginsList">
+      <section className="pluginsList">
         {PluginsData.map((item, key) => {
           return (
             <Plugin
@@ -20,7 +20,7 @@ const PluginsList = () => {
             ></Plugin>
           );
         })}
-      </div>
+      </section>
     </>
   );
 };

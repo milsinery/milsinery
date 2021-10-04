@@ -1,0 +1,69 @@
+.pluginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.pluginPage__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 6vmax 4vmax 12vmax 4vmax;
+}
+
+.pluginPage__header {
+  display: flex;
+  margin-bottom: 5vmax;
+}
+
+.pluginPage__head {
+  display: flex;
+  margin-bottom: 5vmax;
+}
+
+.pluginPage__cover,
+.pluginPage__title-text {
+  margin-bottom: 2vmax;
+}
+
+.pluginPage__cover {
+  margin-bottom: 5vmax;
+}
+
+.pluginPage__short-description {
+  margin-bottom: 5vmax;
+}
+
+.pluginPage__cover {
+  display: flex;
+  height: max(256px, 20vmax);
+  width: max(256px, 20vmax);
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pluginPage__content,
+.pluginPage__title {
+  display: flex;
+  flex-direction: column;
+}
+
+.pluginPage__comment:not(:last-child),
+.pluginPage__comments-title {
+  margin-bottom: 2vmax;
+}
+
+.pluginPage__comment-text {
+  margin-bottom: 0.2vmax;
+}
+
+/* plugin card for mobile */
+@media screen and (max-width: 800px) {
+  .pluginPage__head {
+    /* flex-direction: column-reverse; */
+  }
+}

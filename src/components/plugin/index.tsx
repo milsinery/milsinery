@@ -13,8 +13,6 @@ type PluginProps = {
 
 const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: PluginProps) => {
   const symbols = [
-    '❤️',
-    '☺️',
     '🥰',
     '👏',
     '😎',
@@ -38,7 +36,7 @@ const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: Plugi
   const content = comment && comment[getRandom(comment)];
 
   return (
-    <div className="plugin">
+    <article className="plugin">
       <div className="plugin__cover">
         <picture>
           <source srcSet={webp} type="image/webp" />
@@ -64,9 +62,9 @@ const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: Plugi
           >
             <h3>Установить</h3>
           </a>
-          {/* <Link to={"/plugins/" + infoLink}>
-              <h3 className="plugin__link">Описание</h3>
-          </Link> */}
+          <Link to={infoLink}>
+              <h3 className="plugin__link">О плагине</h3>
+          </Link>
         </div>
       </div>
 
@@ -82,7 +80,7 @@ const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: Plugi
           </h1>
         </div>
       )}
-    </div>
+    </article>
   );
 };
 

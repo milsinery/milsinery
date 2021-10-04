@@ -4,7 +4,10 @@ import PluginsList from '../../components/pluginsList/index';
 import './index.css';
 
 const Plugins = () => {
-  document.querySelector('html')?.setAttribute('data-theme', localStorage.getItem("theme") || "system");
+  document
+    .querySelector('html')
+    ?.setAttribute('data-theme', localStorage.getItem('theme') || 'system');
+
   return (
     <>
       <Helmet>
@@ -23,7 +26,7 @@ const Plugins = () => {
         <title>Плагины для Фигмы</title>
       </Helmet>
 
-      <div className="plugins effect-fade-in effect-zoom-in">
+      <main className="plugins effect-fade-in effect-zoom-in">
         <div className="plugins__wrapper">
           <header className="plugins__header">
             <Link to="/">
@@ -31,20 +34,27 @@ const Plugins = () => {
             </Link>
           </header>
           <h1 className="plugins__title">Плагины для Фигмы</h1>
-          <div className="plugins__plugins-list">
+          <section className="plugins__plugins-list">
             <PluginsList></PluginsList>
+          </section>
+          <div>
+            <h3 className="plugins__link">
+              <a
+                href="https://t.me/pluginsforfigma"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Канал с описанием и примерами
+              </a>
+            </h3>
+            <h3 className="plugins__link">
+              <a href="mailto:milsinery@icloud.com?subject=Figma%20Plugin">
+                Заказать плагин
+              </a>
+            </h3>
           </div>
-          <h3 className="plugins__telegram-link">
-            <a
-              href="https://t.me/pluginsforfigma"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Канал с описанием и примерами
-            </a>
-          </h3>
         </div>
-      </div>
+      </main>
     </>
   );
 };

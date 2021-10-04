@@ -77,21 +77,6 @@ html[data-theme='light'] {
   --color-picture-over: hsla(197, 10%, 5%, 0);
 }
 
-html[data-theme='trash'] {
-  --color-primary: hsl(135, 100%, 50%);
-  --color-secondary: hsl(24, 100%, 50%);
-
-  --color-text-main: hsl(56, 100%, 50%);
-  --color-text-optional: hsl(0, 100%, 24%);
-  --color-text-invert: hsl(0, 0%, 100%);
-
-  --color-bg: hsl(313, 100%, 50%);
-  --color-border: hsl(196, 40%, 88%);
-  --color-pad: hsl(221, 100%, 50%);
-  --color-over: hsla(197, 10%, 5%, 0.3);
-  --color-picture-over: hsla(197, 10%, 5%, 0);
-}
-
 /* main style */
 
 * {
@@ -159,7 +144,7 @@ p {
 
 small {
   font-weight: 300;
-  font-size: max(8px, 1vmax);
+  font-size: max(12px, 1vmax);
   color: var(--color-text-optional);
 }
 
