@@ -198,10 +198,10 @@ select:focus {
 }
 
 /* mobile  */
-
 /* @media (hover: none) and (pointer: coarse) and (max-width: 640px) {} */
 
-/* effect */
+
+/* effects */
 
 .effect-fade-in {
   animation-duration: var(--speed-slow, 600ms), var(--speed-slow, 600ms);

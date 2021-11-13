@@ -68,7 +68,7 @@ const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: Plugi
         </div>
       </div>
 
-      {comment && (
+      {comment.length > 0 && (
         <div className="plugin__commentary">
           <h4 className="plugin__commentary-title">{content.text}</h4>
           <small className="plugin__commentary-author">{content.author}</small>

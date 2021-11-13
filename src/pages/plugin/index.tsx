@@ -74,7 +74,7 @@ const Plugin = () => {
                   </div>
                 </div>
 
-                <div className="pluginPage__comments">
+                {item.comments.length > 0 && <div className="pluginPage__comments">
                   <h3 className="pluginPage__comments-title">{item.comments.length > 1 ? "Отзывы пользователей" : "Отзыв пользователя"}</h3>
                   {item.comments.map((commentary, key) => (
                     <article className="pluginPage__comment" key={key}>
@@ -82,7 +82,7 @@ const Plugin = () => {
                       <small>{commentary.author}</small>
                     </article>
                   ))}
-                </div>
+                </div>}
               </div>
             ))}
         </div>

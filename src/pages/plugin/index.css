@@ -60,10 +60,3 @@
 .pluginPage__comment-text {
   margin-bottom: 0.2vmax;
 }
-
-/* plugin card for mobile */
-@media screen and (max-width: 800px) {
-  .pluginPage__head {
-    /* flex-direction: column-reverse; */
-  }
-}

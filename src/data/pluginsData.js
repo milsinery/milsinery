@@ -1,13 +1,34 @@
+import colorFixer from '../pictures/plugins/colorFixer.webp';
 import meow from '../pictures/plugins/meow.webp';
 import coft from '../pictures/plugins/coft.webp';
 import abracadabra from '../pictures/plugins/abracadabra.webp';
 import nowInside from '../pictures/plugins/nowinside.webp';
+import colorFixer2 from '../pictures/plugins/colorFixer.png';
 import meow2 from '../pictures/plugins/meow.png';
 import coft2 from '../pictures/plugins/coft.png';
 import abracadabra2 from '../pictures/plugins/abracadabra.png';
 import nowInside2 from '../pictures/plugins/nowinside.png';
 
 const PluginsData = [
+  {
+    webp: colorFixer,
+    png: colorFixer2,
+    name: 'Color Fixer',
+    info: 'Сканирует используемые цвета в макете и связывает с созданными стилями, если они идентичны или очень похожи — в один клик.',
+    installLink:
+      'https://www.figma.com/community/plugin/1037616212525799012/Color-Fixer',
+    infoLink: '/plugins/colorFixer',
+    comments: [],
+    page: {
+      description: '',
+      instruction: {},
+    },
+    meta: {
+      content:
+        'Color Fixer — бесплатный плагин для Фигмы. Сканирует используемые цвета в макете и связывает с созданными стилями, если они идентичны или очень похожи — в один клик.',
+      title: 'Color Fixer — плагин для Фигмы',
+    },
+  },
   {
     webp: meow,
     png: meow2,
@@ -90,7 +111,7 @@ const PluginsData = [
     installLink:
       'https://www.figma.com/community/plugin/945329982331973175/Now-inside!',
     infoLink: '/plugins/now-inside',
-    comments: [{ author: 'Андрей', text: 'Ну вот, теперь идеален 👌' }],
+    comments: [{ author: 'Андрей', text: 'Ну вот, теперь идеален 👌' }, { author: "Steven", text: 'This one will be a big time saver. Kudos'}],
     page: {
       description: '',
       instruction: {},
