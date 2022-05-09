@@ -1,14 +1,14 @@
-import Plugin from '../plugin';
-import PluginsData from '../../data/pluginsData';
+import Extension from '../extension';
+import ExtensionsData from '../../data/extensionsData';
 import './index.css';
 
-const PluginsList = () => {
+const ExtensionsList = () => {
   return (
     <>
       <section className="pluginsList">
-        {PluginsData.map((item, key) => {
+        {ExtensionsData.map((item, key) => {
           return (
-            <Plugin
+            <Extension
               webp={item.webp}
               png={item.webp}
               name={item.name}
@@ -18,7 +18,7 @@ const PluginsList = () => {
               comment={item.comments}
               isNewLabel={item.isNewLabel}
               key={key}
-            ></Plugin>
+            ></Extension>
           );
         })}
       </section>
@@ -26,4 +26,4 @@ const PluginsList = () => {
   );
 };
 
-export default PluginsList;
+export default ExtensionsList;

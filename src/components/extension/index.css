@@ -1,6 +1,7 @@
-.plugin {
+.extension {
   position: relative;
   display: flex;
+  flex-direction: column;
   transition: all ease-out 300ms;
   background-color: var(--color-pad);
   border-radius: 1vmax;
@@ -8,7 +9,7 @@
   transition: all 150ms ease-out;
 }
 
-.plugin__cover {
+.extension__cover {
   display: flex;
   height: max(26px, 8vmax);
   width: max(26px, 8vmax);
@@ -18,34 +19,34 @@
   margin: 0 2vmax 0 0;
 }
 
-.plugin__info {
+.extension__info {
   display: flex;
   flex-direction: column;
   padding-top: 1vmax;
   width: 100%;
 }
 
-.plugin__title {
+.extension__title {
   margin-bottom: max(8px, 0.5vmax);
 }
 
-.plugin__description {
+.extension__description {
   margin-bottom: max(16px, 1vmax);
 }
 
-.plugin__links {
+.extension__links {
   display: flex;
 }
 
-.plugin__link {
+.extension__link {
   margin: 0 1.5vmax 0 0;
 }
 
-.plugin__link:last-child {
+.extension__link:last-child {
   margin: 0;
 }
 
-.plugin__commentary {
+.extension__commentary {
   position: absolute;
   opacity: 0;
   right: 6vmax;
@@ -61,55 +62,55 @@
   transition: all 100ms ease-in;
 }
 
-.plugin__commentary-title {
+.extension__commentary-title {
   margin: 0 0 1vmax 0;
 }
 
-.plugin__commentary-author {
+.extension__commentary-author {
   text-align: end;
 }
 
-.plugin__commentary-sym-1,
-.plugin__commentary-sym-2 {
+.extension__commentary-sym-1,
+.extension__commentary-sym-2 {
   position: absolute;
 }
 
-.plugin__commentary-sym-1 {
+.extension__commentary-sym-1 {
   opacity: 0;
   top: -0.5vmax;
   left: -0.5vmax;
   transform: rotate(-16deg);
 }
 
-.plugin__commentary-sym-2 {
+.extension__commentary-sym-2 {
   opacity: 0;
   right: -4vmax;
   bottom: 2vmax;
   transition: all 300ms ease-in-out;
 }
 
-.plugin:hover {
+.extension:hover {
   z-index: 1;
   background-color: var(--color-secondary);
   transform: scale(1.05);
   transition: all 300ms ease-in-out;
 }
 
-.plugin:hover .plugin__commentary-sym-1 {
+.extension:hover .extension__commentary-sym-1 {
   opacity: 1;
   top: -1.5vmax;
   left: -1.5vmax;
   transition: all 600ms ease-out;
 }
 
-.plugin:hover .plugin__commentary-sym-2 {
+.extension:hover .extension__commentary-sym-2 {
   opacity: 1;
   right: -5vmax;
   bottom: 3vmax;
   transition: all 600ms ease-out;
 }
 
-.plugin__isNewLable {
+.extension__isNewLable {
   position: absolute;
   right: 0;
   top: 0;
@@ -120,29 +121,29 @@
   transition: all 300ms ease-in-out;
 }
 
-/* plugin card for mobile */
+/* extension card for mobile */
 @media screen and (max-width: 480px) {
-  .plugin {
+  .extension {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 5vmax;
   }
 
-  .plugin__cover {
+  .extension__cover {
     margin: 0;
   }
 
-  .plugin__title,
-  .plugin__info {
+  .extension__title,
+  .extension__info {
     text-align: center;
   }
 
-  .plugin__commentary {
+  .extension__commentary {
     display: none;
   }
 
-  .plugin__links {
+  .extension__links {
     display: flex;
     justify-content: center;
   }
@@ -150,7 +151,7 @@
 
 /* disable commentary on touchscreen devices */
 @media (hover: hover) and (pointer: fine) {
-  .plugin:hover .plugin__commentary {
+  .extension:hover .extension__commentary {
     opacity: 1;
     transform: translate(0, 0) rotate(6deg);
     transition: all 300ms ease-in-out 150ms;

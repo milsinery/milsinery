@@ -50,6 +50,7 @@
   }
   
   .main__title,
+  .main__extensions,
   .main__plugins {
     margin: 0 0 11vmax 0;
   }
@@ -57,12 +58,14 @@
   .main__title {
     max-width: 90%;
   }
-  
+
+  .main__extensions,
   .main__plugins {
     display: flex;
     flex-direction: column;
   }
   
+  .main__extensions-title,
   .main__plugins-title,
   .main__links-title {
     margin-bottom: 2.5vmax;

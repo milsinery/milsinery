@@ -9,9 +9,19 @@ type PluginProps = {
   installLink: string;
   infoLink: string;
   comment: Array<{ text: string; author: string }>;
+  isNewLabel: boolean;
 };
 
-const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: PluginProps) => {
+const Plugin = ({
+  webp,
+  png,
+  name,
+  info,
+  installLink,
+  infoLink,
+  comment,
+  isNewLabel,
+}: PluginProps) => {
   const symbols = [
     '🥰',
     '👏',
@@ -30,13 +40,15 @@ const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: Plugi
   ];
 
   const getRandom = (arr: Array<any>) => {
-    return Math.floor(Math.random() * (arr.length));
+    return Math.floor(Math.random() * arr.length);
   };
 
   const content = comment && comment[getRandom(comment)];
 
   return (
     <article className="plugin">
+      {isNewLabel && <h3 className="plugin__isNewLable">Новый</h3>}
+      
       <div className="plugin__cover">
         <picture>
           <source srcSet={webp} type="image/webp" />
@@ -63,7 +75,7 @@ const Plugin = ({ webp, png, name, info, installLink, infoLink, comment }: Plugi
             <h3>Установить</h3>
           </a>
           <Link to={infoLink}>
-              <h3 className="plugin__link">О плагине</h3>
+            <h3 className="plugin__link">О плагине</h3>
           </Link>
         </div>
       </div>

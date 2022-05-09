@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import PluginsList from '../../components/pluginsList/index';
+import ExtensionsList from '../../components/extensionsList/index';
 import avatar from '../../avatar.webp';
 import avatar2 from '../../avatar.png';
 import './index.css';
@@ -54,6 +55,12 @@ const Main = () => {
           <h1 className="main__title">
             Разрабатываю интерфейсы, пишу для них текст и рисую графику
           </h1>
+
+          <section className="main__extensions">
+            <h3 className="main__extensions-title">Расширения для браузера</h3>
+            <ExtensionsList></ExtensionsList>
+          </section>
+
           <section className="main__plugins">
             <Link to="/plugins">
               <h3 className="main__plugins-title">Плагины для Фигмы</h3>
@@ -100,11 +107,11 @@ const Main = () => {
             </p>
             <p className="main__link">
               <a
-                href="https://t.me/pluginsforfigma"
+                href="https://t.me/areyoureallydesigner"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Канал о плагинах, Фигме и дизайне
+                Канал о моих проектах и дизайне
               </a>
             </p>
           </section>
@@ -122,7 +129,7 @@ const Main = () => {
           </select>
 
           <small className="main__version">
-            Обновлён 13-го ноября · Добавлен плагин Колор Фиксер.
+            Обновлён 9-го мая · Добавлено расширение для браузера.
           </small>
         </div>
       </main>

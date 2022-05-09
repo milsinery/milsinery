@@ -40,11 +40,11 @@ const Plugins = () => {
           <div>
             <h3 className="plugins__link">
               <a
-                href="https://t.me/pluginsforfigma"
+                href="https://t.me/areyoureallydesigner"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Канал с описанием и примерами
+                Описание и примеры работы
               </a>
             </h3>
             <h3 className="plugins__link">
