@@ -123,9 +123,9 @@ const Main = () => {
             value={value}
             defaultValue={value}
           >
-            <option value="system">Тема вашего устройства</option>
-            <option value="dark">Тёмная тема</option>
-            <option value="light">Светлая тема</option>
+            <option value="system">Цветовая схема вашего устройства</option>
+            <option value="dark">Тёмная схема</option>
+            <option value="light">Светлая схема</option>
           </select>
 
           <small className="main__version">
