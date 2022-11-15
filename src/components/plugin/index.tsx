@@ -75,7 +75,7 @@ const Plugin = ({
             <h3>Установить</h3>
           </a>
           <Link to={infoLink}>
-            <h3 className="plugin__link">О плагине</h3>
+            <h3 className="plugin__link">О пладжине</h3>
           </Link>
         </div>
       </div>

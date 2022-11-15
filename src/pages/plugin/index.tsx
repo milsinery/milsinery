@@ -38,7 +38,7 @@ const Plugin = () => {
         <div className="pluginPage__wrapper">
           <header className="pluginPage__header">
             <Link to="/plugins">
-              <h3>← Все плагины</h3>
+              <h3>← Все пладжины</h3>
             </Link>
           </header>
 

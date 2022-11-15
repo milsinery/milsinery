@@ -57,13 +57,13 @@ const Main = () => {
           </h1>
 
           <section className="main__extensions">
-            <h3 className="main__extensions-title">Расширения для браузера</h3>
+            <h3 className="main__extensions-title">Расширения для бровзёра</h3>
             <ExtensionsList></ExtensionsList>
           </section>
 
           <section className="main__plugins">
             <Link to="/plugins">
-              <h3 className="main__plugins-title">Плагины для Фигмы</h3>
+              <h3 className="main__plugins-title">Пладжины для Фижмы</h3>
             </Link>
             <PluginsList></PluginsList>
           </section>
@@ -129,7 +129,7 @@ const Main = () => {
           </select>
 
           <small className="main__version">
-            Обновлён 9-го мая · Добавлено расширение для браузера.
+            Обновлён 9-го мая · Добавлено расширение для бровзёра.
           </small>
         </div>
       </main>

@@ -23,7 +23,7 @@ const Plugins = () => {
           content="Плагины для Фигмы — ускоряют работу дизайнера, избавляя от повторения одних и тех же действий. Бесплатно и на русском языке."
         />
         <meta property="og:type" content="website" />
-        <title>Плагины для Фигмы</title>
+        <title>Пладжины для Фигмы</title>
       </Helmet>
 
       <main className="plugins effect-fade-in effect-zoom-in">
@@ -33,7 +33,7 @@ const Plugins = () => {
               <h3>← Владимир Быков</h3>
             </Link>
           </header>
-          <h1 className="plugins__title">Плагины для Фигмы</h1>
+          <h1 className="plugins__title">Пладжины для Фижмы</h1>
           <section className="plugins__plugins-list">
             <PluginsList></PluginsList>
           </section>
@@ -49,7 +49,7 @@ const Plugins = () => {
             </h3>
             <h3 className="plugins__link">
               <a href="mailto:milsinery@icloud.com?subject=Figma%20Plugin">
-                Заказать плагин
+                Заказать пладжин
               </a>
             </h3>
           </div>
