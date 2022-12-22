@@ -38,7 +38,7 @@ const Plugin = () => {
         <div className="pluginPage__wrapper">
           <header className="pluginPage__header">
             <Link to="/plugins">
-              <h3>← Все пладжины</h3>
+              <h3>← All plugins</h3>
             </Link>
           </header>
 
@@ -69,13 +69,13 @@ const Plugin = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <h2>Установить 🚀</h2>
+                      <h2>Install 🚀</h2>
                     </a>
                   </div>
                 </div>
 
                 {item.comments.length > 0 && <div className="pluginPage__comments">
-                  <h3 className="pluginPage__comments-title">{item.comments.length > 1 ? "Отзывы пользователей" : "Отзыв пользователя"}</h3>
+                  <h3 className="pluginPage__comments-title">{item.comments.length > 1 ? "Reviews" : "Review"}</h3>
                   {item.comments.map((commentary, key) => (
                     <article className="pluginPage__comment" key={key}>
                       <p className="pluginPage__comment-text">{commentary.text}</p>

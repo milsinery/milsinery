@@ -23,17 +23,17 @@ const Plugins = () => {
           content="Плагины для Фигмы — ускоряют работу дизайнера, избавляя от повторения одних и тех же действий. Бесплатно и на русском языке."
         />
         <meta property="og:type" content="website" />
-        <title>Пладжины для Фигмы</title>
+        <title>Plugins for Figma</title>
       </Helmet>
 
       <main className="plugins effect-fade-in effect-zoom-in">
         <div className="plugins__wrapper">
           <header className="plugins__header">
             <Link to="/">
-              <h3>← Владимир Быков</h3>
+              <h3>← Vladimir Bykov</h3>
             </Link>
           </header>
-          <h1 className="plugins__title">Пладжины для Фижмы</h1>
+          <h1 className="plugins__title">Plugins for Figma</h1>
           <section className="plugins__plugins-list">
             <PluginsList></PluginsList>
           </section>
@@ -44,12 +44,12 @@ const Plugins = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Описание и примеры работы
+                Learn more about plugins and examples
               </a>
             </h3>
             <h3 className="plugins__link">
               <a href="mailto:milsinery@icloud.com?subject=Figma%20Plugin">
-                Заказать пладжин
+                Order a plugin
               </a>
             </h3>
           </div>

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
 import avatar from '../../avatar.webp';
-import avatar2 from '../../avatar.png';
 import './index.css';
 
 const Main = () => {
@@ -21,22 +20,22 @@ const Main = () => {
       <Helmet>
         <meta
           name="description"
-          content="Разрабатываю интерфейсы, пишу для них текст и рисую графику. Создаю плагины для Фигмы и рассказываю о них в канале Plugins for Figma."
+          content="I develop user interfaces, write texts and draw graphics for them. I also create plug-ins for Figma and write about them on my Telegram channel."
         />
 
         <meta
           name="keywords"
-          content="ui, ux, figma, дизайн, интерфейс, разработка, фигма, плагины"
+          content="ui, ux, figma, design, development, interface, text, illustration, figma, plugins"
         />
         <meta property="og:url" content="https://milsinery.com" />
-        <meta property="og:site_name" content="Владимир Быков" />
-        <meta property="og:title" content="Владимир Быков" />
+        <meta property="og:site_name" content="Vladimir Bykov" />
+        <meta property="og:title" content="Vladimir Bykov" />
         <meta
           property="og:description"
-          content="Разрабатываю интерфейсы, пишу для них текст и рисую графику. Создаю плагины для Фигмы и рассказываю о них в канале Plugins for Figma."
+          content="I develop user interfaces, write texts and draw graphics for them. I also create plug-ins for Figma and write about them on my Telegram channel."
         />
         <meta property="og:type" content="website" />
-        <title>Владимир Быков</title>
+        <title>Vladimir Bykov</title>
       </Helmet>
 
       <main className="main effect-fade-in effect-zoom-in">
@@ -46,45 +45,48 @@ const Main = () => {
               <div className="main__avatar">
                 <picture>
                   <source srcSet={avatar} type="image/webp" />
-                  <img src={avatar2} width="100%" height="100%" alt="Avatar" />
+                  <img src={avatar} width="100%" height="100%" alt="Avatar" />
                 </picture>
               </div>
-              <h3>Владимир Быков</h3>
+              <div className='main__headline'>
+                <h3 className='main__headline-main'>Vladimir Bykov</h3>
+                <small className='main__headline-additional'>Interface designer</small>
+              </div>
             </div>
           </header>
           <h1 className="main__title">
-            Разрабатываю интерфейсы, пишу для них текст и рисую графику
+            I develop user interfaces, write texts and draw graphics for them 
           </h1>
 
           <section className="main__extensions">
-            <h3 className="main__extensions-title">Расширения для бровзёра</h3>
+            <h3 className="main__extensions-title">Extensions for browser</h3>
             <ExtensionsList></ExtensionsList>
           </section>
 
           <section className="main__plugins">
             <Link to="/plugins">
-              <h3 className="main__plugins-title">Пладжины для Фижмы</h3>
+              <h3 className="main__plugins-title">Plugins for Figma</h3>
             </Link>
             <PluginsList></PluginsList>
           </section>
           <section className="main__links">
-            <h3 className="main__links-title">Контакты и портфолио</h3>
+            <h3 className="main__links-title">Contacts и portfolio</h3>
             <p className="main__link">
               <a
                 href="https://career.habr.com/milsinery"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Хабр Карьера
+                Linkedin 
               </a>
             </p>
             <p className="main__link">
               <a
-                href="https://www.behance.net/milsinery"
+                href="https://www.linkedin.com/in/milsinery/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Биханс
+                Behance
               </a>
             </p>
             <p className="main__link">
@@ -93,7 +95,7 @@ const Main = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Телеграм
+                Telegram
               </a>
             </p>
             <p className="main__link">
@@ -102,7 +104,7 @@ const Main = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Инстаграм
+                Instagram
               </a>
             </p>
             <p className="main__link">
@@ -111,7 +113,7 @@ const Main = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Канал о моих проектах и дизайне
+                My telegram channel about design 
               </a>
             </p>
           </section>
@@ -123,13 +125,13 @@ const Main = () => {
             value={value}
             defaultValue={value}
           >
-            <option value="system">Цветовая схема вашего устройства</option>
-            <option value="dark">Тёмная схема</option>
-            <option value="light">Светлая схема</option>
+            <option value="system">System theme</option>
+            <option value="dark">Dark theme</option>
+            <option value="light">Light theme</option>
           </select>
 
           <small className="main__version">
-            Обновлён 9-го мая · Добавлено расширение для бровзёра.
+            Updated Dec 22 · Added the new plugin - Renamer.
           </small>
         </div>
       </main>

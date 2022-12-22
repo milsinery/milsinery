@@ -28,8 +28,8 @@
     display: flex;
     position: relative;
     border-radius: 100%;
-    width: max(18px, 3.5vmax);
-    height: max(18px, 3.5vmax);
+    width: max(40px, 3.5vmax);
+    height: max(40px, 3.5vmax);
     overflow: hidden;
     flex-shrink: 0;
     margin-right: 1vmax;
@@ -57,6 +57,12 @@
   
   .main__title {
     max-width: 90%;
+  }
+
+  .main__headline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vmax;
   }
 
   .main__extensions,

@@ -22,7 +22,7 @@ const Extension = ({
 
   return (
     <article className="extension">
-      {isNewLabel && <h3 className="extension__isNewLable">Новое</h3>}
+      {isNewLabel && <h3 className="extension__isNewLable">New</h3>}
       
       <div className="extension__cover">
         <picture>
@@ -47,7 +47,7 @@ const Extension = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h3>Установить</h3>
+            <h3>Install</h3>
           </a>
         </div>
       </div>

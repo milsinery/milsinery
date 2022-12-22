@@ -14,7 +14,7 @@ const PluginsData = [
     webp: colorFixer,
     png: colorFixer2,
     name: 'Color Fixer',
-    info: 'Сканирует используемые цвета в макете и связывает с созданными стилями, если они идентичны или очень похожи — в один клик.',
+    info: 'Associates colors to styles if it finds matching or very similar ones. In one click.',
     installLink:
       'https://www.figma.com/community/plugin/1037616212525799012/Color-Fixer',
     infoLink: '/plugins/colorFixer',
@@ -25,16 +25,16 @@ const PluginsData = [
     },
     meta: {
       content:
-        'Color Fixer — бесплатный плагин для Фигмы. Сканирует используемые цвета в макете и связывает с созданными стилями, если они идентичны или очень похожи — в один клик.',
-      title: 'Color Fixer — плагин для Фигмы',
+        'Color Fixer — free plugin for Figma. Associates colors to styles if it finds matching or very similar ones. In one click.',
+      title: 'Color Fixer — plugin for Figma',
     },
-    isNewLabel: true
+    isNewLabel: false
   },
   {
     webp: meow,
     png: meow2,
     name: 'Meow!',
-    info: 'Cоздаёт компонент из выбранного фрейма, а все остальные такие же делает его копиями.',
+    info: 'The plugin will create a component from an object, and all other similar objects will make it instances.',
     installLink:
       'https://www.figma.com/community/plugin/946844618678350922/Meow!',
     infoLink: '/plugins/meow',
@@ -64,8 +64,8 @@ const PluginsData = [
     },
     meta: {
       content:
-        'Meow! — бесплатный плагин для Фигмы. Cоздаёт компонент из выбранного фрейма, а все остальные такие же делает его копиями.',
-      title: 'Meow! — плагин для Фигмы',
+        'Meow! — free plugin for figma. The plugin will create a component from an object, and all other similar objects will make it instances.',
+      title: 'Meow! — plugin for Figma',
     },
     isNewLabel: false
   },
@@ -73,7 +73,7 @@ const PluginsData = [
     webp: abracadabra,
     png: abracadabra2,
     name: 'Abracadabra!',
-    info: 'Генерирует и вставляет текст и изображения в слои.',
+    info: 'You no longer have to write lorem-ipsum-text manually and insert images into layouts — Abracadabra will do it for you.',
     installLink:
       'https://www.figma.com/community/plugin/919546417582505589/Abracadabra!',
     infoLink: '/plugins/abracadabra',
@@ -86,8 +86,8 @@ const PluginsData = [
     },
     meta: {
       content:
-        'Abracadabra! — плагин для Фигмы. Генерирует и вставляет текст и изображения в слои.',
-      title: 'Abracadabra! — плагин для Фигмы',
+        'Abracadabra! — free plugin for Figma. You no longer have to write lorem-ipsum-text manually and insert images into layouts — Abracadabra will do it for you.',
+      title: 'Abracadabra! — plugin for Figma',
     },
     isNewLabel: false
   },
@@ -95,7 +95,7 @@ const PluginsData = [
     webp: coft,
     png: coft2,
     name: 'COFT',
-    info: 'Создаёт копии объекта и подменяет в них текст.',
+    info: 'The plugin creates copies of the selected object or text layers with the changed text in them.',
     installLink:
       'https://www.figma.com/community/plugin/903936058293238810/COFT-%E2%80%94-create-objects-from-text',
     infoLink: '/plugins/coft',
@@ -106,8 +106,8 @@ const PluginsData = [
     },
     meta: {
       content:
-        'COFT — плагин для Фигмы. Создаёт копии объекта и подменяет в них текст.',
-      title: 'COFT — плагин для Фигмы',
+        'COFT — free plugin for Figma. The plugin creates copies of the selected object or text layers with the changed text in them.',
+      title: 'COFT — plugin for Figma',
     },
     isNewLabel: false
   },
@@ -115,7 +115,7 @@ const PluginsData = [
     webp: nowInside,
     png: nowInside2,
     name: 'Now Inside!',
-    info: 'Вставляет выпавшие слои в выбранный фрейм.',
+    info: 'For situations when objects are outside the frame and you want to insert them into it saving their location, but the list of layers is not easy to navigate quickly. ',
     installLink:
       'https://www.figma.com/community/plugin/945329982331973175/Now-inside!',
     infoLink: '/plugins/now-inside',
@@ -126,8 +126,8 @@ const PluginsData = [
     },
     meta: {
       content:
-        'Now Inside! — плагин для Фигмы. Вставляет выпавшие слои в выбранный фрейм.',
-      title: 'Now Inside! — плагин для Фигмы',
+        'Now Inside! — free plugin for Figma. For situations when objects are outside the frame and you want to insert them into it saving their location, but the list of layers is not easy to navigate quickly. ',
+      title: 'Now Inside! — plugin for Figma',
     },
     isNewLabel: false
   },

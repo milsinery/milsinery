@@ -6,7 +6,7 @@ const PluginsData = [
     webp: advertiser,
     png: advertiser2,
     name: 'PropellerAds Advertiser',
-    info: 'Отображает баланс и сегодняшние траты рекламодателя в реальном времени.',
+    info: 'Keep an eye on your spendings. This extension shows your balance and daily spendings in real time.',
     installLink:
       'https://chrome.google.com/webstore/detail/propellerads-advertiser/ccfeocaphcnobhoieomkgflenhkjgpcd?hl',
     infoLink: '/extensions/advertiser',
@@ -17,8 +17,8 @@ const PluginsData = [
     },
     meta: {
       content:
-        'PropellerAds Advertiser — бесплатное расширение для браузера. Будь в курсе своих трат. Отображает ваш баланс и сегодняшние траты в реальном времени.',
-      title: 'PropellerAds Advertiser — бесплатное расширение для браузера',
+        'PropellerAds Advertiser — free extension for Chrome browser. Keep an eye on your spendings. This extension shows your balance and daily spendings in real time.',
+      title: 'PropellerAds Advertiser — free extension for Chrome browser',
     },
     isNewLabel: true
   },

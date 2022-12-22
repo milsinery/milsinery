@@ -47,7 +47,7 @@ const Plugin = ({
 
   return (
     <article className="plugin">
-      {isNewLabel && <h3 className="plugin__isNewLable">Новый</h3>}
+      {isNewLabel && <h3 className="plugin__isNewLable">New</h3>}
       
       <div className="plugin__cover">
         <picture>
@@ -72,10 +72,10 @@ const Plugin = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h3>Установить</h3>
+            <h3>Install</h3>
           </a>
           <Link to={infoLink}>
-            <h3 className="plugin__link">О пладжине</h3>
+            <h3 className="plugin__link">About</h3>
           </Link>
         </div>
       </div>
