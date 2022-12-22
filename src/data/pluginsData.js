@@ -1,8 +1,10 @@
+import renamer from '../pictures/plugins/renamer.webp';
 import colorFixer from '../pictures/plugins/colorFixer.webp';
 import meow from '../pictures/plugins/meow.webp';
 import coft from '../pictures/plugins/coft.webp';
 import abracadabra from '../pictures/plugins/abracadabra.webp';
 import nowInside from '../pictures/plugins/nowinside.webp';
+import renamer2 from '../pictures/plugins/renamer.png';
 import colorFixer2 from '../pictures/plugins/colorFixer.png';
 import meow2 from '../pictures/plugins/meow.png';
 import coft2 from '../pictures/plugins/coft.png';
@@ -10,6 +12,26 @@ import abracadabra2 from '../pictures/plugins/abracadabra.png';
 import nowInside2 from '../pictures/plugins/nowinside.png';
 
 const PluginsData = [
+  {
+    webp: renamer,
+    png: renamer2,
+    name: 'Renamer',
+    info: 'Just assigns random names to all layers, including groups and frames.',
+    installLink:
+      'https://www.figma.com/community/plugin/1185219382747213717/Renamer',
+    infoLink: '/plugins/renamer',
+    comments: [],
+    page: {
+      description: '',
+      instruction: {},
+    },
+    meta: {
+      content:
+        'Renamer — free plugin for Figma. Just assigns random names to all layers, including groups and frames.',
+      title: 'Renamer — plugin for Figma',
+    },
+    isNewLabel: true
+  },
   {
     webp: colorFixer,
     png: colorFixer2,
