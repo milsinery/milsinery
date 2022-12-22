@@ -73,7 +73,7 @@ const Main = () => {
             <h3 className="main__links-title">Contacts и portfolio</h3>
             <p className="main__link">
               <a
-                href="https://career.habr.com/milsinery"
+                href="https://www.linkedin.com/in/milsinery"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -82,7 +82,7 @@ const Main = () => {
             </p>
             <p className="main__link">
               <a
-                href="https://www.linkedin.com/in/milsinery/"
+                href="https://www.behance.net/milsinery"
                 target="_blank"
                 rel="noopener noreferrer"
               >
