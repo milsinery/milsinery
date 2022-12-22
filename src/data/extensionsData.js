@@ -20,7 +20,7 @@ const PluginsData = [
         'PropellerAds Advertiser — free extension for Chrome browser. Keep an eye on your spendings. This extension shows your balance and daily spendings in real time.',
       title: 'PropellerAds Advertiser — free extension for Chrome browser',
     },
-    isNewLabel: true
+    isNewLabel: false
   },
 ];
 
