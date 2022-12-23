@@ -77,7 +77,7 @@ const Main = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Linkedin 
+                LinkedIn 
               </a>
             </p>
             <p className="main__link">
