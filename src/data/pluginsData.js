@@ -20,7 +20,12 @@ const PluginsData = [
     installLink:
       'https://www.figma.com/community/plugin/1185219382747213717/Renamer',
     infoLink: '/plugins/renamer',
-    comments: [],
+    comments: [
+      {
+        author: 'Настя Кино',
+        text: 'Я в восторге! спасибо большое) это сделало мою жизнь чуточку лучше.',
+      },
+    ],
     page: {
       description: '',
       instruction: {},
@@ -30,7 +35,7 @@ const PluginsData = [
         'Renamer — free plugin for Figma. Just assigns random names to all layers, including groups and frames.',
       title: 'Renamer — plugin for Figma',
     },
-    isNewLabel: true
+    isNewLabel: true,
   },
   {
     webp: colorFixer,
@@ -50,7 +55,7 @@ const PluginsData = [
         'Color Fixer — free plugin for Figma. Associates colors to styles if it finds matching or very similar ones. In one click.',
       title: 'Color Fixer — plugin for Figma',
     },
-    isNewLabel: false
+    isNewLabel: false,
   },
   {
     webp: meow,
@@ -89,7 +94,7 @@ const PluginsData = [
         'Meow! — free plugin for figma. The plugin will create a component from an object, and all other similar objects will make it instances.',
       title: 'Meow! — plugin for Figma',
     },
-    isNewLabel: false
+    isNewLabel: false,
   },
   {
     webp: abracadabra,
@@ -111,7 +116,7 @@ const PluginsData = [
         'Abracadabra! — free plugin for Figma. You no longer have to write lorem-ipsum-text manually and insert images into layouts — Abracadabra will do it for you.',
       title: 'Abracadabra! — plugin for Figma',
     },
-    isNewLabel: false
+    isNewLabel: false,
   },
   {
     webp: coft,
@@ -131,7 +136,7 @@ const PluginsData = [
         'COFT — free plugin for Figma. The plugin creates copies of the selected object or text layers with the changed text in them.',
       title: 'COFT — plugin for Figma',
     },
-    isNewLabel: false
+    isNewLabel: false,
   },
   {
     webp: nowInside,
@@ -141,7 +146,10 @@ const PluginsData = [
     installLink:
       'https://www.figma.com/community/plugin/945329982331973175/Now-inside!',
     infoLink: '/plugins/now-inside',
-    comments: [{ author: 'Андрей', text: 'Ну вот, теперь идеален 👌' }, { author: "Steven", text: 'This one will be a big time saver. Kudos'}],
+    comments: [
+      { author: 'Андрей', text: 'Ну вот, теперь идеален 👌' },
+      { author: 'Steven', text: 'This one will be a big time saver. Kudos' },
+    ],
     page: {
       description: '',
       instruction: {},
@@ -151,7 +159,7 @@ const PluginsData = [
         'Now Inside! — free plugin for Figma. For situations when objects are outside the frame and you want to insert them into it saving their location, but the list of layers is not easy to navigate quickly. ',
       title: 'Now Inside! — plugin for Figma',
     },
-    isNewLabel: false
+    isNewLabel: false,
   },
 ];
 
