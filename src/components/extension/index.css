@@ -1,7 +1,6 @@
 .extension {
   position: relative;
   display: flex;
-  flex-direction: column;
   transition: all ease-out 300ms;
   background-color: var(--color-pad);
   border-radius: 1vmax;
@@ -13,7 +12,7 @@
   display: flex;
   height: max(26px, 8vmax);
   width: max(26px, 8vmax);
-  border-radius: 4vmax;
+  border-radius: 1vmax;
   overflow: hidden;
   flex-shrink: 0;
   margin: 0 2vmax 0 0;
