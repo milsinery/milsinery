@@ -20,7 +20,7 @@ const Plugin = () => {
               <meta name="description" content={item.meta.content} />
               <meta
                 name="keywords"
-                content="figma, фигма, плагины, разработка"
+                content="figma, design, development, plugins"
               />
               <meta
                 property="og:url"
@@ -38,34 +38,34 @@ const Plugin = () => {
         <div className="pluginPage__wrapper">
           <header className="pluginPage__header">
             <Link to="/plugins">
-              <h3>← All plugins</h3>
+              <h3>All plugins</h3>
             </Link>
           </header>
 
           {pluginData &&
-            pluginData.map((item) => (
+            pluginData.map(({webp, png, info, name, installLink, comments}) => (
               <div className="pluginPage__content">
                 <div className="pluginPage__head">
                   <div className="pluginPage__title">
                     <div className="pluginPage__cover">
                       <picture>
-                        <source srcSet={item.webp} type="image/webp" />
+                        <source srcSet={webp} type="image/webp" />
                         <img
                           loading="lazy"
-                          src={item.png}
+                          src={png}
                           width="100%"
                           height="100%"
                           alt="Cover"
                         />
                       </picture>
                     </div>
-                    <h1 className="pluginPage__title-text">{item.name}</h1>
+                    <h1 className="pluginPage__title-text">{name}</h1>
                     <h2 className="pluginPage__short-description">
-                      {item.info}
+                      {info}
                     </h2>
                     <a
                       className="plugin__link"
-                      href={item.installLink}
+                      href={installLink}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -74,9 +74,9 @@ const Plugin = () => {
                   </div>
                 </div>
 
-                {item.comments.length > 0 && <div className="pluginPage__comments">
-                  <h3 className="pluginPage__comments-title">{item.comments.length > 1 ? "Reviews" : "Review"}</h3>
-                  {item.comments.map((commentary, key) => (
+                {comments.length > 0 && <div className="pluginPage__comments">
+                  <h3 className="pluginPage__comments-title">{comments.length > 1 ? "Reviews" : "Review"}</h3>
+                  {comments.map((commentary, key) => (
                     <article className="pluginPage__comment" key={key}>
                       <p className="pluginPage__comment-text">{commentary.text}</p>
                       <small>{commentary.author}</small>

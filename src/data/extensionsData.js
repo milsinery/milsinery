@@ -1,7 +1,7 @@
 import advertiser from '../pictures/extensions/advertiser.webp';
 import advertiser2 from '../pictures/extensions/advertiser.webp';
 
-const PluginsData = [
+const extensionsData = [
   {
     webp: advertiser,
     png: advertiser2,
@@ -24,4 +24,4 @@ const PluginsData = [
   },
 ];
 
-export default PluginsData;
+export default extensionsData;

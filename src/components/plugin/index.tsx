@@ -48,7 +48,7 @@ const Plugin = ({
   return (
     <article className="plugin">
       {isNewLabel && <h3 className="plugin__isNewLable">New</h3>}
-      
+
       <div className="plugin__cover">
         <picture>
           <source srcSet={webp} type="image/webp" />

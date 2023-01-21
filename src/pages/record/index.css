@@ -1,4 +1,4 @@
-.pluginPage {
+.recordPage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,38 +7,37 @@
   overflow-y: auto;
 }
 
-.pluginPage__wrapper {
+.recordPage__wrapper {
   display: flex;
   flex-direction: column;
   max-width: 1280px;
   margin: 6vmax 4vmax 12vmax 4vmax;
 }
 
-.pluginPage__header {
+.recordPage__header {
   display: flex;
   margin-bottom: 5vmax;
 }
 
-.pluginPage__head {
+.recordPage__head {
   display: flex;
   margin-bottom: 5vmax;
 }
 
-.pluginPage__cover,
-.pluginPage__title-text {
+.recordPage__cover,
+.recordPage__title-text {
   margin-bottom: 2vmax;
 }
 
-.pluginPage__cover {
-  margin-bottom: 5vmax;
- border: 1px solid hsl(0, 10%, 95%);
-}
-
-.pluginPage__short-description {
+.recordPage__cover {
   margin-bottom: 5vmax;
 }
 
-.pluginPage__cover {
+.recordPage__short-description {
+  margin-bottom: 5vmax;
+}
+
+.recordPage__cover {
   display: flex;
   height: max(256px, 20vmax);
   width: max(256px, 20vmax);
@@ -47,17 +46,26 @@
   flex-shrink: 0;
 }
 
-.pluginPage__content,
-.pluginPage__title {
+.recordPage__content,
+.recordPage__title {
   display: flex;
   flex-direction: column;
 }
 
-.pluginPage__comment:not(:last-child),
-.pluginPage__comments-title {
+.recordPage__content-picture {
+  overflow: hidden;
+  border-radius: 1vmax;
+}
+
+.recordPage__content-picture > picture {
+  width: 100%;
+  height: 100%;
+}
+
+.recordPage__content-item {
   margin-bottom: 2vmax;
 }
 
-.pluginPage__comment-text {
-  margin-bottom: 0.2vmax;
+.recordPage__content-item:last-child {
+  margin-bottom: 0;
 }

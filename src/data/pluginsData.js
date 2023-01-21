@@ -10,8 +10,9 @@ import meow2 from '../pictures/plugins/meow.png';
 import coft2 from '../pictures/plugins/coft.png';
 import abracadabra2 from '../pictures/plugins/abracadabra.png';
 import nowInside2 from '../pictures/plugins/nowinside.png';
+import data from '../records/stageManager';
 
-const PluginsData = [
+const pluginsData = [
   {
     webp: renamer,
     png: renamer2,
@@ -163,4 +164,6 @@ const PluginsData = [
   },
 ];
 
-export default PluginsData;
+export const getLastPlugin = () => data[0];
+
+export default pluginsData;

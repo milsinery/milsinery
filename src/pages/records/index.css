@@ -1,4 +1,4 @@
-.plugins {
+.records {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,27 +7,17 @@
   overflow-y: auto;
 }
 
-.plugins__wrapper {
+.records__wrapper {
   display: flex;
   flex-direction: column;
   max-width: 1280px;
   margin: 6vmax 4vmax 12vmax 4vmax;
 }
 
-.plugins__header {
+.records__header {
   margin: 0 0 4vmax 0;
 }
 
-.plugins__title {
+.records__title {
   margin: 0 0 4vmax 0;
-}
-
-.plugins__plugins-list {
-  margin-bottom: 6vmax;
-}
-
-.plugins__links {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5vmax;
 }

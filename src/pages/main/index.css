@@ -50,6 +50,7 @@
   }
   
   .main__title,
+  .main__blog,
   .main__extensions,
   .main__plugins {
     margin: 0 0 11vmax 0;
@@ -65,12 +66,14 @@
     gap: 0.3vmax;
   }
 
+  .main__blog,
   .main__extensions,
   .main__plugins {
     display: flex;
     flex-direction: column;
   }
-  
+
+  .main__blog-title,
   .main__extensions-title,
   .main__plugins-title,
   .main__links-title {

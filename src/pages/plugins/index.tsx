@@ -13,14 +13,14 @@ const Plugins = () => {
       <Helmet>
         <meta
           name="description"
-          content="Плагины для Фигмы — ускоряют работу дизайнера, избавляя от повторения одних и тех же действий. Бесплатно и на русском языке."
+          content="Plug-ins for Figma - make the designer's work faster, eliminating routine"
         />
-        <meta name="keywords" content="figma, фигма, плагины, разработка" />
+        <meta name="keywords" content="figma, design, development, plugins" />
         <meta property="og:url" content="https://milsinery.com/#/plugins" />
-        <meta property="og:title" content="Плагины для Фигмы" />
+        <meta property="og:title" content="Plug-ins for Figma" />
         <meta
           property="og:description"
-          content="Плагины для Фигмы — ускоряют работу дизайнера, избавляя от повторения одних и тех же действий. Бесплатно и на русском языке."
+          content="Plug-ins for Figma - make the designer's work faster, eliminating routine"
         />
         <meta property="og:type" content="website" />
         <title>Plugins for Figma</title>
@@ -30,28 +30,28 @@ const Plugins = () => {
         <div className="plugins__wrapper">
           <header className="plugins__header">
             <Link to="/">
-              <h3>← Vladimir Bykov</h3>
+              <h3>About the author</h3>
             </Link>
           </header>
           <h1 className="plugins__title">Plugins for Figma</h1>
           <section className="plugins__plugins-list">
             <PluginsList></PluginsList>
           </section>
-          <div>
-            <h3 className="plugins__link">
+          <div className='plugins__links'>
+            <p className="plugins__link">
               <a
                 href="https://t.me/areyoureallydesigner"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn more about plugins and examples
+                Learn more about plugins 
               </a>
-            </h3>
-            <h3 className="plugins__link">
+            </p>
+            <p className="plugins__link">
               <a href="mailto:milsinery@icloud.com?subject=Figma%20Plugin">
                 Order a plugin
               </a>
-            </h3>
+            </p>
           </div>
         </div>
       </main>

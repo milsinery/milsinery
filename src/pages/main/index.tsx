@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import { getLastRecord } from '../../data/recordsData';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
 import avatar from '../../avatar.webp';
@@ -48,15 +49,24 @@ const Main = () => {
                   <img src={avatar} width="100%" height="100%" alt="Avatar" />
                 </picture>
               </div>
-              <div className='main__headline'>
-                <h3 className='main__headline-main'>Vladimir Bykov</h3>
-                <small className='main__headline-additional'>Interface designer</small>
+              <div className="main__headline">
+                <h3 className="main__headline-main">Vladimir Bykov</h3>
+                <small className="main__headline-additional">
+                  Interface designer
+                </small>
               </div>
             </div>
           </header>
           <h1 className="main__title">
-            I develop user interfaces, write texts and draw graphics for them 
+            I develop user interfaces, write texts and draw graphics for them
           </h1>
+
+          <section className="main__blog">
+            <Link to="/blog">
+              <h3 className="main__blog-title">Blog</h3>
+            </Link>
+            {getLastRecord()}
+          </section>
 
           <section className="main__extensions">
             <h3 className="main__extensions-title">Extensions for browser</h3>
@@ -77,7 +87,7 @@ const Main = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                LinkedIn 
+                LinkedIn
               </a>
             </p>
             <p className="main__link">
@@ -113,7 +123,7 @@ const Main = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                My telegram channel about design 
+                My telegram channel about design
               </a>
             </p>
           </section>
@@ -130,9 +140,7 @@ const Main = () => {
             <option value="light">Light theme</option>
           </select>
 
-          <small className="main__version">
-            Updated Dec 22 · Added the new plugin - Renamer.
-          </small>
+          <small className="main__version">Updated Jan 12 · Blog added.</small>
         </div>
       </main>
     </>
