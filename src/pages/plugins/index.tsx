@@ -33,7 +33,7 @@ const Plugins = () => {
               <h3>About the author</h3>
             </Link>
           </header>
-          <h1 className="plugins__title">Plugins for Figma</h1>
+          <h1 className="plugins__title">Plugins for Figma</h1>
           <section className="plugins__plugins-list">
             <PluginsList></PluginsList>
           </section>
