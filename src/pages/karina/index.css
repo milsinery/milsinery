@@ -1,0 +1,107 @@
+:root .gift {
+  --size-width: 400px;
+  --size-fullWidth: 800px;
+  --size-height: 600px;
+  
+  --color-first: #2E2E2E;
+  --color-second: #F7E43B;
+  --color-background: white;
+  
+  --shadow-close: 0px 6px 12px 0px rgba(0, 0, 0, 0.29), 0px 22px 22px 0px rgba(0, 0, 0, 0.25), 0px 50px 30px 0px rgba(0, 0, 0, 0.15), 0px 90px 36px 0px rgba(0, 0, 0, 0.04), 0px 140px 39px 0px rgba(0, 0, 0, 0.01);
+  --shadow-open: 0px 6px 12px 0px rgba(209, 195, 35, 0.46), 0px 22px 22px 0px rgba(209, 195, 35, 0.40), 0px 50px 30px 0px rgba(209, 195, 35, 0.23), 0px 90px 36px 0px rgba(209, 195, 35, 0.07), 0px 140px 39px 0px rgba(209, 195, 35, 0.01);
+  
+  --motion-speed-in: 300ms;
+  --motion-speed-out: 250ms;
+}
+
+.gift,
+.background,
+.card {
+  display: flex;
+}
+
+.gift,
+.background {
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.background {
+  background-color: var(--color-background);
+}
+
+.card {
+  width: var(--size-width);
+  overflow: hidden;
+  border-radius: 4px 16px 16px 4px;
+  border: 1px solid var(--border-close);
+  box-shadow: var(--shadow-close);
+}
+  
+
+.card,
+.first,
+.second,
+.second:before {
+  transition: all var(--motion-speed-out) ease-out;
+}
+
+.first,
+.second {
+  height: var(--size-height);
+}
+
+.first {
+  z-index: 2;
+  width: var(--size-width);
+  border-radius: 0 16px 16px 0;
+  background-color: var(--color-first);
+}
+
+.second {
+  z-index: 0;
+  position: relative;
+  width: 0;
+  background-color: var(--color-second);
+}
+
+.second:before {
+  z-index: 1;
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+}
+
+.card:hover,
+.card:hover .first,
+.card:hover .second {
+  transition: all var(--motion-speed-in) ease-in;
+}
+
+.card:hover,
+.card:hover .second {
+  width: var(--size-fullWidth);
+}
+
+.card:hover {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow-open);
+}
+
+.card:hover .first {
+  width: 0;
+  border-radius: 0;
+}
+
+.card:hover .second:before {
+  opacity: 0.03;
+}
