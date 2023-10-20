@@ -40,7 +40,7 @@ const Plugins = () => {
           <div className='plugins__links'>
             <p className="plugins__link">
               <a
-                href="https://t.me/areyoureallydesigner"
+                href="https://t.me/areyoureallyadesigner"
                 target="_blank"
                 rel="noopener noreferrer"
               >

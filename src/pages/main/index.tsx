@@ -119,7 +119,7 @@ const Main = () => {
             </p>
             <p className="main__link">
               <a
-                href="https://t.me/areyoureallydesigner"
+                href="https://t.me/areyoureallyadesigner"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -140,7 +140,7 @@ const Main = () => {
             <option value="light">Light theme</option>
           </select>
 
-          <small className="main__version">Updated Jan 12 · Blog added.</small>
+          <small className="main__version">Updated October 20 · New icon for Advertiser extension.</small>
         </div>
       </main>
     </>
