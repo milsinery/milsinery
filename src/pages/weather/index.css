@@ -1,0 +1,40 @@
+:root .gift {
+  --size-width: 400px;
+  --size-fullWidth: 800px;
+  --size-height: 600px;
+  
+  --color-first: #2E2E2E;
+  --color-second: blue;
+  --color-background: white;
+  
+  --shadow-close: 0px 6px 12px 0px rgba(0, 0, 0, 0.29), 0px 22px 22px 0px rgba(0, 0, 0, 0.25), 0px 50px 30px 0px rgba(0, 0, 0, 0.15), 0px 90px 36px 0px rgba(0, 0, 0, 0.04), 0px 140px 39px 0px rgba(0, 0, 0, 0.01);
+  --shadow-open: 0px 6px 12px 0px rgba(209, 195, 35, 0.46), 0px 22px 22px 0px rgba(209, 195, 35, 0.40), 0px 50px 30px 0px rgba(209, 195, 35, 0.23), 0px 90px 36px 0px rgba(209, 195, 35, 0.07), 0px 140px 39px 0px rgba(209, 195, 35, 0.01);
+  
+  --motion-speed-in: 300ms;
+  --motion-speed-out: 250ms;
+}
+
+
+.weather,
+.now,
+.today,
+.week {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather {
+  gap: 4vmax;
+}
+
+.now {
+  gap: 1vmax;
+}
+
+.today {
+  gap: 1vmax;
+}
+
+.today {
+  gap: 1vmax;
+}

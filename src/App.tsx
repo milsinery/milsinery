@@ -6,6 +6,7 @@ import Records from './pages/records/index';
 import Record from './pages/record/index';
 import Karina from './pages/karina/index';
 import Danila from './pages/danila/index';
+import Weather from './pages/weather/index';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route exact path="/blog/:name" component={Record} />
         <Route exact path="/karina" component={Karina} />
         <Route exact path="/danila" component={Danila} />
+        <Route exact path="/weather" component={Weather} />
       </Switch>
   );
 };
