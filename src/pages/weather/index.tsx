@@ -4,7 +4,8 @@ import './index.css';
 type WeatherNowProps = {
   temp: number;
   description: string;
-  wind: { speed: number; compass: string };
+  name: string,
+  wind: { speed: number; compass: number };
 }
 
 type WeatherTodayProps = {
@@ -13,19 +14,38 @@ type WeatherTodayProps = {
   precipitation: number; 
 }
 
-const RenderWeatherNow = ({ temp, description, wind }: WeatherNowProps) => {
-  const title = (temp: number) => `Now it's ${temp < 5 && temp >= -5 ? "cold" : temp >= 5 && temp <= 15 ? "coolly" : temp > 15 && temp <= 25 ? "nice" : temp > 25 && temp <= 30 ? "hot" : 'hot as hell'}.`
+const RenderWeatherNow = ({ temp, description, name, wind }: WeatherNowProps) => {
+  const capitalizeFirstLetter = (string: string) => {
+    if (string.length === 0) return string;
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  const title = (temp: number) => `Now it's ${temp < 5 && temp >= -5 ? "cold" : temp >= 5 && temp <= 15 ? "coolly" : temp > 15 && temp <= 25 ? "nice" : temp > 25 && temp <= 30 ? "hot" : 'hot as hell'}`
+  
   const subTitle = (wind: any, description: string) => {
+    const getDirection = (degrees: number) => {
+      if ((degrees >= 337.5 && degrees <= 360) || (degrees >= 0 && degrees < 22.5)) {
+        return 'cold'; 
+      } else if (degrees >= 67.5 && degrees < 112.5) {
+        return 'dry'; 
+      } else if (degrees >= 157.5 && degrees < 202.5) {
+        return 'warm'; 
+      } else if (degrees >= 247.5 && degrees < 292.5) {
+        return 'wet'; 
+      } else {
+        return ''; 
+      }
+    }
+
     const windPower = `${wind.speed <= 10 ? " with light" : wind.speed > 20 && wind.speed <= 30 ? "with strong" : wind.speed > 30 ? "with really strong" : "with"}`
-    const windState = `${wind.compass.includes('N') ? "cold" : "warm"} ${wind.compass.includes('W') ? "wet" : "dry"} wind.`;
+    const windState = `${getDirection(wind.compass)} wind.`;
     return `${windPower} ${windState}`;
   };
 
   return (
     <>
       <div className='now'>
-        <h1>{title(temp)}</h1>
-        <h1>{description} { wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h1>
+        <h1>{title(temp)}{name.length > 0 && ` in ${name}`}.</h1>
+        <h1>{capitalizeFirstLetter(description)} { wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h1>
       </div>
     </>
   );
@@ -35,41 +55,35 @@ const RenderWeatherToday = ({ temp_min, temp_max, precipitation }: WeatherTodayP
   return (
     <>
       <div className='today'>
-        <h2>Today will feel like { temp_min === temp_max ? temp_min : `${temp_min} to ${temp_max}`}.</h2>
-        <h2>{ precipitation >= 30 && precipitation < 60 ? "You can take an umbrella with you, because there is a slight chance of rain" : precipitation >= 60 ? "Take an umbrella with you, because it's going to rain" : "It won't rain" }.</h2>
-      </div>
-    </>
-  );
-}
-
-const RenderWeatherWeek = () => {
-  return (
-    <>
-      <div className='week'>
-        <small>Forecast for the week — soon this year.</small>
+        <h3>Today's and weekly forecasts will be coming soon.</h3>
+        <small>Powered by Open Weather.</small>
+        {/* <h2>Today will feel like { temp_min === temp_max ? temp_min : `${temp_min} to ${temp_max}`}.</h2>
+        <h2>{ precipitation >= 30 && precipitation < 60 ? "You can take an umbrella with you, because there is a slight chance of rain" : precipitation >= 60 ? "Take an umbrella with you, because it's going to rain" : "It won't rain" }.</h2> */}
       </div>
     </>
   );
 }
 
 const Weather = () => {
-  const auth = { login: "d536a447", key: "77e3b5ed9de2fd82880ec3f20873273d" };
+  const key = "422ff778e3bb5484a4b07787c510aa5b";
+
   const [location, setLocation] = useState({ latitude: 0, longitude: 0 });
-  const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', wind: { speed: 0, compass: '' } });
+  const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', name: '', wind: { speed: 0, compass: 0 } });
   const [weatherTodayData, setWeatherTodayData] = useState({ temp_min: 0, temp_max: 0, precipitation: 0 });
   const [isFetchedData, fetchData] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchNowWeatherData = async () => {
-    const url = `http://api.weatherunlocked.com/api/current/${location.latitude},${location.longitude}?app_id=${auth.login}&app_key=${auth.key}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${key}`
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const { feelslike_c, wx_desc, windspd_ms, winddir_compass } = data;
-      setWeatherNowData({ temp: Math.round(feelslike_c), description: wx_desc, wind: { speed: Math.round(windspd_ms), compass: winddir_compass } });
+      const { main, weather, wind, name, pop } = data;
+
+      setWeatherNowData({ temp: Math.round(main.feels_like), description: weather[0].description, name, wind: { speed: Math.round(wind.speed), compass: wind.deg } });
       fetchData(true);
     } catch (error: any) {
       console.error("Error fetching weather data: ", error);
@@ -78,17 +92,16 @@ const Weather = () => {
   };
 
   const fetchTodayWeatherData = async () => {
-    const url = `http://api.weatherunlocked.com/api/forecast/${location.latitude},${location.longitude}?app_id=${auth.login}&app_key=${auth.key}`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${key}`
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const { Days } = data;
-      const today = Days[0];
+      const today = data.list;
 
-      setWeatherTodayData( { temp_min: Math.round(today.temp_min_c), temp_max: Math.round(today.temp_max_c), precipitation: today.prob_precip_pct } );
+      // setWeatherTodayData( { temp_min: Math.round(today.temp_min_c), temp_max: Math.round(today.temp_max_c), precipitation: today.prob_precip_pct } );
       fetchData(true);
     } catch (error: any) {
       console.error("Error fetching weather data: ", error);
@@ -97,7 +110,7 @@ const Weather = () => {
   };
 
   useEffect(() => {
-    const defaultLocation = { latitude: 44.8125, longitude: 20.4612 };
+    const defaultLocation = { latitude: 40.7128, longitude: 74.0060 };
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -119,8 +132,6 @@ const Weather = () => {
   }, []);
 
   useEffect(() => {
-    console.log(location);
- 
     if (location.latitude !== 0 && location.longitude !== 0) {
       fetchNowWeatherData();
       fetchTodayWeatherData();
@@ -141,7 +152,7 @@ const Weather = () => {
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <h1>Please let us know your location information.</h1>
+          <h1>Getting location information...</h1>
          </div>
       </main>
     );
@@ -151,21 +162,21 @@ const Weather = () => {
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <h1>We're getting the weather...</h1>
+          <h1>Getting the weather...</h1>
          </div>
       </main>
     );
   }
 
   return (
-    <main className="main effect-fade-in ">
+    <main className={"main effect-fade-in " + (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25? "warm" : "hot")} >
       <div className="main__wrapper">
         <div className='weather'>
           {RenderWeatherNow(weatherNowData)}
           {RenderWeatherToday(weatherTodayData)}
-          {RenderWeatherWeek()}
         </div>
       </div>
+      <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25? "hero-warm" : "hero-hot")}>{weatherNowData.temp}</h1>
     </main>
   );
 };
