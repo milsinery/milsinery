@@ -36,7 +36,7 @@ const RenderWeatherNow = ({ temp, description, name, wind }: WeatherNowProps) =>
     if(temp <= 35) return "It's heat";
     if(temp <= 40) return "It's heat as hell";
     if(temp <= 45) return "It's deadly inferno";
-    return "It's unknown";
+    return "Unknown weather";
   }
 
   const subTitle = (wind: any, description: string) => {
