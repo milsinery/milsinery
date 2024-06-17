@@ -25,7 +25,7 @@
 
 .weather,
 .now,
-.today,
+.day,
 .week {
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@
   gap: 1vmax;
 }
 
-.today {
+.day {
   gap: 1vmax;
 }
 
