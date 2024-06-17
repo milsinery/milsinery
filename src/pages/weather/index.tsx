@@ -21,7 +21,8 @@ const RenderWeatherNow = ({ temp, description, name, wind }: WeatherNowProps) =>
     if (string.length === 0) return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  const title = (temp: number) => {
+
+  const weatherDescription = (temp: number) => {
     if(temp <= -25) return "It's extremely cold";
     if(temp <= -20) return "It's frosty";
     if(temp <= -15) return "It's very cold";
@@ -62,7 +63,7 @@ const RenderWeatherNow = ({ temp, description, name, wind }: WeatherNowProps) =>
   return (
     <>
       <div className='now'>
-        <h1>{title(temp)}{name.length > 0 && ` in ${name}`}.</h1>
+        <h1>{weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
         <h1>{capitalizeFirstLetter(description)} {wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h1>
       </div>
     </>
@@ -125,13 +126,31 @@ const RenderWeatherToday = (arr: any) => {
     }
   }
 
+  const weatherDescription = (temp: number) => {
+    if(temp <= -25) return "extremely cold";
+    if(temp <= -20) return "frosty";
+    if(temp <= -15) return "very cold";
+    if(temp <= -10) return "cold";
+    if(temp <= 0) return "mildly cold";
+    if(temp <= 5) return "chilly";
+    if(temp <= 10) return "It's cool";
+    if(temp <= 15) return "mildly warm";
+    if(temp <= 20) return "warm";
+    if(temp <= 25) return "hot";
+    if(temp <= 30) return "very hot";
+    if(temp <= 35) return "heat";
+    if(temp <= 40) return "heat as hell";
+    if(temp <= 45) return "deadly inferno";
+    return "hmm, we don't know";
+  }
+
   const rain = getPop(arr);
   const temps = getTemps(arr);
 
   return (
     <>
       <div className='day'>
-        <h2>Tomorrow, expect {temps.min} to {temps.max}°C.</h2>
+        <h2>Tomorrow, it's expected to be {weatherDescription(temps.max)}.</h2>
         <h2>{renderRainDescription(rain, temps.max)}</h2>
       </div>
     </>
@@ -284,7 +303,7 @@ const Weather = () => {
           {RenderWeatherTomorrow()}
         </div>
       </div>
-      <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherNowData.temp}</h1>
+      {/* <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherNowData.temp}</h1> */}
     </main>
   );
 };
