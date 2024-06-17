@@ -233,7 +233,20 @@ const Weather = () => {
     }
   };
 
-
+  const weatherDescription = (temp: number) => {
+    if(temp <= -25) return "Extremely";
+    if(temp <= -20) return "Frosty";
+    if(temp <= 0) return "Cold";
+    if(temp <= 5) return "Chilly";
+    if(temp <= 10) return "Cool";
+    if(temp <= 15) return "Mildly";
+    if(temp <= 20) return "Warm";
+    if(temp <= 30) return "Hot";
+    if(temp <= 35) return "Heat";
+    if(temp <= 40) return "Hell";
+    if(temp <= 45) return "Inferno";
+    return "Unknown weather";
+  }
 
   useEffect(() => {
     const defaultLocation = { latitude: 40.8561221, longitude: -92.8615866 };
@@ -303,7 +316,7 @@ const Weather = () => {
           {RenderWeatherTomorrow()}
         </div>
       </div>
-      {/* <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherNowData.temp}</h1> */}
+      <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>
     </main>
   );
 };

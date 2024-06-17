@@ -59,7 +59,7 @@
 .hero {
   position: absolute;
   top: -15vmax;
-  left: -2vmax;
+  left: -25vmax;
   z-index: -1;
   font-size: 70vmax;
   transform: rotate(-10deg);
@@ -81,8 +81,8 @@
 
 @media screen and (max-width: 600px) {
   .hero {
-    top: -6vmax;
-    left: -6vmax;
-    font-size: 50vmax;
+    top: 10vmax;
+    left: -20vmax;
+    font-size: 40vmax;
   }
 }
