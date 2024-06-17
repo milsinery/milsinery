@@ -131,7 +131,7 @@ const RenderWeatherToday = (arr: any) => {
   return (
     <>
       <div className='day'>
-        <h2>Tomorrow we expect {temps.min} to {temps.max}.</h2>
+        <h2>Tomorrow, expect {temps.min} to {temps.max}°C.</h2>
         <h2>{renderRainDescription(rain, temps.max)}</h2>
       </div>
     </>
