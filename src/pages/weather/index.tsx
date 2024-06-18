@@ -375,7 +375,7 @@ const Weather = () => {
         const color = weatherNowData.temp < 15 ? "rgba(183, 220, 255, 0.9)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(255, 238, 204, 0.9)" : "rgba(255, 204, 204, 0.9)";
         metaColor.setAttribute('content', color);
       } else {
-        const color = weatherNowData.temp < 15 ? "rgba(0, 51, 102, 0.2)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(102, 68, 0, 0.1)" : "rgba(102, 0, 0, 0.2)";
+        const color = weatherNowData.temp < 15 ? "rgba(0, 51, 102, 0.5)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(102, 68, 0, 0.5)" : "rgba(102, 0, 0, 0.5)";
         metaColor.setAttribute('content', color);
       }
     }
