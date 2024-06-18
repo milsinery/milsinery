@@ -1,22 +1,8 @@
 import { useEffect, useState } from 'react';
 import './index.css';
 
-type WeatherNowProps = {
-  temp: number;
-  description: string;
-  name: string,
-  wind: { speed: number; compass: number };
-}
-
-type WeatherDayProps = {
-  time: any;
-  temp: any;
-  pop: any;
-  description: any;
-  wind: { speed: any; compass: any; }[]
-}
-
-const RenderWeatherNow = ({ temp, description, name, wind }: WeatherNowProps) => {
+const RenderWeatherNow = (arr: any) => {
+  const { temp, description, name, wind } = arr;
   const capitalizeFirstLetter = (string: string) => {
     if (string.length === 0) return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -32,8 +18,8 @@ const RenderWeatherNow = ({ temp, description, name, wind }: WeatherNowProps) =>
     if(temp <= 10) return "It's cool";
     if(temp <= 15) return "It's mildly warm";
     if(temp <= 20) return "It's warm";
-    if(temp <= 25) return "It's hot";
-    if(temp <= 30) return "It's very hot";
+    if(temp <= 25) return "It's mildly hot";
+    if(temp <= 30) return "It's hot";
     if(temp <= 35) return "It's heat";
     if(temp <= 40) return "It's heat as hell";
     if(temp <= 45) return "It's deadly inferno";
@@ -63,7 +49,7 @@ const RenderWeatherNow = ({ temp, description, name, wind }: WeatherNowProps) =>
   return (
     <>
       <div className='now'>
-        <h1>{weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
+        <h1>Now {weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
         <h1>{capitalizeFirstLetter(description)} {wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h1>
       </div>
     </>
@@ -103,25 +89,35 @@ const RenderWeatherToday = (arr: any) => {
 
     const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : "in the evening"}`;
 
-    if (temp > 0) {
+    if (temp < 0) {
       if (pop < 15) {
-        return "It won't rain.";
+        return "without snow";
       } else if (pop < 30 && pop >= 15) {
-        return `There is a slight chance of rain ${getTimeofDay(time)}.`;
+        return `with a slight chance of snow ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `You can take an umbrella with you, because there is a chance of rain ${getTimeofDay(time)}.`;
+        return `with a chance snow ${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `Take an umbrella with you, because it's going to rain ${getTimeofDay(time)}.`;
+        return `with snow ${getTimeofDay(time)}`;
+      }
+    } else if (temp >= 0 && temp < 5) {
+      if (pop < 15) {
+        return "without snow or rain";
+      } else if (pop < 30 && pop >= 15) {
+        return `with a slight chance of snow or rain ${getTimeofDay(time)}`;
+      } else if (pop >= 30 && pop < 60) {
+        return `with a chance of snow or rain ${getTimeofDay(time)}`;
+      } else if (pop >= 60) {
+        return `with snow or rain ${getTimeofDay(time)}`;
       }
     } else {
       if (pop < 15) {
-        return "It won't snow.";
+        return "without rain";
       } else if (pop < 30 && pop >= 15) {
-        return `There is a slight chance snow ${getTimeofDay(time)}.`;
+        return `with a slight chance of rain ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `There is a chance snow ${getTimeofDay(time)}.`;
+        return `with a chance of rain ${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `It's going to snow ${getTimeofDay(time)}.`;
+        return `with rain${getTimeofDay(time)}`;
       }
     }
   }
@@ -149,19 +145,115 @@ const RenderWeatherToday = (arr: any) => {
 
   return (
     <>
-      <div className='day'>
-        <h2>Tomorrow, it's expected to be {weatherDescription(temps.max)}.</h2>
-        <h2>{renderRainDescription(rain, temps.max)}</h2>
+      <div className='day today'>
+        <h2>Today it's {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</h2>
       </div>
     </>
   );
 }
 
-const RenderWeatherTomorrow = () => {
+const RenderWeatherTomorrow = (arr: any) => {
+  const getPop = (arr: any) => {
+    let rain = { pop: 0, time: 0 };
+
+    for (const { time, pop } of arr) {
+      if (pop === 0) continue;
+      if (pop > rain.pop) {
+        rain.pop = pop;
+        rain.time = parseInt(time[11] + time[12]);
+      };
+    }
+    return rain;
+  }
+
+  const getTemps = (arr: any) => {
+    const minMax = { min: 0, max: 0 };
+
+    for (const { temp } of arr) {
+      if (temp > minMax.max) {
+        minMax.max = temp
+      } else {
+        minMax.min = temp;
+      }
+    }
+    return minMax;
+  }
+
+  const renderRainDescription = (rain: any, temp: number) => {
+    const { pop, time } = rain;
+    const { min } = temps;
+
+    const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : "in the evening"}`;
+
+    if (temp < 0) {
+      if (pop < 15) {
+        return "It won't snow";
+      } else if (pop < 30 && pop >= 15) {
+        return `There is a slight chance snow ${getTimeofDay(time)}`;
+      } else if (pop >= 30 && pop < 60) {
+        return `There is a chance snow ${getTimeofDay(time)}`;
+      } else if (pop >= 60) {
+        return `It's going to snow ${getTimeofDay(time)}`;
+      }
+    } else if (temp >= 0 && temp < 5) {
+      if (pop < 15) {
+        return "It won't snow or rain";
+      } else if (pop < 30 && pop >= 15) {
+        return `There is a slight chance of rain ${getTimeofDay(time)}`;
+      } else if (pop >= 30 && pop < 60) {
+        return `You can take an umbrella with you, because there is a chance of snow or rain ${getTimeofDay(time)}`;
+      } else if (pop >= 60) {
+        return `Take an umbrella with you, because because there is a chance of snow or rain ${getTimeofDay(time)}`;
+      }
+    } else {
+      if (pop < 15) {
+        return "It won't rain";
+      } else if (pop < 30 && pop >= 15) {
+        return `There is a slight chance of rain ${getTimeofDay(time)}`;
+      } else if (pop >= 30 && pop < 60) {
+        return `You can take an umbrella with you, because there is a chance of rain ${getTimeofDay(time)}`;
+      } else if (pop >= 60) {
+        return `Take an umbrella with you, because it's going to rain or snow ${getTimeofDay(time)}`;
+      }
+    }
+  }
+
+  const weatherDescription = (temp: number) => {
+    if(temp <= -25) return "extremely cold";
+    if(temp <= -20) return "frosty";
+    if(temp <= -15) return "very cold";
+    if(temp <= -10) return "cold";
+    if(temp <= 0) return "mildly cold";
+    if(temp <= 5) return "chilly";
+    if(temp <= 10) return "It's cool";
+    if(temp <= 15) return "mildly warm";
+    if(temp <= 20) return "warm";
+    if(temp <= 25) return "hot";
+    if(temp <= 30) return "very hot";
+    if(temp <= 35) return "heat";
+    if(temp <= 40) return "heat as hell";
+    if(temp <= 45) return "deadly inferno";
+    return "hmm, we don't know";
+  }
+
+  const rain = getPop(arr);
+  const temps = getTemps(arr);
+
   return (
     <>
-      <div className='day'>
-        <p>Work in progress. Other sections will be available soon.</p>
+      <div className='day tomorrow'>
+        <h2>Tomorrow it's expected to be {weatherDescription(temps.max)}.</h2>
+        <h2>{renderRainDescription(rain, temps.max)}.</h2>
+      </div>
+    </>
+  );
+}
+
+const renderOther = () => {
+  return (
+    <>
+      <div className='day tomorrow'>
+        <small>The app in development, some features will come later.</small>
         <small>Powered by Open Weather.</small>
       </div>
     </>
@@ -174,6 +266,7 @@ const Weather = () => {
   const [location, setLocation] = useState({ latitude: 0, longitude: 0 });
   const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', name: '', wind: { speed: 0, compass: 0 } });
   const [weatherTodayData, setWeatherTodayData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
+  const [weatherTomorrowData, setWeatherTomorrowData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
   const [isFetchedData, fetchData] = useState(false);
   const [error, setError] = useState(null);
 
@@ -195,9 +288,28 @@ const Weather = () => {
     }
   };
 
-  const fetchTodayWeatherData = async () => {
+  const fetchTomorrowWeatherData = async () => {
     const currentDate = new Date().getDate().toString();
-    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&cnt=16&units=metric&appid=${key}`
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&&units=metric&appid=${key}`
+
+    const getToday = (todayRangeTime: any) => {
+      const nextDay = [];
+
+      for (const item of todayRangeTime) {
+        const itemDay = item.dt_txt[8] + item.dt_txt[9];
+        if (itemDay === currentDate) {
+          nextDay.push(item);
+        }
+      }
+
+      const nextDayData = [];
+
+      for (const item of nextDay) {
+        nextDayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
+      }
+
+      return nextDayData.slice(2, 8);
+    }
 
     const getTomorrow = (next48Hours: any) => {
       const nextDay = [];
@@ -224,8 +336,13 @@ const Weather = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const nextDay = getTomorrow(data.list);
-      setWeatherTodayData(nextDay);
+      const thisDay = getToday(data.list);
+      const nexDay = getTomorrow(data.list);
+
+      console.log(data)
+
+      setWeatherTodayData(thisDay);
+      setWeatherTomorrowData(nexDay);
       fetchData(true);
     } catch (error: any) {
       console.error("Error fetching weather data: ", error);
@@ -273,7 +390,7 @@ const Weather = () => {
   useEffect(() => {
     if (location.latitude !== 0 && location.longitude !== 0) {
       fetchNowWeatherData();
-      fetchTodayWeatherData();
+      fetchTomorrowWeatherData();
     }
   }, [location]);
 
@@ -307,13 +424,29 @@ const Weather = () => {
     );
   }
 
+  const metaColor = document.querySelector('meta[name="theme-color"');
+  const prefersTheme = window.matchMedia('(prefers-color-scheme:light)').matches;
+
+  console.log(prefersTheme)
+
+  if(metaColor) {
+    if(prefersTheme) {
+      const color = weatherNowData.temp < 15 ? "rgba(183, 220, 255, 0.9)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(255, 238, 204, 0.9)" : "rgba(255, 204, 204, 0.9)";
+      metaColor.setAttribute('content', color);
+    } else {
+      const color = weatherNowData.temp < 15 ? "rgba(0, 51, 102, 0.2)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(102, 68, 0, 0.1)" : "rgba(102, 0, 0, 0.2)";
+      metaColor.setAttribute('content', color);
+    }
+  }
+
   return (
     <main className={"main effect-fade-in " + (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot")} >
       <div className="main__wrapper">
         <div className='weather'>
           {RenderWeatherNow(weatherNowData)}
           {RenderWeatherToday(weatherTodayData)}
-          {RenderWeatherTomorrow()}
+          {RenderWeatherTomorrow(weatherTomorrowData)}
+          {renderOther()}
         </div>
       </div>
       <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>
