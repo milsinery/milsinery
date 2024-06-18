@@ -129,11 +129,11 @@ const RenderWeatherToday = (arr: any) => {
     if(temp <= -10) return "cold";
     if(temp <= 0) return "mildly cold";
     if(temp <= 5) return "chilly";
-    if(temp <= 10) return "It's cool";
+    if(temp <= 10) return "cool";
     if(temp <= 15) return "mildly warm";
     if(temp <= 20) return "warm";
-    if(temp <= 25) return "hot";
-    if(temp <= 30) return "very hot";
+    if(temp <= 25) return "mildly hot";
+    if(temp <= 30) return "hot";
     if(temp <= 35) return "heat";
     if(temp <= 40) return "heat as hell";
     if(temp <= 45) return "deadly inferno";
@@ -225,11 +225,11 @@ const RenderWeatherTomorrow = (arr: any) => {
     if(temp <= -10) return "cold";
     if(temp <= 0) return "mildly cold";
     if(temp <= 5) return "chilly";
-    if(temp <= 10) return "It's cool";
+    if(temp <= 10) return "cool";
     if(temp <= 15) return "mildly warm";
     if(temp <= 20) return "warm";
-    if(temp <= 25) return "hot";
-    if(temp <= 30) return "very hot";
+    if(temp <= 25) return "mildly hot";
+    if(temp <= 30) return "hot";
     if(temp <= 35) return "heat";
     if(temp <= 40) return "heat as hell";
     if(temp <= 45) return "deadly inferno";
@@ -303,13 +303,12 @@ const Weather = () => {
         }
       }
 
-      const TodayData = [];
+      const todayData = [];
 
       for (const item of nextDay) {
-        TodayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
+        todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
       }
-
-      return TodayData;
+      return todayData;
     }
 
     const getTomorrow = (next48Hours: any) => {
