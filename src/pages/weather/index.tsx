@@ -340,8 +340,6 @@ const Weather = () => {
       const thisDay = getToday(data.list);
       const nexDay = getTomorrow(data.list);
 
-      console.log(data)
-
       setWeatherTodayData(thisDay);
       setWeatherTomorrowData(nexDay);
       fetchDataForNow(true);
@@ -369,13 +367,26 @@ const Weather = () => {
   const changeThemeColor = () => {
     const metaColor = document.querySelector('meta[name="theme-color"');
     const prefersTheme = window.matchMedia('(prefers-color-scheme:light)').matches;
+
+    const colors = {
+      light: {
+        cold: "#CCE6FF",
+        warm: "#FFEECC",
+        hot: "#FFCCCC"
+      },
+      dark: {
+        cold: "#152F4A",
+        warm: "#483717",
+        hot: "#552222"
+      }
+    }
   
     if(metaColor) {
       if(prefersTheme) {
-        const color = weatherNowData.temp < 15 ? "rgba(183, 220, 255, 0.9)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(255, 238, 204, 0.9)" : "rgba(255, 204, 204, 0.9)";
+        const color = weatherNowData.temp < 15 ? colors.light.cold : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? colors.light.warm : colors.light.hot;
         metaColor.setAttribute('content', color);
       } else {
-        const color = weatherNowData.temp < 15 ? "rgba(0, 51, 102, 0.5)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(102, 68, 0, 0.5)" : "rgba(102, 0, 0, 0.5)";
+        const color = weatherNowData.temp < 15 ? colors.dark.cold : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? colors.dark.warm : colors.dark.hot;
         metaColor.setAttribute('content', color);
       }
     }
