@@ -267,7 +267,8 @@ const Weather = () => {
   const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', name: '', wind: { speed: 0, compass: 0 } });
   const [weatherTodayData, setWeatherTodayData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
   const [weatherTomorrowData, setWeatherTomorrowData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
-  const [isFetchedData, fetchData] = useState(false);
+  const [isFetchedDataForNow, fetchDataForNow] = useState(false);
+  const [isFetchedDataForTwoDays, fetchDataForTwoDays] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchNowWeatherData = async () => {
@@ -281,7 +282,7 @@ const Weather = () => {
       const { main, weather, wind, name, pop } = data;
 
       setWeatherNowData({ temp: Math.round(main.feels_like), description: weather[0].description, name, wind: { speed: Math.round(wind.speed), compass: wind.deg } });
-      fetchData(true);
+      fetchDataForNow(true);
     } catch (error: any) {
       console.error("Error fetching weather data: ", error);
       setError(error.message);
@@ -343,7 +344,7 @@ const Weather = () => {
 
       setWeatherTodayData(thisDay);
       setWeatherTomorrowData(nexDay);
-      fetchData(true);
+      fetchDataForNow(true);
     } catch (error: any) {
       console.error("Error fetching weather data: ", error);
       setError(error.message);
@@ -363,6 +364,21 @@ const Weather = () => {
     if(temp <= 40) return "Hell";
     if(temp <= 45) return "Inferno";
     return "Unknown weather";
+  }
+
+  const changeThemeColor = () => {
+    const metaColor = document.querySelector('meta[name="theme-color"');
+    const prefersTheme = window.matchMedia('(prefers-color-scheme:light)').matches;
+  
+    if(metaColor) {
+      if(prefersTheme) {
+        const color = weatherNowData.temp < 15 ? "rgba(183, 220, 255, 0.9)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(255, 238, 204, 0.9)" : "rgba(255, 204, 204, 0.9)";
+        metaColor.setAttribute('content', color);
+      } else {
+        const color = weatherNowData.temp < 15 ? "rgba(0, 51, 102, 0.2)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(102, 68, 0, 0.1)" : "rgba(102, 0, 0, 0.2)";
+        metaColor.setAttribute('content', color);
+      }
+    }
   }
 
   useEffect(() => {
@@ -414,7 +430,8 @@ const Weather = () => {
     );
   }
 
-  if (!isFetchedData) {
+  if (!isFetchedDataForNow && !isFetchedDataForTwoDays) {
+    changeThemeColor();
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
@@ -422,21 +439,6 @@ const Weather = () => {
         </div>
       </main>
     );
-  }
-
-  const metaColor = document.querySelector('meta[name="theme-color"');
-  const prefersTheme = window.matchMedia('(prefers-color-scheme:light)').matches;
-
-  console.log(prefersTheme)
-
-  if(metaColor) {
-    if(prefersTheme) {
-      const color = weatherNowData.temp < 15 ? "rgba(183, 220, 255, 0.9)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(255, 238, 204, 0.9)" : "rgba(255, 204, 204, 0.9)";
-      metaColor.setAttribute('content', color);
-    } else {
-      const color = weatherNowData.temp < 15 ? "rgba(0, 51, 102, 0.2)" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "rgba(102, 68, 0, 0.1)" : "rgba(102, 0, 0, 0.2)";
-      metaColor.setAttribute('content', color);
-    }
   }
 
   return (
