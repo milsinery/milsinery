@@ -49,8 +49,8 @@ const RenderWeatherNow = (arr: any) => {
   return (
     <>
       <div className='now'>
-        <h1>Now {weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
-        <h1>{capitalizeFirstLetter(description)} {wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h1>
+        <h1>{weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
+        <h2>{capitalizeFirstLetter(description)} {description.includes("rain") && "💦"} {wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h2>
       </div>
     </>
   );
@@ -85,39 +85,37 @@ const RenderWeatherToday = (arr: any) => {
 
   const renderRainDescription = (rain: any, temp: number) => {
     const { pop, time } = rain;
-    const { min } = temps;
-
     const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : "in the evening"}`;
 
     if (temp < 0) {
       if (pop < 15) {
         return "without snow";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of snow ${getTimeofDay(time)}`;
+        return `with a slight chance of snow around ${time}:00`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance snow ${getTimeofDay(time)}`;
+        return `with a chance snow around ${(time)}:00`;
       } else if (pop >= 60) {
-        return `with snow ${getTimeofDay(time)}`;
+        return `with snow around ${getTimeofDay(time)}:00`;
       }
     } else if (temp >= 0 && temp < 5) {
       if (pop < 15) {
         return "without snow or rain";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of snow or rain ${getTimeofDay(time)}`;
+        return `with a slight chance of snow or rain 💦 around ${time}:00`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance of snow or rain ${getTimeofDay(time)}`;
+        return `with a chance of snow or rain 💦 around ${time}:00`;
       } else if (pop >= 60) {
-        return `with snow or rain ${getTimeofDay(time)}`;
+        return `with snow or rain 💦 around ${time}:00`;
       }
     } else {
       if (pop < 15) {
         return "without rain";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of rain ${getTimeofDay(time)}`;
+        return `with a slight chance of rain 💦 around ${time}:00`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance of rain ${getTimeofDay(time)}`;
+        return `with a chance of rain 💦 around ${time}:00`;
       } else if (pop >= 60) {
-        return `with rain${getTimeofDay(time)}`;
+        return `with rain 💦 around ${time}:00`;
       }
     }
   }
@@ -146,7 +144,7 @@ const RenderWeatherToday = (arr: any) => {
   return (
     <>
       <div className='day today'>
-        <h2>Today it's {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</h2>
+        <p>Today it's {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</p>
       </div>
     </>
   );
@@ -187,7 +185,7 @@ const RenderWeatherTomorrow = (arr: any) => {
 
     if (temp < 0) {
       if (pop < 15) {
-        return "It won't snow";
+        return "It won't snow";
       } else if (pop < 30 && pop >= 15) {
         return `There is a slight chance snow ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
@@ -197,23 +195,23 @@ const RenderWeatherTomorrow = (arr: any) => {
       }
     } else if (temp >= 0 && temp < 5) {
       if (pop < 15) {
-        return "It won't snow or rain";
+        return "It won't snow or rain";
       } else if (pop < 30 && pop >= 15) {
-        return `There is a slight chance of rain ${getTimeofDay(time)}`;
+        return `There is a slight chance of rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `You can take an umbrella with you, because there is a chance of snow or rain ${getTimeofDay(time)}`;
+        return `You can take an umbrella with you, because there is a chance of snow or rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `Take an umbrella with you, because because there is a chance of snow or rain ${getTimeofDay(time)}`;
+        return `Take an umbrella with you, because there is a chance of snow or rain 💦 ${getTimeofDay(time)}`;
       }
     } else {
       if (pop < 15) {
-        return "It won't rain";
+        return "It won't rain";
       } else if (pop < 30 && pop >= 15) {
-        return `There is a slight chance of rain ${getTimeofDay(time)}`;
+        return `There is a slight chance of rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `You can take an umbrella with you, because there is a chance of rain ${getTimeofDay(time)}`;
+        return `You can take an umbrella with you, because there is a chance of rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `Take an umbrella with you, because it's going to rain or snow ${getTimeofDay(time)}`;
+        return `Take an umbrella with you, because it's going to rain 💦 ${getTimeofDay(time)}`;
       }
     }
   }
@@ -242,8 +240,8 @@ const RenderWeatherTomorrow = (arr: any) => {
   return (
     <>
       <div className='day tomorrow'>
-        <h2>Tomorrow it's expected to be {weatherDescription(temps.max)}.</h2>
-        <h2>{renderRainDescription(rain, temps.max)}.</h2>
+        <p>Tomorrow it's expected to be {weatherDescription(temps.max)}.</p>
+        <p>{renderRainDescription(rain, temps.max)}.</p>
       </div>
     </>
   );
@@ -252,7 +250,7 @@ const RenderWeatherTomorrow = (arr: any) => {
 const renderOther = () => {
   return (
     <>
-      <div className='day tomorrow'>
+      <div className='other'>
         <small>The app in development, some features will come later.</small>
         <small>Powered by Open Weather.</small>
       </div>
@@ -303,13 +301,13 @@ const Weather = () => {
         }
       }
 
-      const nextDayData = [];
+      const TodayData = [];
 
       for (const item of nextDay) {
-        nextDayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
+        TodayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
       }
 
-      return nextDayData.slice(2, 8);
+      return TodayData;
     }
 
     const getTomorrow = (next48Hours: any) => {
@@ -339,10 +337,9 @@ const Weather = () => {
       const data = await response.json();
       const thisDay = getToday(data.list);
       const nexDay = getTomorrow(data.list);
-
       setWeatherTodayData(thisDay);
       setWeatherTomorrowData(nexDay);
-      fetchDataForNow(true);
+      fetchDataForTwoDays(true);
     } catch (error: any) {
       console.error("Error fetching weather data: ", error);
       setError(error.message);
@@ -425,7 +422,9 @@ const Weather = () => {
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <h1>Sorry, we can't get the weather. Try again later, please.</h1>
+          <div className='weather'>
+            <h3>Sorry, we can't get the weather. Try again later, please.</h3>
+          </div>
         </div>
       </main>
     );
@@ -435,7 +434,9 @@ const Weather = () => {
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <h1>Getting location information...</h1>
+          <div className='weather'>
+            <h3>Getting location information...</h3>
+          </div>
         </div>
       </main>
     );
@@ -446,7 +447,9 @@ const Weather = () => {
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <h1>Getting the weather...</h1>
+          <div className='weather'>
+            <h3>Getting the weather...</h3>
+          </div>
         </div>
       </main>
     );
@@ -457,8 +460,10 @@ const Weather = () => {
       <div className="main__wrapper">
         <div className='weather'>
           {RenderWeatherNow(weatherNowData)}
-          {RenderWeatherToday(weatherTodayData)}
-          {RenderWeatherTomorrow(weatherTomorrowData)}
+          <div className='today-tomorrow'>
+            {RenderWeatherToday(weatherTodayData)}
+            {RenderWeatherTomorrow(weatherTomorrowData)}
+          </div>
           {renderOther()}
         </div>
       </div>

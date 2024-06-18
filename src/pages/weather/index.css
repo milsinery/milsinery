@@ -24,25 +24,45 @@
 }
 
 .weather,
+.today-tomorrow,
 .now,
 .day,
-.week {
+.other  {
   display: flex;
   flex-direction: column;
 }
 
 .weather {
-  padding-top: 2vmax;
-  ;
-  gap: 4vmax;
+  padding-top: 3vmax;
+  gap: 6vmax;
+}
+
+.weather h1 {
+  font-size: 7vmax;
+}
+
+.weather h2 {
+  font-size: 5vmax;
+}
+
+.weather p {
+  font-size: 3vmax;
 }
 
 .now {
-  gap: 1vmax;
+  gap: 1.5vmax;
+}
+
+.today-tomorrow {
+  gap: 3vmax;
 }
 
 .day {
   gap: 1vmax;
+}
+
+.other {
+  gap: 0.5vmax;
 }
 
 .cold {
