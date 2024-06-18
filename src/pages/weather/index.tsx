@@ -57,6 +57,8 @@ const RenderWeatherNow = (arr: any) => {
 }
 
 const RenderWeatherToday = (arr: any) => {
+  const now = Math.round(new Date().getHours());
+
   const getPop = (arr: any) => {
     let rain = { pop: 0, time: 0 };
 
@@ -144,7 +146,7 @@ const RenderWeatherToday = (arr: any) => {
   return (
     <>
       <div className='day today'>
-        <p>Today it's {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</p>
+        <p>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</p>
       </div>
     </>
   );
