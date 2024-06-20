@@ -27,7 +27,7 @@
 .today-tomorrow,
 .now,
 .day,
-.other  {
+.other {
   display: flex;
   flex-direction: column;
 }
@@ -35,6 +35,12 @@
 .weather {
   padding-top: 3vmax;
   gap: 6vmax;
+}
+
+.weather h1, 
+.weather h2, 
+.weather p {
+  text-wrap: balance;
 }
 
 .weather h1 {
@@ -100,10 +106,18 @@
   color: var(--hero-hot);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 640px) {
   .hero {
     top: 10vmax;
     left: -20vmax;
     font-size: 40vmax;
+  }
+
+  .weather h1 {
+    font-size: 6vmax;
+  }
+
+  .weather h2 {
+    font-size: 5vmax;
   }
 }
