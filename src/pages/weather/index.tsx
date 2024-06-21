@@ -56,7 +56,7 @@ const RenderWeatherNow = (arr: any) => {
   );
 }
 
-const RenderWeatherToday = (arr: any) => {
+const RenderWeatherToday = (arr: any, movie: any) => {
   const now = Math.round(new Date().getHours());
 
   const getPop = (arr: any) => {
@@ -140,6 +140,18 @@ const RenderWeatherToday = (arr: any) => {
     return "hmm, we don't know";
   }
 
+  const renderMovie = (movie: any) => {
+    const { title, overview } = movie;
+    
+      return (
+        <>
+          <div className='now'>
+            <p title={overview}>If you decide to stay at home, we recommend wathcing {title}.</p>
+          </div>
+        </>
+      );
+    }
+
   const rain = getPop(arr);
   const temps = getTemps(arr);
 
@@ -147,6 +159,7 @@ const RenderWeatherToday = (arr: any) => {
     <>
       <div className='day today'>
         <p>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</p>
+        <p>{now <= 12 && rain.pop >= 60 && temps.max <= 25 && renderMovie(movie)}</p>
       </div>
     </>
   );
@@ -181,7 +194,6 @@ const RenderWeatherTomorrow = (arr: any) => {
 
   const renderRainDescription = (rain: any, temp: number) => {
     const { pop, time } = rain;
-    const { min } = temps;
 
     const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : "in the evening"}`;
 
@@ -267,9 +279,10 @@ const Weather = () => {
   const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', name: '', wind: { speed: 0, compass: 0 } });
   const [weatherTodayData, setWeatherTodayData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
   const [weatherTomorrowData, setWeatherTomorrowData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
+  const [movie, setMovie] = useState({ title: "", overview: "" });
+  const [isFetchedMovie, fetchMovie] = useState(false);
   const [isFetchedDataForNow, fetchDataForNow] = useState(false);
   const [isFetchedDataForTwoDays, fetchDataForTwoDays] = useState(false);
-  const [isFetchedMovie, fetchMovie] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchNowWeatherData = async () => {
@@ -293,19 +306,23 @@ const Weather = () => {
   };
 
   const fetchRandomMovie = async () => {
-    const params = { 'api-key': 'key', 'language': 'en-US' };
-    const url = `https://api.themoviedb.org/3/discover/movie?language=en-US&`
-
-    
+    const APIKey = 'd67e865d0b7d554f93bb028403d98436';
+    const baseURL = `https://api.themoviedb.org/3`
 
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log(data);
+      const response = await fetch(`${baseURL}/discover/movie?api_key=${APIKey}&sort_by=popularity.desc`);
 
+      if (!response.ok) {
+        throw new Error('Failed to fetch movies');
+      }
+      
+      const data = await response.json();
+      const upliftingMovies = data.results.filter((movie:any) => movie.genre_ids.includes(18)); 
+      const randomMovie = upliftingMovies[Math.floor(Math.random() * upliftingMovies.length)];
+      const { title, overview } = randomMovie;
+
+      setMovie({ title, overview });
+      fetchMovie(true);
     } catch (error: any) {
       setError(error.message);
     }
@@ -328,8 +345,20 @@ const Weather = () => {
       const todayData = [];
 
       for (const item of nextDay) {
-        todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
+        todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg }});
       }
+
+      let rain = 0;
+  
+      for (const { pop } of todayData) {
+        if (pop === 0) continue;
+        if (pop > rain) {
+          rain = pop;
+        };
+      }
+
+      if(rain > 60) fetchRandomMovie();
+
       return todayData;
     }
 
@@ -485,7 +514,7 @@ const Weather = () => {
         <div className='weather'>
           {RenderWeatherNow(weatherNowData)}
           <div className='today-tomorrow'>
-            {RenderWeatherToday(weatherTodayData)}
+            {RenderWeatherToday(weatherTodayData, movie)}
             {RenderWeatherTomorrow(weatherTomorrowData)}
           </div>
           {renderOther()}
