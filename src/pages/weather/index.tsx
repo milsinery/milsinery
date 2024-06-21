@@ -20,8 +20,8 @@ const RenderWeatherNow = (arr: any) => {
     if(temp <= 20) return "It's warm";
     if(temp <= 25) return "It's mildly hot";
     if(temp <= 30) return "It's hot";
-    if(temp <= 35) return "It's heat";
-    if(temp <= 40) return "It's heat as hell";
+    if(temp <= 35) return "It's very hot";
+    if(temp <= 40) return "It's hot as hell";
     if(temp <= 45) return "It's deadly inferno";
     return "Unknown weather";
   }
@@ -134,8 +134,8 @@ const RenderWeatherToday = (arr: any) => {
     if(temp <= 20) return "warm";
     if(temp <= 25) return "mildly hot";
     if(temp <= 30) return "hot";
-    if(temp <= 35) return "heat";
-    if(temp <= 40) return "heat as hell";
+    if(temp <= 35) return "very hot";
+    if(temp <= 40) return "hot as hell";
     if(temp <= 45) return "deadly inferno";
     return "hmm, we don't know";
   }
@@ -230,8 +230,8 @@ const RenderWeatherTomorrow = (arr: any) => {
     if(temp <= 20) return "warm";
     if(temp <= 25) return "mildly hot";
     if(temp <= 30) return "hot";
-    if(temp <= 35) return "heat";
-    if(temp <= 40) return "heat as hell";
+    if(temp <= 35) return "very hot";
+    if(temp <= 40) return "hot as hell";
     if(temp <= 45) return "deadly inferno";
     return "hmm, we don't know";
   }
@@ -269,10 +269,13 @@ const Weather = () => {
   const [weatherTomorrowData, setWeatherTomorrowData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
   const [isFetchedDataForNow, fetchDataForNow] = useState(false);
   const [isFetchedDataForTwoDays, fetchDataForTwoDays] = useState(false);
+  const [isFetchedMovie, fetchMovie] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchNowWeatherData = async () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${key}`
+    const now = new Date();
+
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -289,7 +292,26 @@ const Weather = () => {
     }
   };
 
-  const fetchTomorrowWeatherData = async () => {
+  const fetchRandomMovie = async () => {
+    const params = { 'api-key': 'key', 'language': 'en-US' };
+    const url = `https://api.themoviedb.org/3/discover/movie?language=en-US&`
+
+    
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+
+  const fetchNextWeatherData = async () => {
     const currentDate = new Date().getDate().toString();
     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&&units=metric&appid=${key}`
 
@@ -401,7 +423,8 @@ const Weather = () => {
             longitude: position.coords.longitude,
           });
         },
-        (error) => {
+        (error: any) => {
+          setError(error.message);
           console.error("Error getting geolocation: ", error);
           setLocation(defaultLocation);
         }
@@ -415,7 +438,7 @@ const Weather = () => {
   useEffect(() => {
     if (location.latitude !== 0 && location.longitude !== 0) {
       fetchNowWeatherData();
-      fetchTomorrowWeatherData();
+      fetchNextWeatherData();
     }
   }, [location]);
 
