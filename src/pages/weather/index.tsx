@@ -1,29 +1,29 @@
 import { useEffect, useState } from 'react';
 import './index.css';
 
+const weatherDescription = (temp: any) => {
+  if(temp <= -25) return "extremely cold";
+  if(temp <= -20) return "frosty";
+  if(temp <= -15) return "very cold";
+  if(temp <= -10) return "cold";
+  if(temp <= 0) return "mildly cold";
+  if(temp <= 5) return "chilly";
+  if(temp <= 10) return "cool";
+  if(temp <= 15) return "mildly warm";
+  if(temp <= 20) return "warm";
+  if(temp <= 25) return "mildly hot";
+  if(temp <= 30) return "hot";
+  if(temp <= 35) return "very hot";
+  if(temp <= 40) return "hot as hell";
+  if(temp <= 45) return "deadly inferno";
+  return "unknown weather";
+}
+
 const RenderWeatherNow = (arr: any) => {
   const { temp, description, name, wind } = arr;
   const capitalizeFirstLetter = (string: string) => {
     if (string.length === 0) return string;
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  const weatherDescription = (temp: number) => {
-    if(temp <= -25) return "It's extremely cold";
-    if(temp <= -20) return "It's frosty";
-    if(temp <= -15) return "It's very cold";
-    if(temp <= -10) return "It's cold";
-    if(temp <= 0) return "It's mildly cold";
-    if(temp <= 5) return "It's chilly";
-    if(temp <= 10) return "It's cool";
-    if(temp <= 15) return "It's mildly warm";
-    if(temp <= 20) return "It's warm";
-    if(temp <= 25) return "It's mildly hot";
-    if(temp <= 30) return "It's hot";
-    if(temp <= 35) return "It's very hot";
-    if(temp <= 40) return "It's hot as hell";
-    if(temp <= 45) return "It's deadly inferno";
-    return "Unknown weather";
   }
 
   const subTitle = (wind: any, description: string) => {
@@ -49,7 +49,7 @@ const RenderWeatherNow = (arr: any) => {
   return (
     <>
       <div className='now'>
-        <h1>{weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
+        <h1>It's {weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
         <h2>{capitalizeFirstLetter(description)} {description.includes("rain") && "💦"} {wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h2>
       </div>
     </>
@@ -74,7 +74,6 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const getTemps = (arr: any) => {
     const minMax = { min: 0, max: 0 };
-
     for (const { temp } of arr) {
       if (temp > minMax.max) {
         minMax.max = temp
@@ -120,24 +119,6 @@ const RenderWeatherToday = (arr: any, movie: any) => {
         return `with rain 💦 around ${time}:00`;
       }
     }
-  }
-
-  const weatherDescription = (temp: number) => {
-    if(temp <= -25) return "extremely cold";
-    if(temp <= -20) return "frosty";
-    if(temp <= -15) return "very cold";
-    if(temp <= -10) return "cold";
-    if(temp <= 0) return "mildly cold";
-    if(temp <= 5) return "chilly";
-    if(temp <= 10) return "cool";
-    if(temp <= 15) return "mildly warm";
-    if(temp <= 20) return "warm";
-    if(temp <= 25) return "mildly hot";
-    if(temp <= 30) return "hot";
-    if(temp <= 35) return "very hot";
-    if(temp <= 40) return "hot as hell";
-    if(temp <= 45) return "deadly inferno";
-    return "hmm, we don't know";
   }
 
   const renderMovie = (movie: any) => {
@@ -229,25 +210,6 @@ const RenderWeatherTomorrow = (arr: any) => {
       }
     }
   }
-
-  const weatherDescription = (temp: number) => {
-    if(temp <= -25) return "extremely cold";
-    if(temp <= -20) return "frosty";
-    if(temp <= -15) return "very cold";
-    if(temp <= -10) return "cold";
-    if(temp <= 0) return "mildly cold";
-    if(temp <= 5) return "chilly";
-    if(temp <= 10) return "cool";
-    if(temp <= 15) return "mildly warm";
-    if(temp <= 20) return "warm";
-    if(temp <= 25) return "mildly hot";
-    if(temp <= 30) return "hot";
-    if(temp <= 35) return "very hot";
-    if(temp <= 40) return "hot as hell";
-    if(temp <= 45) return "deadly inferno";
-    return "hmm, we don't know";
-  }
-
   const rain = getPop(arr);
   const temps = getTemps(arr);
 
