@@ -9,3 +9,9 @@
   justify-content: stretch;
   width: 100%;
 }
+
+.weather__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vmax;
+}

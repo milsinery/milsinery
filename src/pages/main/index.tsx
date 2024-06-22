@@ -64,7 +64,7 @@ const Main = () => {
 
           <section className="main__weather">
               <h3 className="main__weather-title">Apps</h3>
-            {Weather()}
+              {Weather()}
           </section>
 
           <section className="main__extensions">
