@@ -59,7 +59,7 @@ const Main = () => {
             </div>
           </header>
           <h1 className="main__title">
-            I develop user interfaces, write texts and draw graphics for them
+            I develop user interfaces, write texts and draw graphics for them.
           </h1>
 
           <section className="main__weather">
