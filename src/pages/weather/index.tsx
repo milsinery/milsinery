@@ -279,7 +279,7 @@ const Weather = () => {
       }
       
       const data = await response.json();
-      const upliftingMovies = data.results.filter((movie:any) => movie.genre_ids.includes(18)); 
+      const upliftingMovies = data.results.filter((movie:any) => movie.genre_ids.includes(18) || movie.genre_ids.includes(35)); 
       const randomMovie = upliftingMovies[Math.floor(Math.random() * upliftingMovies.length)];
       const { title, overview } = randomMovie;
 
@@ -310,16 +310,8 @@ const Weather = () => {
         todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg }});
       }
 
-      let rain = 0;
-  
-      for (const { pop } of todayData) {
-        if (pop === 0) continue;
-        if (pop > rain) {
-          rain = pop;
-        };
-      }
-
-      if(rain > 60) fetchRandomMovie();
+      const rainCount = todayData.map(item => item.pop).filter(item => item > 60).length;
+      if(rainCount > 2) fetchRandomMovie();
 
       return todayData;
     }
@@ -404,7 +396,7 @@ const Weather = () => {
   }
 
   useEffect(() => {
-    const defaultLocation = { latitude: 40.8561221, longitude: -92.8615866 };
+    const defaultLocation = { latitude: 70.8561221, longitude: 52.8615866 };
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
