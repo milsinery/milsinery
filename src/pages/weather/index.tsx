@@ -87,7 +87,7 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const renderRainDescription = (rain: any, temp: number) => {
     const { pop, time } = rain;
-    const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : "in the evening"}`;
+    const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : time >= 17 && time < 20 ? "in the evening" : ""}`;
 
     if (temp < 0) {
       if (pop < 15) {
