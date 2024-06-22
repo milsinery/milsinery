@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import Weather  from '../../components/weather/index';
 import { getLastRecord } from '../../data/recordsData';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
@@ -61,11 +62,9 @@ const Main = () => {
             I develop user interfaces, write texts and draw graphics for them
           </h1>
 
-          <section className="main__blog">
-            <Link to="/blog">
-              <h3 className="main__blog-title">Blog</h3>
-            </Link>
-            {getLastRecord()}
+          <section className="main__weather">
+              <h3 className="main__weather-title">Apps</h3>
+            {Weather()}
           </section>
 
           <section className="main__extensions">
@@ -79,6 +78,14 @@ const Main = () => {
             </Link>
             <PluginsList></PluginsList>
           </section>
+
+          <section className="main__blog">
+            <Link to="/blog">
+              <h3 className="main__blog-title">Blog</h3>
+            </Link>
+            {getLastRecord()}
+          </section>
+
           <section className="main__links">
             <h3 className="main__links-title">Contacts и portfolio</h3>
             <p className="main__link">
