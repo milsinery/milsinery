@@ -61,6 +61,7 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const getPop = (arr: any) => {
     let rain = { pop: 0, time: 0 };
+    console.log(arr)
 
     for (const { time, pop } of arr) {
       if (pop === 0) continue;
@@ -92,31 +93,31 @@ const RenderWeatherToday = (arr: any, movie: any) => {
       if (pop < 15) {
         return "without snow";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of snow around ${time}:00`;
+        return `with a slight chance of snow ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance snow around ${(time)}:00`;
+        return `with a chance snow around ${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `with snow around ${getTimeofDay(time)}:00`;
+        return `with snow around ${getTimeofDay(time)}`;
       }
     } else if (temp >= 0 && temp < 5) {
       if (pop < 15) {
         return "without snow or rain";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of snow or rain 💦 around ${time}:00`;
+        return `with a slight chance of snow or rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance of snow or rain 💦 around ${time}:00`;
+        return `with a chance of snow or rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `with snow or rain 💦 around ${time}:00`;
+        return `with snow or rain 💦 ${getTimeofDay(time)}`;
       }
     } else {
       if (pop < 15) {
         return "without rain";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of rain 💦 around ${time}:00`;
+        return `with a slight chance of rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance of rain 💦 around ${time}:00`;
+        return `with a chance of rain 💦 ${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `with rain 💦 around ${time}:00`;
+        return `with rain 💦 ${getTimeofDay(time)}`;
       }
     }
   }
