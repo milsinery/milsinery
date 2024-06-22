@@ -61,7 +61,6 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const getPop = (arr: any) => {
     let rain = { pop: 0, time: 0 };
-    console.log(arr)
 
     for (const { time, pop } of arr) {
       if (pop === 0) continue;
@@ -87,7 +86,7 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const renderRainDescription = (rain: any, temp: number) => {
     const { pop, time } = rain;
-    const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : time >= 17 && time < 20 ? "in the evening" : ""}`;
+    const getTimeofDay = (time: any) => `${now + 3 < time && time < 12 ? "in the morning" : now + 3 < time && time >= 12 && time < 17 ? "during the day" : now + 3 < time && time >= 17 && time < 20 ? "in the evening" : ""}`;
 
     if (temp < 0) {
       if (pop < 15) {
