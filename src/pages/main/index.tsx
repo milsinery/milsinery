@@ -147,7 +147,7 @@ const Main = () => {
             <option value="light">Light theme</option>
           </select>
 
-          <small className="main__version">Updated October 20 · New icon for Advertiser extension.</small>
+          <small className="main__version">Updated June 22 · Added the weather app.</small>
         </div>
       </main>
     </>
