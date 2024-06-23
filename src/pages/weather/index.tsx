@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
+import Helmet from 'react-helmet';
 import './index.css';
 
 const weatherDescription = (temp: any) => {
-  if(temp <= -25) return "extremely cold";
-  if(temp <= -20) return "frosty";
-  if(temp <= -15) return "very cold";
-  if(temp <= -10) return "cold";
-  if(temp <= 0) return "mildly cold";
-  if(temp <= 5) return "chilly";
-  if(temp <= 10) return "cool";
-  if(temp <= 15) return "mildly warm";
-  if(temp <= 20) return "warm";
-  if(temp <= 25) return "mildly hot";
-  if(temp <= 30) return "hot";
-  if(temp <= 35) return "very hot";
-  if(temp <= 40) return "hot as hell";
-  if(temp <= 45) return "deadly inferno";
+  if (temp <= -25) return "extremely cold";
+  if (temp <= -20) return "frosty";
+  if (temp <= -15) return "very cold";
+  if (temp <= -10) return "cold";
+  if (temp <= 0) return "mildly cold";
+  if (temp <= 5) return "chilly";
+  if (temp <= 10) return "cool";
+  if (temp <= 15) return "mildly warm";
+  if (temp <= 20) return "warm";
+  if (temp <= 25) return "mildly hot";
+  if (temp <= 30) return "hot";
+  if (temp <= 35) return "very hot";
+  if (temp <= 40) return "hot as hell";
+  if (temp <= 45) return "deadly inferno";
   return "unknown weather";
 }
 
@@ -123,15 +124,15 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const renderMovie = (movie: any) => {
     const { title, overview } = movie;
-    
-      return (
-        <>
-          <div className='now'>
-            <p title={overview}>If you decide to stay at home, we recommend wathcing {title}.</p>
-          </div>
-        </>
-      );
-    }
+
+    return (
+      <>
+        <div className='now'>
+          <p title={overview}>If you decide to stay at home, we recommend wathcing {title}.</p>
+        </div>
+      </>
+    );
+  }
 
   const rain = getPop(arr);
   const temps = getTemps(arr);
@@ -175,7 +176,7 @@ const RenderWeatherTomorrow = (arr: any) => {
 
   const renderRainDescription = (rain: any, temp: number) => {
     const { pop, time } = rain;
-    
+
     const getTimeofDay = (time: any) => `${time < 12 ? "in the morning" : time >= 12 && time < 17 ? "during the day" : time >= 17 && time < 21 ? " in the evening" : " late in the evening"}`;
 
     if (temp < 0) {
@@ -277,9 +278,9 @@ const Weather = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch movies');
       }
-      
+
       const data = await response.json();
-      const upliftingMovies = data.results.filter((movie:any) => movie.genre_ids.includes(18) || movie.genre_ids.includes(35)); 
+      const upliftingMovies = data.results.filter((movie: any) => movie.genre_ids.includes(18) || movie.genre_ids.includes(35));
       const randomMovie = upliftingMovies[Math.floor(Math.random() * upliftingMovies.length)];
       const { title, overview } = randomMovie;
 
@@ -307,11 +308,11 @@ const Weather = () => {
       const todayData = [];
 
       for (const item of nextDay) {
-        todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg }});
+        todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
       }
 
       const rainCount = todayData.map(item => item.pop).filter(item => item > 60).length;
-      if(rainCount > 2) fetchRandomMovie();
+      if (rainCount > 2) fetchRandomMovie();
 
       return todayData;
     }
@@ -353,17 +354,17 @@ const Weather = () => {
   };
 
   const weatherDescription = (temp: number) => {
-    if(temp <= -25) return "Extremely";
-    if(temp <= -20) return "Frosty";
-    if(temp <= 0) return "Cold";
-    if(temp <= 5) return "Chilly";
-    if(temp <= 10) return "Cool";
-    if(temp <= 15) return "Mildly";
-    if(temp <= 20) return "Warm";
-    if(temp <= 30) return "Hot";
-    if(temp <= 35) return "Heat";
-    if(temp <= 40) return "Hell";
-    if(temp <= 45) return "Inferno";
+    if (temp <= -25) return "Extremely";
+    if (temp <= -20) return "Frosty";
+    if (temp <= 0) return "Cold";
+    if (temp <= 5) return "Chilly";
+    if (temp <= 10) return "Cool";
+    if (temp <= 15) return "Mildly";
+    if (temp <= 20) return "Warm";
+    if (temp <= 30) return "Hot";
+    if (temp <= 35) return "Heat";
+    if (temp <= 40) return "Hell";
+    if (temp <= 45) return "Inferno";
     return "Unknown weather";
   }
 
@@ -383,9 +384,9 @@ const Weather = () => {
         hot: "#552222"
       }
     }
-  
-    if(metaColor) {
-      if(prefersTheme) {
+
+    if (metaColor) {
+      if (prefersTheme) {
         const color = weatherNowData.temp < 15 ? colors.light.cold : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? colors.light.warm : colors.light.hot;
         metaColor.setAttribute('content', color);
       } else {
@@ -463,19 +464,26 @@ const Weather = () => {
   }
 
   return (
-    <main className={"main effect-fade-in " + (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot")} >
-      <div className="main__wrapper">
-        <div className='weather'>
-          {RenderWeatherNow(weatherNowData)}
-          <div className='today-tomorrow'>
-            {RenderWeatherToday(weatherTodayData, movie)}
-            {RenderWeatherTomorrow(weatherTomorrowData)}
+    <>
+      <Helmet>
+        <meta name="description" content="Weather without numbers" />
+        <title>Weather</title>
+      </Helmet>
+
+      <main className={"main effect-fade-in " + (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot")} >
+        <div className="main__wrapper">
+          <div className='weather'>
+            {RenderWeatherNow(weatherNowData)}
+            <div className='today-tomorrow'>
+              {RenderWeatherToday(weatherTodayData, movie)}
+              {RenderWeatherTomorrow(weatherTomorrowData)}
+            </div>
+            {renderOther()}
           </div>
-          {renderOther()}
         </div>
-      </div>
-      <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>
-    </main>
+        <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>
+      </main>
+    </>
   );
 };
 
