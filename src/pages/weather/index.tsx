@@ -86,37 +86,37 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const renderRainDescription = (rain: any, temp: number) => {
     const { pop, time } = rain;
-    const getTimeofDay = (time: any) => `${now < time && time < 12 ? "in the morning" : now < time && time >= 12 && time < 17 ? "during the day" : now < time && time >= 17 && time < 20 ? "in the evening" : ""}`;
+    const getTimeofDay = (time: any) => `${now < time && time < 12 ? " in the morning" : now < time && time >= 12 && time < 17 ? " during the day" : now < time && time >= 17 && time < 20 ? " in the evening" : ""}`;
 
     if (temp < 0) {
       if (pop < 15) {
         return "without snow";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of snow ${getTimeofDay(time)}`;
+        return `with a slight chance of snow${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance snow around ${getTimeofDay(time)}`;
+        return `with a chance snow around${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `with snow around ${getTimeofDay(time)}`;
+        return `with snow around${getTimeofDay(time)}`;
       }
     } else if (temp >= 0 && temp < 5) {
       if (pop < 15) {
         return "without snow or rain";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of snow or rain 💦 ${getTimeofDay(time)}`;
+        return `with a slight chance of snow or rain 💦${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance of snow or rain 💦 ${getTimeofDay(time)}`;
+        return `with a chance of snow or rain 💦${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `with snow or rain 💦 ${getTimeofDay(time)}`;
+        return `with snow or rain 💦${getTimeofDay(time)}`;
       }
     } else {
       if (pop < 15) {
         return "without rain";
       } else if (pop < 30 && pop >= 15) {
-        return `with a slight chance of rain 💦 ${getTimeofDay(time)}`;
+        return `with a slight chance of rain 💦${getTimeofDay(time)}`;
       } else if (pop >= 30 && pop < 60) {
-        return `with a chance of rain 💦 ${getTimeofDay(time)}`;
+        return `with a chance of rain 💦${getTimeofDay(time)}`;
       } else if (pop >= 60) {
-        return `with rain 💦 ${getTimeofDay(time)}`;
+        return `with rain 💦${getTimeofDay(time)}`;
       }
     }
   }
