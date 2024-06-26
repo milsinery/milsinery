@@ -1,6 +1,7 @@
 export const setMetaTags = (iconPath, manifestPath) => {
     // Set icon
     const link = document.querySelector("link[rel~='icon']");
+
     if (link) {
         link.href = iconPath;
     } else {
