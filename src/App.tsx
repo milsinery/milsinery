@@ -14,9 +14,9 @@ const usePageViews = () => {
   const location = useLocation();
   useEffect(() => {
     if (location.pathname === '/weather') {
-      setMetaTags('/icons/weather-icon.png', '/manifest-weather.json');
+      setMetaTags('weather.png', '/manifest-weather.json');
     } else {
-      setMetaTags('/icons/default-icon.png', '/manifest.json');
+      setMetaTags('favicon.png', '/manifest.json');
     }
   }, [location]);
 };
