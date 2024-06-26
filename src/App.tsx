@@ -1,4 +1,6 @@
-import { Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Switch, BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { setMetaTags } from '../src/utils/setMetaTags';
 import Main from './pages/main/index';
 import Plugins from './pages/plugins/index';
 import Plugin from './pages/plugin/index';
@@ -8,7 +10,20 @@ import Karina from './pages/karina/index';
 import Danila from './pages/danila/index';
 import Weather from './pages/weather/index';
 
+const usePageViews = () => {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/weather') {
+      setMetaTags('/icons/weather-icon.png', '/manifest-weather.json');
+    } else {
+      setMetaTags('/icons/default-icon.png', '/manifest.json');
+    }
+  }, [location]);
+};
+
 const App = () => {
+  usePageViews();
+
   return (
       <Switch>
         <Route exact path="/" component={Main} />
