@@ -141,7 +141,7 @@ const RenderWeatherToday = (arr: any, movie: any) => {
     <>
       <div className='day today'>
         <p>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</p>
-        <p>{now <= 12 && rain.pop >= 60 && temps.max <= 25 && renderMovie(movie)}</p>
+        <p>{movie.length > 0 && now <= 12 && rain.pop >= 60 && temps.max <= 25 && renderMovie(movie)}</p>
       </div>
     </>
   );
