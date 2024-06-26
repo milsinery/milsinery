@@ -113,11 +113,16 @@
     font-size: 40vmax;
   }
 
+  .weather h1,
+  .weather h2 {
+    word-break: break-word;
+  }
+
   .weather h1 {
-    font-size: 6vmax;
+    font-size: 5.5vmax;
   }
 
   .weather h2 {
-    font-size: 5vmax;
+    font-size: 4.5vmax;
   }
 }
