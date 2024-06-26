@@ -128,7 +128,7 @@ const RenderWeatherToday = (arr: any, movie: any) => {
     return (
       <>
         <div className='now'>
-          <p title={overview}>If you decide to stay at home, we recommend wathcing {title}.</p>
+          <p title={overview}>If you decide to stay at home, we recommend watching {title}.</p>
         </div>
       </>
     );
