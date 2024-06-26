@@ -1,24 +1,24 @@
 {
-  "short_name": "Vladimir B.",
-  "name": "Vladimir Bykov — interface designer and developer",
+  "short_name": "Weather",
+  "name": "Weather without numbers",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "weather.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/svg+xml"
     },
     {
-      "src": "favicon.png",
+      "src": "weather.png",
       "type": "image/png",
       "sizes": "1024x1024 512x512 192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "favicon.ico",
+      "src": "weather.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
   ],
-  "start_url": ".",
+  "start_url": "/#/weather",
   "display": "standalone"
 }
