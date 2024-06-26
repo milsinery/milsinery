@@ -19,6 +19,6 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "/#/weather",
+  "start_url": "/",
   "display": "standalone"
 }
