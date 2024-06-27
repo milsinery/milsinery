@@ -71,6 +71,10 @@
   gap: 0.5vmax;
 }
 
+.update {
+  visibility: hidden;
+}
+
 .cold {
   background: var(--gradient-cold);
 }
@@ -124,5 +128,11 @@
 
   .weather h2 {
     font-size: 4.5vmax;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .update {
+    visibility: visible;
   }
 }

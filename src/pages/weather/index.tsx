@@ -243,14 +243,18 @@ const Weather = () => {
   const [weatherTodayData, setWeatherTodayData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
   const [weatherTomorrowData, setWeatherTomorrowData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
   const [movie, setMovie] = useState({ title: "", overview: "" });
-  const [isFetchedMovie, fetchMovie] = useState(false);
   const [isFetchedDataForNow, fetchDataForNow] = useState(false);
   const [isFetchedDataForTwoDays, fetchDataForTwoDays] = useState(false);
   const [error, setError] = useState(null);
+  const [shouldShowButton, setShouldShowButton] = useState(false);
+
+  const lastRefreshTime: any = localStorage.getItem('lastRefreshTime');
+    const now = new Date().getTime();
+
+
 
   const fetchNowWeatherData = async () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${key}`
-    const now = new Date();
 
     try {
       const response = await fetch(url);
@@ -258,7 +262,7 @@ const Weather = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const { main, weather, wind, name, pop } = data;
+      const { main, weather, wind, name } = data;
 
       setWeatherNowData({ temp: Math.round(main.feels_like), description: weather[0].description, name, wind: { speed: Math.round(wind.speed), compass: wind.deg } });
       fetchDataForNow(true);
@@ -285,7 +289,6 @@ const Weather = () => {
       const { title, overview } = randomMovie;
 
       setMovie({ title, overview });
-      fetchMovie(true);
     } catch (error: any) {
       setError(error.message);
     }
@@ -424,7 +427,26 @@ const Weather = () => {
       fetchNowWeatherData();
       fetchNextWeatherData();
     }
+
+    if (lastRefreshTime) {
+      const timeDiff = now - lastRefreshTime;
+      const fiveMinutes = 5 * 60 * 1000;
+
+      if (timeDiff >= fiveMinutes) {
+        setShouldShowButton(true);
+      }
+    } else {
+      setShouldShowButton(true); 
+    }
+
+   
   }, [location]);
+
+  const handleReload = () => {
+    const thismoment = new Date().getTime().toString();
+    localStorage.setItem('lastRefreshTime', thismoment);
+    window.location.reload();
+  };
 
   if (error) {
     return (
@@ -432,6 +454,7 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
+            {shouldShowButton && <small><a className='update' onClick={handleReload}>Update</a></small>}
           </div>
         </div>
       </main>
@@ -479,6 +502,7 @@ const Weather = () => {
               {RenderWeatherTomorrow(weatherTomorrowData)}
             </div>
             {renderOther()}
+            {shouldShowButton && <small><a className='update' onClick={handleReload}>Update</a></small>}
           </div>
         </div>
         <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>

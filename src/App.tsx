@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Route, Switch, BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { setMetaTags } from '../src/utils/setMetaTags';
 import Main from './pages/main/index';
 import Plugins from './pages/plugins/index';
