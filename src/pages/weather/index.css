@@ -39,6 +39,7 @@
 
 .weather h1, 
 .weather h2, 
+.weather h3, 
 .weather p {
   text-wrap: balance;
 }
