@@ -237,7 +237,6 @@ const renderOther = () => {
 
 const Weather = () => {
   const key = "422ff778e3bb5484a4b07787c510aa5b";
-
   const [location, setLocation] = useState({ latitude: 0, longitude: 0 });
   const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', name: '', wind: { speed: 0, compass: 0 } });
   const [weatherTodayData, setWeatherTodayData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
@@ -249,9 +248,7 @@ const Weather = () => {
   const [shouldShowButton, setShouldShowButton] = useState(false);
 
   const lastRefreshTime: any = localStorage.getItem('lastRefreshTime');
-    const now = new Date().getTime();
-
-
+  const now = new Date().getTime();
 
   const fetchNowWeatherData = async () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${key}`
@@ -436,10 +433,8 @@ const Weather = () => {
         setShouldShowButton(true);
       }
     } else {
-      setShouldShowButton(true); 
+      setShouldShowButton(true);
     }
-
-   
   }, [location]);
 
   const handleReload = () => {
@@ -454,7 +449,6 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
-            {shouldShowButton && <small><a className='update' onClick={handleReload}>Update</a></small>}
           </div>
         </div>
       </main>
@@ -473,8 +467,9 @@ const Weather = () => {
     );
   }
 
-  if (!isFetchedDataForNow && !isFetchedDataForTwoDays) {
+  if (!isFetchedDataForNow && !isFetchedDataForTwoDays) { 
     changeThemeColor();
+
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
@@ -485,6 +480,8 @@ const Weather = () => {
       </main>
     );
   }
+
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
 
   return (
     <>
@@ -502,7 +499,7 @@ const Weather = () => {
               {RenderWeatherTomorrow(weatherTomorrowData)}
             </div>
             {renderOther()}
-            {shouldShowButton && <small><a className='update' onClick={handleReload}>Update</a></small>}
+            {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => {}}>Update</a></small>}
           </div>
         </div>
         <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>
