@@ -52,6 +52,10 @@
   font-size: 5vmax;
 }
 
+.weather h3 {
+  font-size: 3.5vmax;
+}
+
 .weather p {
   font-size: 3vmax;
 }
@@ -125,5 +129,13 @@
 
   .weather h2 {
     font-size: 4.5vmax;
+  }
+
+  .weather h3 {
+    font-size: 3vmax;
+  }
+
+  .weather p {
+    font-size: 2.5vmax;
   }
 }

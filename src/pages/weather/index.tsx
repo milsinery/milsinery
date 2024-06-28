@@ -57,7 +57,7 @@ const RenderWeatherNow = (arr: any) => {
   );
 }
 
-const RenderWeatherToday = (arr: any, movie: any) => {
+const RenderWeatherToday = (arr: any) => {
   const now = Math.round(new Date().getHours());
 
   const getPop = (arr: any) => {
@@ -122,13 +122,11 @@ const RenderWeatherToday = (arr: any, movie: any) => {
     }
   }
 
-  const renderMovie = (movie: any) => {
-    const { title, overview } = movie;
-
+  const renderMovie = () => {
     return (
       <>
         <div className='now'>
-          <p title={overview}>If you decide to stay at home, we recommend watching {title}.</p>
+          <p>If you decide to stay at home, we recommend watching one of <a href='https://www.imdb.com/chart/moviemeter' target="_blank" rel="noopener noreferrer">these popular movies →</a>.</p>
         </div>
       </>
     );
@@ -136,12 +134,13 @@ const RenderWeatherToday = (arr: any, movie: any) => {
 
   const rain = getPop(arr);
   const temps = getTemps(arr);
+  const isBadWeather = now <= 12 && rain.pop >= 60 && temps.max <= 25;
 
   return (
     <>
       <div className='day today'>
-        <p>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</p>
-        <p>{movie.length > 0 && now <= 12 && rain.pop >= 60 && temps.max <= 25 && renderMovie(movie)}</p>
+        <h3>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</h3>
+        <p>{renderMovie()}</p>
       </div>
     </>
   );
@@ -269,28 +268,6 @@ const Weather = () => {
     }
   };
 
-  const fetchRandomMovie = async () => {
-    const APIKey = 'd67e865d0b7d554f93bb028403d98436';
-    const baseURL = `https://api.themoviedb.org/3`
-
-    try {
-      const response = await fetch(`${baseURL}/discover/movie?api_key=${APIKey}&sort_by=popularity.desc`);
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch movies');
-      }
-
-      const data = await response.json();
-      const upliftingMovies = data.results.filter((movie: any) => movie.genre_ids.includes(18) || movie.genre_ids.includes(35));
-      const randomMovie = upliftingMovies[Math.floor(Math.random() * upliftingMovies.length)];
-      const { title, overview } = randomMovie;
-
-      setMovie({ title, overview });
-    } catch (error: any) {
-      setError(error.message);
-    }
-  }
-
   const fetchNextWeatherData = async () => {
     const currentDate = new Date().getDate().toString();
     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&&units=metric&appid=${key}`
@@ -310,9 +287,6 @@ const Weather = () => {
       for (const item of nextDay) {
         todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
       }
-
-      const rainCount = todayData.map(item => item.pop).filter(item => item > 60).length;
-      if (rainCount > 2) fetchRandomMovie();
 
       return todayData;
     }
@@ -494,7 +468,7 @@ const Weather = () => {
           <div className='weather'>
             {RenderWeatherNow(weatherNowData)}
             <div className='today-tomorrow'>
-              {RenderWeatherToday(weatherTodayData, movie)}
+              {RenderWeatherToday(weatherTodayData)}
               {RenderWeatherTomorrow(weatherTomorrowData)}
             </div>
             {renderOther()}
