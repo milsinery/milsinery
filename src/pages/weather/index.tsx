@@ -140,7 +140,7 @@ const RenderWeatherToday = (arr: any) => {
     <>
       <div className='day today'>
         <h3>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</h3>
-        <p>{renderMovie()}</p>
+        <p>{rain.pop > 60 && renderMovie()}</p>
       </div>
     </>
   );
@@ -216,8 +216,7 @@ const RenderWeatherTomorrow = (arr: any) => {
   return (
     <>
       <div className='day tomorrow'>
-        <p>Tomorrow it's expected to be {weatherDescription(temps.max)}.</p>
-        <p>{renderRainDescription(rain, temps.max)}.</p>
+        <h3>Tomorrow it's expected to be {weatherDescription(temps.max)}. {renderRainDescription(rain, temps.max)}.</h3>
       </div>
     </>
   );
