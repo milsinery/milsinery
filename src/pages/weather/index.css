@@ -27,6 +27,7 @@
 .today-tomorrow,
 .now,
 .day,
+.about,
 .other {
   display: flex;
   flex-direction: column;
@@ -72,8 +73,12 @@
   gap: 1vmax;
 }
 
-.other {
+.about {
   gap: 0.5vmax;
+}
+
+.other {
+  gap: 1.5vmax;
 }
 
 .cold {

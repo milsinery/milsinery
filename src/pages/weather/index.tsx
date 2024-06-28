@@ -224,12 +224,10 @@ const RenderWeatherTomorrow = (arr: any) => {
 
 const renderOther = () => {
   return (
-    <>
-      <div className='other'>
-        <small>The app in development, some features will come later.</small>
-        <small>Powered by Open Weather.</small>
-      </div>
-    </>
+    <div className='about'>
+      <small>The app in development, some features will come later.</small>
+      <small>Powered by Open Weather.</small>
+    </div>
   );
 }
 
@@ -422,7 +420,7 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
-            {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => {}}>Update</a></small>}
+            {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
           </div>
         </div>
       </main>
@@ -441,7 +439,7 @@ const Weather = () => {
     );
   }
 
-  if (!isFetchedDataForNow && !isFetchedDataForTwoDays) { 
+  if (!isFetchedDataForNow && !isFetchedDataForTwoDays) {
     changeThemeColor();
 
     return (
@@ -470,8 +468,10 @@ const Weather = () => {
               {RenderWeatherToday(weatherTodayData)}
               {RenderWeatherTomorrow(weatherTomorrowData)}
             </div>
-            {renderOther()}
-            {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => {}}>Update</a></small>}
+            <div className='other'>
+              {renderOther()}
+              {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
+            </div>
           </div>
         </div>
         <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>
