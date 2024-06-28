@@ -246,7 +246,7 @@ const Weather = () => {
   const [isFetchedDataForTwoDays, fetchDataForTwoDays] = useState(false);
   const [error, setError] = useState(null);
   const [shouldShowButton, setShouldShowButton] = useState(false);
-
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
   const lastRefreshTime: any = localStorage.getItem('lastRefreshTime');
   const now = new Date().getTime();
 
@@ -449,6 +449,7 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
+            {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => {}}>Update</a></small>}
           </div>
         </div>
       </main>
@@ -480,8 +481,6 @@ const Weather = () => {
       </main>
     );
   }
-
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
 
   return (
     <>
