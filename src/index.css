@@ -168,9 +168,20 @@ a:hover {
   transition: color ease-in 150ms;
 }
 
+small a:link,
+small a:visited {
+  color: var(--color-text-optional);
+  transition: color ease-out 150ms;
+}
+
+small a:hover {
+  cursor: pointer;
+  color: var(--color-primary);
+  transition: color ease-in 150ms;
+}
+
 select{
   font-size: max(14px, 1.5vmax);
-
   color: var(--color-text-main);
   appearance: none;
   background: none;

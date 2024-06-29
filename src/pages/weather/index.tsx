@@ -122,25 +122,22 @@ const RenderWeatherToday = (arr: any) => {
     }
   }
 
-  const renderMovie = () => {
-    return (
-      <>
-        <div className='now'>
-          <p>If you decide to stay at home, we recommend watching one of <a href='https://www.imdb.com/chart/moviemeter' target="_blank" rel="noopener noreferrer">these popular movies →</a>.</p>
-        </div>
-      </>
-    );
-  }
-
   const rain = getPop(arr);
   const temps = getTemps(arr);
-  const isBadWeather = now <= 12 && rain.pop >= 60 && temps.max <= 25;
+
+  const renderMovie = () => <p>If you decide to stay at home, we recommend watching one of <a href='https://www.imdb.com/chart/moviemeter' target="_blank" rel="noopener noreferrer">these popular movies</a> or <a href='https://www.imdb.com/chart/tvmeter' target="_blank" rel="noopener noreferrer">TV shows</a>.</p>
+  const renderPicnic = () => <p>It's a great day for a picnic.</p>
+  const renderJogging = () => <p>A good day for running.</p>
+
+  const isBadWeather = rain.pop >= 60 && temps.max <= 25 || temps.min <= 0;
+  const isGoodWeather = rain.pop <= 15 && temps.max >= 15 && temps.max <= 25 && temps.min >= 15 && temps.min <= 20;
+  const isNiceWeather = rain.pop === 0 && temps.max >= 20 && temps.max <= 25 && temps.min >= 20 && temps.min <= 25;
 
   return (
     <>
       <div className='day today'>
         <h3>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</h3>
-        <p>{rain.pop > 60 && renderMovie()}</p>
+        <p>{now <= 12 && isBadWeather ? renderMovie() : isGoodWeather ? renderJogging() : isNiceWeather && renderPicnic()}</p>
       </div>
     </>
   );
@@ -216,7 +213,8 @@ const RenderWeatherTomorrow = (arr: any) => {
   return (
     <>
       <div className='day tomorrow'>
-        <h3>Tomorrow it's expected to be {weatherDescription(temps.max)}. {renderRainDescription(rain, temps.max)}.</h3>
+        <h3>Tomorrow it's expected to be {weatherDescription(temps.max)}.</h3>
+        <p>{renderRainDescription(rain, temps.max)}.</p>
       </div>
     </>
   );
@@ -225,7 +223,7 @@ const RenderWeatherTomorrow = (arr: any) => {
 const renderOther = () => {
   return (
     <div className='about'>
-      <small>The app in development, some features will come later.</small>
+      <small>This is a Beta version, some features will come later. <a href="https://t.me/milsinery" target="_blank" rel="noopener noreferrer">Write to me</a> if you find any errors.</small>
       <small>Powered by Open Weather.</small>
     </div>
   );
@@ -237,7 +235,6 @@ const Weather = () => {
   const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', name: '', wind: { speed: 0, compass: 0 } });
   const [weatherTodayData, setWeatherTodayData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
   const [weatherTomorrowData, setWeatherTomorrowData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
-  const [movie, setMovie] = useState({ title: "", overview: "" });
   const [isFetchedDataForNow, fetchDataForNow] = useState(false);
   const [isFetchedDataForTwoDays, fetchDataForTwoDays] = useState(false);
   const [error, setError] = useState(null);
@@ -420,7 +417,7 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
-            {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
+            {isStandalone && <small><a href='#' className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
           </div>
         </div>
       </main>
@@ -440,8 +437,6 @@ const Weather = () => {
   }
 
   if (!isFetchedDataForNow && !isFetchedDataForTwoDays) {
-    changeThemeColor();
-
     return (
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
@@ -452,6 +447,8 @@ const Weather = () => {
       </main>
     );
   }
+
+  changeThemeColor();
 
   return (
     <>
@@ -470,7 +467,7 @@ const Weather = () => {
             </div>
             <div className='other'>
               {renderOther()}
-              {isStandalone && <small><a className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
+              {isStandalone && <small><a href='#' className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
             </div>
           </div>
         </div>
