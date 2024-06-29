@@ -41,7 +41,8 @@
 .weather h1, 
 .weather h2, 
 .weather h3, 
-.weather p {
+.weather p,
+.weather small {
   text-wrap: balance;
 }
 
