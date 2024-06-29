@@ -394,7 +394,7 @@ const Weather = () => {
     }
 
     if (lastRefreshTime) {
-      const timeDiff = now - lastRefreshTime;
+      const timeDiff = now - parseInt(lastRefreshTime);
       const fiveMinutes = 5 * 60 * 1000;
 
       if (timeDiff >= fiveMinutes) {
@@ -406,8 +406,8 @@ const Weather = () => {
   }, [location]);
 
   const handleReload = () => {
-    const thismoment = new Date().getTime().toString();
-    localStorage.setItem('lastRefreshTime', thismoment);
+    const thisMoment = new Date().getTime();
+    localStorage.setItem('lastRefreshTime', thisMoment.toString());
     window.location.reload();
   };
 
@@ -417,7 +417,7 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
-            {isStandalone && <small><a href='#' className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
+            {isStandalone && <small><a onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
           </div>
         </div>
       </main>
@@ -467,7 +467,7 @@ const Weather = () => {
             </div>
             <div className='other'>
               {renderOther()}
-              {isStandalone && <small><a href='#' className='update' onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
+              {isStandalone && <small><a onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
             </div>
           </div>
         </div>
