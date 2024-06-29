@@ -238,10 +238,7 @@ const Weather = () => {
   const [isFetchedDataForNow, fetchDataForNow] = useState(false);
   const [isFetchedDataForTwoDays, fetchDataForTwoDays] = useState(false);
   const [error, setError] = useState(null);
-  const [shouldShowButton, setShouldShowButton] = useState(false);
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-  const lastRefreshTime: any = localStorage.getItem('lastRefreshTime');
-  const now = new Date().getTime();
 
   const fetchNowWeatherData = async () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${key}`
@@ -392,24 +389,9 @@ const Weather = () => {
       fetchNowWeatherData();
       fetchNextWeatherData();
     }
-
-    if (lastRefreshTime) {
-      const timeDiff = now - parseInt(lastRefreshTime);
-      const fiveMinutes = 5 * 60 * 1000;
-
-      if (timeDiff >= fiveMinutes) {
-        setShouldShowButton(true);
-      }
-    } else {
-      setShouldShowButton(true);
-    }
   }, [location]);
 
-  const handleReload = () => {
-    const thisMoment = new Date().getTime();
-    localStorage.setItem('lastRefreshTime', thisMoment.toString());
-    window.location.reload();
-  };
+  const handleReload = () => window.location.reload();
 
   if (error) {
     return (
@@ -417,7 +399,7 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
-            {isStandalone && <small><a onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
+            {isStandalone && <small><a onClick={handleReload}>Update</a></small>}
           </div>
         </div>
       </main>
@@ -467,7 +449,7 @@ const Weather = () => {
             </div>
             <div className='other'>
               {renderOther()}
-              {isStandalone && <small><a onClick={shouldShowButton ? handleReload : () => { }}>Update</a></small>}
+              {isStandalone && <small><a onClick={handleReload}>Update</a></small>}
             </div>
           </div>
         </div>
