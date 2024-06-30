@@ -1,15 +1,15 @@
 import './green.css';
 
 export const BranchLeft = ({props}: any) => {
-    const { fill, wind } = props;
+    const { temp, wind } = props;
 
     return (
         <svg
-            className={'branch branchLeft ' + wind}
+        className={`branch branchLeft ${wind} ${temp}`}
             xmlns="http://www.w3.org/2000/svg"
             width={653}
             height={728}
-            fill={fill}
+
         >
             <g className={'leaf1' + wind}>
                 <path
@@ -65,15 +65,14 @@ export const BranchLeft = ({props}: any) => {
 };
 
 export const BranchRight = ({props}: any) => {
-    const { fill, wind } = props;
+    const { temp, wind } = props;
 
     return (
         <svg
-            className={'branch branchRight ' + wind}
+            className={`branch branchRight ${wind} ${temp}`}
             xmlns="http://www.w3.org/2000/svg"
             width={752}
             height={761}
-            fill={fill}
         >
 
             <g className={'leaf1' + wind}>

@@ -363,17 +363,15 @@ const Weather = () => {
   }
 console.log(weatherNowData)
   useEffect(() => {
-    const defaultLocation = { latitude: 40.8561221, longitude: 64.8615866 };
-    // const defaultLocation = { latitude: 70.8561221, longitude: 52.8615866 };
+    const defaultLocation = { latitude: 70.8561221, longitude: 52.8615866 };
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLocation(defaultLocation)
-          // setLocation({
-          //   latitude: position.coords.latitude,
-          //   longitude: position.coords.longitude,
-          // });
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
         },
         (error: any) => {
           setError(error.message);
@@ -458,8 +456,8 @@ console.log(weatherNowData)
           </div>
         </div>
         {/* <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1> */}
-        <BranchLeft props={ {fill: (weatherNowData.temp < 15 ? "#CCE6FF" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "#FFEECC" : "#FFCCCC"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchLeft>
-        <BranchRight props={ {fill: (weatherNowData.temp < 15 ? "#CCE6FF" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "#FFEECC" : "#FFCCCC"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchRight>
+        <BranchLeft props={ {temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchLeft>
+        <BranchRight props={ {temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchRight>
       </main>
     </>
   );
