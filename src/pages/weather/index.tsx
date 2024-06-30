@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
+import { BranchLeft, BranchRight } from './green';
 import './index.css';
 
 const weatherDescription = (temp: any) => {
@@ -42,7 +43,7 @@ const RenderWeatherNow = (arr: any) => {
       }
     }
 
-    const windPower = `${wind.speed <= 10 ? " with light" : wind.speed > 20 && wind.speed <= 30 ? "with strong" : wind.speed > 30 ? "with really strong" : "with"}`
+    const windPower = `${wind.speed <= 10 ? "with light" : wind.speed > 20 && wind.speed <= 30 ? "with strong" : wind.speed > 30 ? "with really strong" : "with"}`
     const windState = `${getDirection(wind.compass)} wind.`;
     return `${windPower} ${windState}`;
   };
@@ -360,17 +361,19 @@ const Weather = () => {
       }
     }
   }
-
+console.log(weatherNowData)
   useEffect(() => {
-    const defaultLocation = { latitude: 70.8561221, longitude: 52.8615866 };
+    const defaultLocation = { latitude: 40.8561221, longitude: 64.8615866 };
+    // const defaultLocation = { latitude: 70.8561221, longitude: 52.8615866 };
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
+          setLocation(defaultLocation)
+          // setLocation({
+          //   latitude: position.coords.latitude,
+          //   longitude: position.coords.longitude,
+          // });
         },
         (error: any) => {
           setError(error.message);
@@ -399,6 +402,7 @@ const Weather = () => {
         <div className="main__wrapper">
           <div className='weather'>
             <h3>Sorry, we can't get the weather. Try again later, please.</h3>
+            <p>Make sure that you have allowed access to your location.</p>
             {isStandalone && <small><a onClick={handleReload}>Update</a></small>}
           </div>
         </div>
@@ -453,7 +457,9 @@ const Weather = () => {
             </div>
           </div>
         </div>
-        <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1>
+        {/* <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1> */}
+        <BranchLeft props={ {fill: (weatherNowData.temp < 15 ? "#CCE6FF" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "#FFEECC" : "#FFCCCC"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchLeft>
+        <BranchRight props={ {fill: (weatherNowData.temp < 15 ? "#CCE6FF" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "#FFEECC" : "#FFCCCC"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchRight>
       </main>
     </>
   );
