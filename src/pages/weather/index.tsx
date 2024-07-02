@@ -261,7 +261,8 @@ const Weather = () => {
   };
 
   const fetchNextWeatherData = async () => {
-    const currentDate = new Date().getDate().toString();
+    const currentDate = new Date().toISOString();
+    const today = currentDate[8] + currentDate[9];
     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&&units=metric&appid=${key}`
 
     const getToday = (todayRangeTime: any) => {
@@ -269,7 +270,7 @@ const Weather = () => {
 
       for (const item of todayRangeTime) {
         const itemDay = item.dt_txt[8] + item.dt_txt[9];
-        if (itemDay === currentDate) {
+        if (itemDay === today) {
           nextDay.push(item);
         }
       }
@@ -278,7 +279,6 @@ const Weather = () => {
       for (const item of nextDay) {
         todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
       }
-
       return todayData;
     }
 
