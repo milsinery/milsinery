@@ -273,9 +273,8 @@ const Weather = () => {
           nextDay.push(item);
         }
       }
-
       const todayData = [];
-
+      
       for (const item of nextDay) {
         todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
       }
@@ -361,7 +360,7 @@ const Weather = () => {
       }
     }
   }
-console.log(weatherNowData)
+
   useEffect(() => {
     const defaultLocation = { latitude: 70.8561221, longitude: 52.8615866 };
 
