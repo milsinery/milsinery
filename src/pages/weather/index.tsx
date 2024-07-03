@@ -69,7 +69,7 @@ const RenderWeatherNow = (arr: any) => {
   return (
     <>
       <div className='now'>
-        <h1 style={{color: (temp < 15 ? colors.text.cold : temp >= 15 && temp <= 25 ? colors.text.warm : colors.text.hot)}}>It's {weatherDescription(temp)}.</h1>
+        <h1 style={{ color: (temp <= 15 ? colors.text.cold : temp > 15 && temp <= 25 ? colors.text.warm : colors.text.hot) }}>It's {weatherDescription(temp)}.</h1>
         <h2>{capitalizeFirstLetter(description)} {description.includes("rain") && "💦"} {wind.speed > 1 ? subTitle(wind, description) : "without wind"}{name.length > 0 && ` in ${name}`}.</h2>
       </div>
     </>
@@ -293,7 +293,7 @@ const Weather = () => {
         }
       }
       const todayData = [];
-      
+
       for (const item of nextDay) {
         todayData.push({ time: item.dt_txt, temp: Math.round(item.main.feels_like), pop: Math.round(item.pop * 100), description: item.weather[0].description, wind: { speed: item.wind.speed, compass: item.wind.deg } });
       }
@@ -340,7 +340,7 @@ const Weather = () => {
     const metaColor = document.querySelector('meta[name="theme-color"');
     const prefersTheme = window.matchMedia('(prefers-color-scheme:light)').matches;
 
- 
+
 
     if (metaColor) {
       if (prefersTheme) {
@@ -446,8 +446,8 @@ const Weather = () => {
             </div>
           </div>
         </div>
-        <BranchLeft props={ {temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchLeft>
-        <BranchRight props={ {temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchRight>
+        <BranchLeft props={{ temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong") }}></BranchLeft>
+        <BranchRight props={{ temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong") }}></BranchRight>
       </main>
     </>
   );
