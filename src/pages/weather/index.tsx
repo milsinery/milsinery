@@ -3,6 +3,24 @@ import Helmet from 'react-helmet';
 import { BranchLeft, BranchRight } from './green';
 import './index.css';
 
+const colors = {
+  text: {
+    cold: "#339BFF",
+    warm: "#FFBB33",
+    hot: "#FF3333"
+  },
+  light: {
+    cold: "#CCE6FF",
+    warm: "#FFEECC",
+    hot: "#FFCCCC"
+  },
+  dark: {
+    cold: "#152F4A",
+    warm: "#483717",
+    hot: "#552222"
+  }
+}
+
 const weatherDescription = (temp: any) => {
   if (temp <= -25) return "extremely cold";
   if (temp <= -20) return "frosty";
@@ -44,15 +62,15 @@ const RenderWeatherNow = (arr: any) => {
     }
 
     const windPower = `${wind.speed <= 10 ? "with light" : wind.speed > 20 && wind.speed <= 30 ? "with strong" : wind.speed > 30 ? "with really strong" : "with"}`
-    const windState = `${getDirection(wind.compass)} wind.`;
+    const windState = `${getDirection(wind.compass)} wind`;
     return `${windPower} ${windState}`;
   };
 
   return (
     <>
       <div className='now'>
-        <h1>It's {weatherDescription(temp)}{name.length > 0 && ` in ${name}`}.</h1>
-        <h2>{capitalizeFirstLetter(description)} {description.includes("rain") && "💦"} {wind.speed > 1 ? subTitle(wind, description) : "without wind."}</h2>
+        <h1 style={{color: (temp < 15 ? colors.text.cold : temp >= 15 && temp <= 25 ? colors.text.warm : colors.text.hot)}}>It's {weatherDescription(temp)}.</h1>
+        <h2>{capitalizeFirstLetter(description)} {description.includes("rain") && "💦"} {wind.speed > 1 ? subTitle(wind, description) : "without wind"}{name.length > 0 && ` in ${name}`}.</h2>
       </div>
     </>
   );
@@ -138,7 +156,7 @@ const RenderWeatherToday = (arr: any) => {
     <>
       <div className='day today'>
         <h3>{now <= 12 ? "Today it's" : "Then it will be"} {weatherDescription(temps.max)} {renderRainDescription(rain, temps.max)}.</h3>
-        <p>{now <= 12 && isBadWeather ? renderMovie() : isGoodWeather ? renderJogging() : isNiceWeather && renderPicnic()}</p>
+        <p>{isBadWeather ? renderMovie() : isGoodWeather ? renderJogging() : isNiceWeather && renderPicnic()}</p>
       </div>
     </>
   );
@@ -318,37 +336,11 @@ const Weather = () => {
     }
   };
 
-  const weatherDescription = (temp: number) => {
-    if (temp <= -25) return "Extremely";
-    if (temp <= -20) return "Frosty";
-    if (temp <= 0) return "Cold";
-    if (temp <= 5) return "Chilly";
-    if (temp <= 10) return "Cool";
-    if (temp <= 15) return "Mildly";
-    if (temp <= 20) return "Warm";
-    if (temp <= 30) return "Hot";
-    if (temp <= 35) return "Heat";
-    if (temp <= 40) return "Hell";
-    if (temp <= 45) return "Inferno";
-    return "Unknown weather";
-  }
-
   const changeThemeColor = () => {
     const metaColor = document.querySelector('meta[name="theme-color"');
     const prefersTheme = window.matchMedia('(prefers-color-scheme:light)').matches;
 
-    const colors = {
-      light: {
-        cold: "#CCE6FF",
-        warm: "#FFEECC",
-        hot: "#FFCCCC"
-      },
-      dark: {
-        cold: "#152F4A",
-        warm: "#483717",
-        hot: "#552222"
-      }
-    }
+ 
 
     if (metaColor) {
       if (prefersTheme) {
@@ -454,7 +446,6 @@ const Weather = () => {
             </div>
           </div>
         </div>
-        {/* <h1 className={"hero " + (weatherNowData.temp < 15 ? "hero-cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "hero-warm" : "hero-hot")}>{weatherDescription(weatherNowData.temp)}</h1> */}
         <BranchLeft props={ {temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchLeft>
         <BranchRight props={ {temp: (weatherNowData.temp < 15 ? "cold" : weatherNowData.temp >= 15 && weatherNowData.temp <= 25 ? "warm" : "hot"), wind: (weatherNowData.wind.speed > 0 && weatherNowData.wind.speed <= 10 ? "windLight" : "windStrong")}}></BranchRight>
       </main>

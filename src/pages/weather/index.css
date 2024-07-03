@@ -47,7 +47,8 @@
 }
 
 .weather h1 {
-  font-size: 7vmax;
+  font-size: 11vmax;
+  line-height: 90%;
 }
 
 .weather h2 {
@@ -67,7 +68,7 @@
 }
 
 .today-tomorrow {
-  gap: 3vmax;
+  gap: 5vmax;
 }
 
 .day {
@@ -130,7 +131,7 @@
   }
 
   .weather h1 {
-    font-size: 5.5vmax;
+    font-size: 8vmax;
   }
 
   .weather h2 {
