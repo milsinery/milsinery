@@ -243,6 +243,7 @@ const renderOther = () => {
   return (
     <div className='about'>
       <small>This is a Beta version, some features will come later. <a href="https://t.me/milsinery" target="_blank" rel="noopener noreferrer">Write to me</a> if you find any errors.</small>
+      <small>Updated July 3. The header is color now. Improved animations for backgrounds.</small>
       <small>Powered by Open Weather.</small>
     </div>
   );
