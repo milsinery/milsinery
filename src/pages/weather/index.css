@@ -52,7 +52,7 @@
 }
 
 .weather h2 {
-  font-size: 5vmax;
+  font-size: 7vmax;
 }
 
 .weather h3 {
@@ -64,7 +64,7 @@
 }
 
 .now {
-  gap: 1.5vmax;
+  gap: 2vmax;
 }
 
 .today-tomorrow {
