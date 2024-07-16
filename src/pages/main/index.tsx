@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import Weather  from '../../components/weather/index';
+import Weather from '../../components/weather/index';
 import { getLastRecord } from '../../data/recordsData';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
@@ -63,8 +63,8 @@ const Main = () => {
           </h1>
 
           <section className="main__weather">
-              <h3 className="main__weather-title">Apps</h3>
-              {Weather()}
+            <h3 className="main__weather-title">Apps</h3>
+            {Weather()}
           </section>
 
           <section className="main__extensions">
@@ -99,20 +99,29 @@ const Main = () => {
             </p>
             <p className="main__link">
               <a
+                href="https://t.me/areyoureallyadesigner"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Telegram channel
+              </a>
+            </p>
+            <p className="main__link">
+              <a
+                href="https://www.vsco.co/milsinery"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VSCO Profile
+              </a>
+            </p>
+            <p className="main__link">
+              <a
                 href="https://www.behance.net/milsinery"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Behance
-              </a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://t.me/milsinery"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Telegram
               </a>
             </p>
             <p className="main__link">
@@ -126,13 +135,14 @@ const Main = () => {
             </p>
             <p className="main__link">
               <a
-                href="https://t.me/areyoureallyadesigner"
+                href="https://t.me/milsinery"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                My telegram channel about design
+                Telegram
               </a>
             </p>
+
           </section>
 
           <select
