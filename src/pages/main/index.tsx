@@ -62,11 +62,6 @@ const Main = () => {
             I develop user interfaces, write texts and draw graphics for them.
           </h1>
 
-          <section className="main__weather">
-            <h3 className="main__weather-title">Apps</h3>
-            {Weather()}
-          </section>
-
           <section className="main__extensions">
             <h3 className="main__extensions-title">Extensions for browser</h3>
             <ExtensionsList></ExtensionsList>

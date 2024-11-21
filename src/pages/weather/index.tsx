@@ -250,7 +250,7 @@ const renderOther = () => {
 }
 
 const Weather = () => {
-  const key = "422ff778e3bb5484a4b07787c510aa5b";
+  const key = "";
   const [location, setLocation] = useState({ latitude: 0, longitude: 0 });
   const [weatherNowData, setWeatherNowData] = useState({ temp: 0, description: '', name: '', wind: { speed: 0, compass: 0 } });
   const [weatherTodayData, setWeatherTodayData] = useState([{ time: "", temp: 0, pop: 0, description: "", wind: { speed: 0, compass: 0 } }]);
@@ -340,8 +340,6 @@ const Weather = () => {
   const changeThemeColor = () => {
     const metaColor = document.querySelector('meta[name="theme-color"');
     const prefersTheme = window.matchMedia('(prefers-color-scheme:light)').matches;
-
-
 
     if (metaColor) {
       if (prefersTheme) {
