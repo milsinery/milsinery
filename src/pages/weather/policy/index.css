@@ -1,0 +1,26 @@
+.main__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4vmax;
+}
+
+.main__title,
+.main__section {
+  gap: 1vmax
+}
+
+.main__title {
+  max-width: 90%;
+}
+
+
+.main__section {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 480px) {
+  .main__title {
+    margin: 0 0 8vmax 0;
+  }
+}

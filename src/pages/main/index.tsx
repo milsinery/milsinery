@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import Weather from '../../components/weather/index';
 import { getLastRecord } from '../../data/recordsData';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
@@ -152,7 +151,7 @@ const Main = () => {
             <option value="light">Light theme</option>
           </select>
 
-          <small className="main__version">Updated June 22 · Added the weather app.</small>
+          <small className="main__version">Updated January 28 · Added the privacy policy for the Weather app.</small>
         </div>
       </main>
     </>
