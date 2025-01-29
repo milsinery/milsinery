@@ -1,26 +1,42 @@
-.main__wrapper {
+.app {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.app__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 6vmax 4vmax 12vmax 4vmax;
   gap: 4vmax;
 }
 
-.main__title,
-.main__section {
+.app__header {
+  display: flex;
+  margin-bottom: 5vmax;
+}
+
+.app__title,
+.app__section {
   gap: 1vmax
 }
 
-.main__title {
+.app__title {
   max-width: 90%;
 }
 
 
-.main__section {
+.app__section {
   display: flex;
   flex-direction: column;
 }
 
 @media screen and (max-width: 480px) {
-  .main__title {
+  .app__title {
     margin: 0 0 8vmax 0;
   }
 }
