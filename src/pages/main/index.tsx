@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getLastRecord } from '../../data/recordsData';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
+import AppsList from "../../components/appslist/index"
 import avatar from '../../avatar.webp';
 import './index.css';
 
@@ -60,6 +61,11 @@ const Main = () => {
           <h1 className="main__title">
             I develop user interfaces, write texts and draw graphics for them.
           </h1>
+
+          {/* <section className="main__apps">
+            <h3 className="main__app-title">iOS applications</h3>
+            <AppsList></AppsList>
+          </section> */}
 
           <section className="main__extensions">
             <h3 className="main__extensions-title">Extensions for browser</h3>

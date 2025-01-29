@@ -1,24 +1,25 @@
-import Extension from '../extension';
-import ExtensionsData from '../../data/extensionsData';
+import App from '../app';
+import AppsData from '../../data/appsData';
 import './index.css';
 
-const ExtensionsList = () => {
+const AppList = () => {
   return (
     <>
-      <section className="extensionsList">
-        {ExtensionsData.map((item, key) => {
+      <section className="appList">
+        {AppsData.map((item, key) => {
           return (
-            <Extension
+            <App
               webp={item.webp}
               png={item.webp}
               name={item.name}
               info={item.info}
               installLink={item.installLink}
+              policyLink={item.policyLink}
               infoLink={item.infoLink}
               comment={item.comments}
               isNewLabel={item.isNewLabel}
               key={key}
-            ></Extension>
+            ></App>
           );
         })}
       </section>
@@ -26,4 +27,4 @@ const ExtensionsList = () => {
   );
 };
 
-export default ExtensionsList;
+export default AppList;

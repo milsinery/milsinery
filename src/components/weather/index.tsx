@@ -5,8 +5,8 @@ const Weather = () => {
   return (
     <div className="weather-card">
       <Link className="weather__title" to="/weather">
-        <h2>It's hot 🔥</h2>
-        <p>About the weather in simple words.</p>
+        <h2>Weather — how you feel</h2>
+        <p>Just the weather app without numbers, huh.</p>
       </Link>
     </div>
   );

@@ -50,7 +50,7 @@
   }
   
   .main__title,
-  .main__weather,
+  .main__apps,
   .main__extensions,
   .main__plugins, 
   .main__blog {
@@ -67,7 +67,7 @@
     gap: 0.3vmax;
   }
 
-  .main__weather,
+  .main__apps,
   .main__extensions,
   .main__plugins,
   .main__blog {
@@ -75,7 +75,7 @@
     flex-direction: column;
   }
 
-  .main__weather-title,
+  .main__app-title,
   .main__extensions-title,
   .main__plugins-title,
   .main__blog-title,
