@@ -9,8 +9,8 @@ const appsData = [
     info: 'Weather app without numbers. But with cute graphics and melodies.',
     installLink:
       '#',
-    infoLink: '/app/weather',
-    policyLink: '/app/weather/privacy-policy',
+    infoLink: '/apps/weather',
+    policyLink: '/apps/weather/privacy-policy',
     comments: [],
     page: {
       description: '',

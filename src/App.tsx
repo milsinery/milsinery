@@ -30,8 +30,8 @@ const App = () => {
         <Route exact path="/plugins/:name" component={Plugin} />
         <Route exact path="/blog" component={Records} />
         <Route exact path="/blog/:name" component={Record} />
-        <Route exact path="/app/:name" component={Application} />
-        <Route exact path="/app/weather/privacy-policy" component={Policy} />
+        <Route exact path="/apps/:name" component={Application} />
+        <Route exact path="/apps/weather/privacy-policy" component={Policy} />
       </Switch>
   );
 };

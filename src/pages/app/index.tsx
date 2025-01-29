@@ -37,8 +37,8 @@ const App = () => {
       <main className="appPage effect-fade-in effect-zoom-in">
         <div className="appPage__wrapper">
           <header className="appPage__header">
-            <Link to="/apps">
-              <h3>All apps</h3>
+            <Link to="/">
+              <h3>Back to main</h3>
             </Link>
           </header>
 

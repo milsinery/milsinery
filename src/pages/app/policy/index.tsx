@@ -17,7 +17,7 @@ const Weather = () => {
       <main className="app effect-fade-in effect-zoom-in">
         <div className="app__wrapper">
           <header className="app__header">
-            <Link to="/app/weather">
+            <Link to="/apps/weather">
               <h3>Back to app</h3>
             </Link>
           </header>
