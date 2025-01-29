@@ -7,15 +7,15 @@ const Weather = () => {
       <Helmet>
         <meta
           name="description"
-          content="Weather — how you feel, app privacy policy"
+          content="Privacy policy for Weather — how you feel"
         />
 
-        <title>Weather — how you feel, app privacy policy</title>
+        <title>Privacy policy for Weather — how you feel</title>
       </Helmet>
 
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <h1 className="main__title">Weather — how you feel, app privacy policy</h1>
+          <h1 className="main__title">Privacy policy for Weather — how you feel</h1>
           <h2 >Updated January 28th, 2025</h2>
 
           <p className="main__section">
@@ -46,7 +46,7 @@ const Weather = () => {
           <div className="main__section">
             <h3>Third-Party Services</h3>
             <p>
-              Our app uses OpenWeather API to fetch weather data. Please refer to OpenWeather’s Privacy Policy for details on their data practices: <a href='openweather.co.uk/privacy-policy' target="_blank" rel="noopener noreferrer">openweather.co.uk/privacy-policy</a>.
+              Our app uses OpenWeather API to fetch weather data. Please refer to OpenWeather’s Privacy Policy for details on their data practices: <a href='https://openweather.co.uk/privacy-policy' target="_blank" rel="noopener noreferrer">openweather.co.uk/privacy-policy</a>.
             </p>
           </div>
 
