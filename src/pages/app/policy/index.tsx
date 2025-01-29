@@ -7,19 +7,19 @@ const Weather = () => {
       <Helmet>
         <meta
           name="description"
-          content="Privacy policy for Weather — how you feel"
+          content="Privacy policy · Weather — how you feel"
         />
 
-        <title>Privacy policy for Weather — how you feel</title>
+        <title>Privacy policy · Weather — how you feel</title>
       </Helmet>
 
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <h1 className="main__title">Privacy policy for Weather — how you feel</h1>
+          <h1 className="main__title">Privacy policy</h1>
           <h2 >Updated January 28th, 2025</h2>
 
           <p className="main__section">
-            We does not collect, store, or share any personal data of its users. This Privacy Policy explains how we handle user information in compliance with Apple’s guidelines.
+            "Weather — how you feel" does not collect, store, or share any personal data of its users. This Privacy Policy explains how we handle user information in compliance with Apple’s guidelines.
           </p>
 
           <div className="main__section">
