@@ -36,7 +36,7 @@ const pluginsData = [
         'Renamer — free plugin for Figma. Just assigns random names to all layers, including groups and frames.',
       title: 'Renamer — plugin for Figma',
     },
-    isNewLabel: true,
+    isNewLabel: false,
   },
   {
     webp: colorFixer,

@@ -1,34 +1,32 @@
 import { Link } from 'react-router-dom';
 import './index.css';
 
-type AppProps = {
+type applicationProps = {
   webp: string;
   png: string;
   name: string;
   info: string;
   installLink: string;
-  policyLink: String
   infoLink: string;
   comment: Array<{ text: string; author: string }>;
   isNewLabel: boolean;
 };
 
-const app = ({
+const application = ({
   webp,
   png,
   name,
   info,
   installLink,
-  policyLink,
   infoLink,
   isNewLabel,
-}: AppProps) => {
+}: applicationProps) => {
 
   return (
-    <article className="app">
-      {isNewLabel && <h3 className="app__isNewLable">New</h3>}
+    <article className="application">
+      {isNewLabel && <h3 className="application__isNewLable">New</h3>}
       
-      <div className="app__cover">
+      <div className="application__cover">
         <picture>
           <source srcSet={webp} type="image/webp" />
           <img
@@ -41,12 +39,12 @@ const app = ({
         </picture>
       </div>
 
-      <div className="app__info">
-        <h2 className="app__title">{name}</h2>
-        <p className="app__description">{info}</p>
-        <div className="app__links">
+      <div className="application__info">
+        <h2 className="application__title">{name}</h2>
+        <p className="application__description">{info}</p>
+        <div className="application__links">
           <a
-            className="app__link"
+            className="application__link"
             href={installLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -55,7 +53,7 @@ const app = ({
           </a>
 
           <Link to={infoLink}>
-            <h3 className="app__link">About</h3>
+            <h3 className="application__link">About</h3>
           </Link>
         </div>
       </div>
@@ -63,4 +61,4 @@ const app = ({
   );
 };
 
-export default app;
+export default application;

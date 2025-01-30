@@ -1,5 +1,5 @@
-import advertiser from '../pictures/extensions/advertiser.webp';
-import advertiser2 from '../pictures/extensions/advertiser.webp';
+import advertiser from '../pictures/apps/weather_hyf.webp';
+import advertiser2 from '../pictures/apps/weather_hyf.webp';
 
 const appsData = [
   {
@@ -21,7 +21,7 @@ const appsData = [
         'Weather app without numbers. But with cute graphics and melodies.',
       title: 'Weather — how you feel',
     },
-    isNewLabel: false
+    isNewLabel: true
   },
 ];
 

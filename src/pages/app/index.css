@@ -31,7 +31,7 @@
   
   .appPage__cover {
     margin-bottom: 5vmax;
-   border: 1px solid hsl(0, 10%, 95%);
+    border: 1px solid hsl(0, 10%, 95%);
   }
   
   .appPage__short-description {
@@ -48,9 +48,14 @@
   }
   
   .appPage__content,
-  .appPage__title {
+  .appPage__title,
+  .appPage__links {
     display: flex;
     flex-direction: column;
+  }
+
+  .appPage__links {
+    gap: 2vmax;
   }
   
   .appPage__comment:not(:last-child),
