@@ -43,7 +43,7 @@ const App = () => {
           </header>
 
           {appData &&
-            appData.map(({ webp, png, info, name, installLink, policyLink, aboutLink }) => (
+            appData.map(({ webp, png, info, name, installLink, policyLink, aboutLink, meta }) => (
               <div className="appPage__content">
                 <div className="appPage__head">
                   <div className="appPage__title">
@@ -61,7 +61,7 @@ const App = () => {
                     </div>
                     <h1 className="appPage__title-text">{name}</h1>
                     <h2 className="appPage__short-description">
-                      {info}
+                      {meta.content}
                     </h2>
                     <div className="appPage__links">
                       <a

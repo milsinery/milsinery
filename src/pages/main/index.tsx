@@ -157,7 +157,7 @@ const Main = () => {
             <option value="light">Light theme</option>
           </select>
 
-          <small className="main__version">Updated January 28 · Added the privacy policy for the Weather app.</small>
+          <small className="main__version">Updated July 19 · Updated the Weather app description.</small>
         </div>
       </main>
     </>

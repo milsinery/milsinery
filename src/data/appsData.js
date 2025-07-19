@@ -6,7 +6,7 @@ const appsData = [
     webp: weather,
     png: weather,
     name: 'Weather — how you feel',
-    info: 'Without numbers, charts or AI—just the essentials. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
+    info: 'Without numbers, charts or AI—just the essentials.',
     installLink:
       '#',
     infoLink: '/apps/weather',
@@ -19,7 +19,7 @@ const appsData = [
     },
     meta: {
       content:
-        'Weather app without numbers. But with cute graphics and melodies.',
+        'Without numbers, charts or AI—just the essentials. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
       title: 'Weather — how you feel',
     },
     isNewLabel: true
