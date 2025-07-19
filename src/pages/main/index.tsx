@@ -62,10 +62,10 @@ const Main = () => {
             I develop user interfaces, write texts and draw graphics for them.
           </h1>
 
-          {/* <section className="main__apps">
+          <section className="main__apps">
             <h3 className="main__app-title">iOS applications</h3>
             <AppsList></AppsList>
-          </section> */}
+          </section>
 
           <section className="main__extensions">
             <h3 className="main__extensions-title">Extensions for browser</h3>

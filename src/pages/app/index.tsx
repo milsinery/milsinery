@@ -43,7 +43,7 @@ const App = () => {
           </header>
 
           {appData &&
-            appData.map(({ webp, png, info, name, installLink, policyLink }) => (
+            appData.map(({ webp, png, info, name, installLink, policyLink, aboutLink }) => (
               <div className="appPage__content">
                 <div className="appPage__head">
                   <div className="appPage__title">
@@ -75,6 +75,14 @@ const App = () => {
                       <Link to={policyLink}>
                         <h2 className="appPage__link">Privacy policy</h2>
                       </Link>
+                          <a
+            className="application__link"
+            href={aboutLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2>Making of</h2>
+          </a>
                     </div>
                   </div>
                 </div>

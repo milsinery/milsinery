@@ -35,10 +35,8 @@
 
 .application__links {
   display: flex;
-}
-
-.application__link {
-  margin: 0 1.5vmax 0 0;
+  gap: 1.5vmax;
+  flex-wrap: wrap;
 }
 
 .application__link:last-child {

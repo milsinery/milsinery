@@ -15,6 +15,7 @@ const AppList = () => {
               info={item.info}
               installLink={item.installLink}
               infoLink={item.infoLink}
+              aboutLink={item.aboutLink}
               comment={item.comments}
               isNewLabel={item.isNewLabel}
               key={key}

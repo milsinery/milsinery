@@ -8,6 +8,7 @@ type applicationProps = {
   info: string;
   installLink: string;
   infoLink: string;
+  aboutLink: string;
   comment: Array<{ text: string; author: string }>;
   isNewLabel: boolean;
 };
@@ -19,6 +20,7 @@ const application = ({
   info,
   installLink,
   infoLink,
+  aboutLink,
   isNewLabel,
 }: applicationProps) => {
 
@@ -55,6 +57,15 @@ const application = ({
           <Link to={infoLink}>
             <h3 className="application__link">About</h3>
           </Link>
+
+          <a
+            className="application__link"
+            href={aboutLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3>Making of</h3>
+          </a>
         </div>
       </div>
     </article>
