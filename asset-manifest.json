@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.8a3570c2.css",
-    "main.js": "/static/js/main.6d4c312b.js",
+    "main.js": "/static/js/main.f539a3ce.js",
     "static/js/787.ec6ca389.chunk.js": "/static/js/787.ec6ca389.chunk.js",
+    "static/media/avatar.webp": "/static/media/avatar.1f54695e1b5d6c3f1e6e.webp",
     "static/media/picture2.jpeg": "/static/media/picture2.bf082b271bb4934f39e2.jpeg",
     "static/media/weather_hyf.png": "/static/media/weather_hyf.7cbb37f19980cc4b93c3.png",
     "static/media/weather_hyf.webp": "/static/media/weather_hyf.17101379f6a296b32ae2.webp",
     "static/media/picture1.jpeg": "/static/media/picture1.f454a2d6b6948aa4ac21.jpeg",
     "static/media/abracadabra.png": "/static/media/abracadabra.112703682413c2fa2dc3.png",
     "static/media/colorFixer.png": "/static/media/colorFixer.1aef749cfb57fb6f0df2.png",
-    "static/media/avatar.webp": "/static/media/avatar.b5481c12663c81cac7a5.webp",
     "static/media/picture1.jpg": "/static/media/picture1.b654e40ab4529a05771b.jpg",
     "static/media/coft.png": "/static/media/coft.34b13ff10c8afeb772cb.png",
     "static/media/abracadabra.webp": "/static/media/abracadabra.3b929c2acca72f723c4c.webp",
@@ -23,11 +23,11 @@
     "static/media/advertiser.webp": "/static/media/advertiser.3becc7cc97bb86996287.webp",
     "index.html": "/index.html",
     "main.8a3570c2.css.map": "/static/css/main.8a3570c2.css.map",
-    "main.6d4c312b.js.map": "/static/js/main.6d4c312b.js.map",
+    "main.f539a3ce.js.map": "/static/js/main.f539a3ce.js.map",
     "787.ec6ca389.chunk.js.map": "/static/js/787.ec6ca389.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8a3570c2.css",
-    "static/js/main.6d4c312b.js"
+    "static/js/main.f539a3ce.js"
   ]
 }
