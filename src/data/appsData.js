@@ -19,7 +19,7 @@ const appsData = [
     },
     meta: {
       content:
-        'Without numbers, charts or AI—just the essentials. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
+        'Without numbers, charts or AI — just the essentials. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
       title: 'Weather — how you feel',
     },
     isNewLabel: true
