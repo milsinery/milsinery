@@ -6,7 +6,7 @@ const appsData = [
     webp: weather,
     png: weather,
     name: 'Weather — how you feel',
-    info: 'Without numbers, charts or AI—just the essentials.',
+    info: 'Without numbers, charts or AI — just the essentials.',
     installLink:
       'https://apps.apple.com/us/app/weather-how-you-feel/id6739215959',
     infoLink: '/apps/weather',
