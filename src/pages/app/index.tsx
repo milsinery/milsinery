@@ -72,9 +72,6 @@ const App = () => {
                       >
                         <h2>Install 🚀</h2>
                       </a>
-                      <Link to={policyLink}>
-                        <h2 className="appPage__link">Privacy policy</h2>
-                      </Link>
                           <a
             className="application__link"
             href={aboutLink}
@@ -83,6 +80,9 @@ const App = () => {
           >
             <h2>Making of</h2>
           </a>
+            <Link to={policyLink}>
+                        <h2 className="appPage__link">Privacy policy</h2>
+                      </Link>
                     </div>
                   </div>
                 </div>

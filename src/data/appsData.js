@@ -8,7 +8,7 @@ const appsData = [
     name: 'Weather — how you feel',
     info: 'Without numbers, charts or AI—just the essentials.',
     installLink:
-      '#',
+      'https://apps.apple.com/us/app/weather-how-you-feel/id6739215959',
     infoLink: '/apps/weather',
     policyLink: '/apps/weather/privacy-policy',
     aboutLink: 'https://medium.com/@milsinery/weather-how-you-feel-5a82a6c48ab4',
