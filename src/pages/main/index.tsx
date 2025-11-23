@@ -87,7 +87,7 @@ const Main = () => {
           </section>
 
           <section className="main__links">
-            <h3 className="main__links-title">Contacts и portfolio</h3>
+            <h3 className="main__links-title">Contacts & portfolio</h3>
             <p className="main__link">
               <a
                 href="https://www.linkedin.com/in/milsinery"
