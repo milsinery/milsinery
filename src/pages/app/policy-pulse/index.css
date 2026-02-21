@@ -1,0 +1,42 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.app__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 6vmax 4vmax 12vmax 4vmax;
+  gap: 4vmax;
+}
+
+.app__header {
+  display: flex;
+  margin-bottom: 5vmax;
+}
+
+.app__title,
+.app__section {
+  gap: 1vmax
+}
+
+.app__title {
+  max-width: 90%;
+}
+
+
+.app__section {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 480px) {
+  .app__title {
+    margin: 0 0 8vmax 0;
+  }
+}

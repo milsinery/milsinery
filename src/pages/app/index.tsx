@@ -43,7 +43,7 @@ const App = () => {
           </header>
 
           {appData &&
-            appData.map(({ webp, png, info, name, installLink, policyLink, aboutLink, meta }) => (
+            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, meta }) => (
               <div className="appPage__content">
                 <div className="appPage__head">
                   <div className="appPage__title">
@@ -72,7 +72,7 @@ const App = () => {
                       >
                         <h2>Install 🚀</h2>
                       </a>
-                          <a
+                         { aboutLink && <a
             className="application__link"
             href={aboutLink}
             target="_blank"
@@ -80,9 +80,15 @@ const App = () => {
           >
             <h2>Making of</h2>
           </a>
+}
             <Link to={policyLink}>
                         <h2 className="appPage__link">Privacy policy</h2>
                       </Link>
+
+                      { EULA && <Link to={EULA}>
+                        <h2 className="appPage__link">Terms of Use (EULA)</h2>
+                      </Link>
+            }
                     </div>
                   </div>
                 </div>

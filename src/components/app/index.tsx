@@ -58,7 +58,7 @@ const application = ({
             <h3 className="application__link">About</h3>
           </Link>
 
-          <a
+          { aboutLink && <a
             className="application__link"
             href={aboutLink}
             target="_blank"
@@ -66,6 +66,7 @@ const application = ({
           >
             <h3>Making of</h3>
           </a>
+}
         </div>
       </div>
     </article>
