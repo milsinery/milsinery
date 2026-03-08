@@ -8,10 +8,10 @@ const Pulse = () => {
       <Helmet>
         <meta
           name="description"
-          content="Privacy policy · Din-Dan"
+          content="Privacy policy · Pulse"
         />
 
-        <title>Privacy policy · Din-Dan</title>
+        <title>Privacy policy · Pulse</title>
       </Helmet>
 
       <main className="app effect-fade-in effect-zoom-in">
@@ -28,7 +28,7 @@ const Pulse = () => {
           <div className="app__section">
             <h3>General Information</h3>
             <p>
-              Din-Dan ("the App") is a productivity tool for creating tasks and notes. This Privacy Policy explains how data is handled within the App.
+              Pulse ("the App") is a productivity tool for creating tasks and notes. This Privacy Policy explains how data is handled within the App.
             </p>
           </div>
 

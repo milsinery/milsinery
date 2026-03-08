@@ -8,10 +8,10 @@ const Pulse = () => {
       <Helmet>
         <meta
           name="description"
-          content="Terms of Use (EULA) · Din-Dan"
+          content="Terms of Use (EULA) · Pulse"
         />
 
-        <title>Terms of Use (EULA) · Din-Dan</title>
+        <title>Terms of Use (EULA) · Pulse</title>
       </Helmet>
 
       <main className="app effect-fade-in effect-zoom-in">
@@ -28,14 +28,14 @@ const Pulse = () => {
           <div className="app__section">
             <h3>Acceptance of Terms</h3>
             <p>
-              By downloading or using Din-Dan, you agree to these Terms.
+              By downloading or using Pulse, you agree to these Terms.
             </p>
           </div>
 
           <div className="app__section">
             <h3>Description of Service</h3>
             <p>
-              Din-Dan provides tools for task management, note-taking, and interface customization.
+              Pulse provides tools for task management, note-taking, and interface customization.
             </p>
           </div>
 

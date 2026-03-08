@@ -7,7 +7,7 @@ const appsData = [
    {
     webp: pulse2,
     png: pulse,
-    name: 'Din-Dan',
+    name: 'Pulse',
     info: 'Tasks & notes. Simple and beautiful.',
     installLink:
       '',
@@ -29,8 +29,8 @@ const appsData = [
   {
     webp: weather2,
     png: weather,
-    name: 'Weather — how you feel',
-    info: 'Without numbers, charts or AI — just the essentials.',
+    name: 'How you feel',
+    info: 'Weather — without numbers, charts or AI — just the essentials.',
     installLink:
       'https://apps.apple.com/us/app/weather-how-you-feel/id6739215959',
     infoLink: '/apps/weather',
@@ -43,8 +43,8 @@ const appsData = [
     },
     meta: {
       content:
-        'Without numbers, charts or AI — just the essentials. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
-      title: 'Weather — how you feel',
+        'Weather — without numbers, charts or AI — just the essentials. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
+      title: 'How you feel',
     },
     isNewLabel: false
   },
