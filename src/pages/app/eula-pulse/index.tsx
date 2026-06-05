@@ -23,7 +23,7 @@ const Pulse = () => {
           </header>
 
           <h1 className="app__title">Terms of Use (EULA)</h1>
-          <h2 >Updated February 21, 2026</h2>
+          <h2 >Updated May 2, 2026</h2>
 
           <div className="app__section">
             <h3>Acceptance of Terms</h3>
@@ -42,7 +42,7 @@ const Pulse = () => {
           <div className="app__section">
             <h3>Subscriptions</h3>
             <p>
-              Exclusive themes: A monthly subscription ($0.99) provides access to exclusive themes.
+              Exclusive themes: A monthly subscription provides access to exclusive themes.
             </p>
 
              <p>
@@ -80,9 +80,9 @@ const Pulse = () => {
           </div>
 
           <div className="app__section">
-            <h3>Governing Law</h3>
+            <h3>Relationship with Apple</h3>
             <p>
-              These terms are governed by the laws of the Republic of Serbia.
+              This agreement is between you and the Developer only, and not with Apple Inc. Apple is not responsible for the App and its content, and expressly disclaims all warranties with respect to the App.
             </p>
           </div>
         </div>

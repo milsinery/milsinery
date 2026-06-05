@@ -8,9 +8,8 @@ const appsData = [
     webp: pulse2,
     png: pulse,
     name: 'Pulse',
-    info: 'Tasks & notes. Simple and beautiful.',
-    installLink:
-      '',
+    info: 'Tasks & notes. No AI. No tracking. No bloat.',
+    installLink: 'https://apps.apple.com/us/app/pulse-tasks-notes/id6754890551',
     infoLink: '/apps/pulse',
     policyLink: '/apps/pulse/privacy-policy',
     EULA: '/apps/pulse/terms-of-use',
@@ -22,7 +21,7 @@ const appsData = [
     },
     meta: {
       content:
-        'Tasks & notes. Simple and beautiful.',
+        "Tasks and notes in one place. No projects, no labels, no clutter. Just what needs to get done and the thoughts you don't want to lose.",
     },
     isNewLabel: true
   },
@@ -30,9 +29,8 @@ const appsData = [
     webp: weather2,
     png: weather,
     name: 'How you feel',
-    info: 'Weather — without numbers, charts or AI — just the essentials.',
-    installLink:
-      'https://apps.apple.com/us/app/weather-how-you-feel/id6739215959',
+    info: 'Weather right now, today, and tomorrow.',
+    installLink: 'https://apps.apple.com/us/app/weather-how-you-feel/id6739215959',
     infoLink: '/apps/weather',
     policyLink: '/apps/weather/privacy-policy',
     aboutLink: 'https://medium.com/@milsinery/weather-how-you-feel-5a82a6c48ab4',
@@ -43,7 +41,7 @@ const appsData = [
     },
     meta: {
       content:
-        'Weather — without numbers, charts or AI — just the essentials. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
+        'Weather right now, today, and tomorrow. Without numbers, charts or something else. The app sums up the temperature in a single headline and gives you a quick tip on what to wear.',
       title: 'How you feel',
     },
     isNewLabel: false

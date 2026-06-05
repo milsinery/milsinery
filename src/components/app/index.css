@@ -124,7 +124,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 5vmax;
+    /* margin-bottom: 5vmax; */
   }
 
   .application__cover {

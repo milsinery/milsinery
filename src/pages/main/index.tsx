@@ -62,10 +62,10 @@ const Main = () => {
             I develop user interfaces, write texts and draw graphics for them.
           </h1>
 
-          {/* <section className="main__apps">
+          <section className="main__apps">
             <h3 className="main__app-title">iOS applications</h3>
             <AppsList></AppsList>
-          </section> */}
+          </section>
 
           <section className="main__extensions">
             <h3 className="main__extensions-title">Extensions for browser</h3>
@@ -79,12 +79,12 @@ const Main = () => {
             <PluginsList></PluginsList>
           </section>
 
-          <section className="main__blog">
+          {/* <section className="main__blog">
             <Link to="/blog">
               <h3 className="main__blog-title">Blog</h3>
             </Link>
             {getLastRecord()}
-          </section>
+          </section> */}
 
           <section className="main__links">
             <h3 className="main__links-title">Contacts & portfolio</h3>
@@ -157,7 +157,7 @@ const Main = () => {
             <option value="light">Light theme</option>
           </select>
 
-          <small className="main__version">Updated July 19 · Updated the Weather app description.</small>
+          <small className="main__version">Updated May 16 · Added Pulse.</small>
         </div>
       </main>
     </>
