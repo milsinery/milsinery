@@ -13,7 +13,7 @@ const appsData = [
     infoLink: '/apps/pulse',
     policyLink: '/apps/pulse/privacy-policy',
     EULA: '/apps/pulse/terms-of-use',
-    aboutLink: '',
+    aboutLink: 'https://medium.com/@milsinery/pulse-tasks-notes-06943b80e001',
     comments: [],
     page: {
       description: '',
