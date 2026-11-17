@@ -154,3 +154,10 @@
     transition: all 300ms ease-in-out 150ms;
   }
 }
+
+.application__link--soon {
+  color: var(--color-text-optional);
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}

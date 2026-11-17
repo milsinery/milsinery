@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { getLastRecord } from '../../data/recordsData';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
 import AppsList from "../../components/appslist/index"
+import MacAppsData from "../../data/macAppsData";
 import avatar from '../../avatar.webp';
 import './index.css';
 
@@ -67,6 +67,11 @@ const Main = () => {
             <AppsList></AppsList>
           </section>
 
+          <section className="main__mac-apps">
+            <h3 className="main__mac-title">Mac applications</h3>
+            <AppsList data={MacAppsData}></AppsList>
+          </section>
+
           <section className="main__extensions">
             <h3 className="main__extensions-title">Extensions for browser</h3>
             <ExtensionsList></ExtensionsList>
@@ -78,13 +83,6 @@ const Main = () => {
             </Link>
             <PluginsList></PluginsList>
           </section>
-
-          {/* <section className="main__blog">
-            <Link to="/blog">
-              <h3 className="main__blog-title">Blog</h3>
-            </Link>
-            {getLastRecord()}
-          </section> */}
 
           <section className="main__links">
             <h3 className="main__links-title">Contacts & portfolio</h3>
@@ -157,7 +155,7 @@ const Main = () => {
             <option value="light">Light theme</option>
           </select>
 
-          <small className="main__version">Updated May 16 · Added Pulse.</small>
+          <small className="main__version">Updated Nov 17 · Added Stay Awake.</small>
         </div>
       </main>
     </>

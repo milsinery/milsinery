@@ -51,6 +51,7 @@
   
   .main__title,
   .main__apps,
+  .main__mac-apps,
   .main__extensions,
   .main__plugins, 
   .main__blog {
@@ -68,6 +69,7 @@
   }
 
   .main__apps,
+  .main__mac-apps,
   .main__extensions,
   .main__plugins,
   .main__blog {
@@ -76,6 +78,7 @@
   }
 
   .main__app-title,
+  .main__mac-title,
   .main__extensions-title,
   .main__plugins-title,
   .main__blog-title,
