@@ -60,7 +60,7 @@
   
   .main__title {
     max-width: 90%;
-    font-size: 6.5vmax;
+    font-size: 7.5vmax;
   }
 
   .main__headline {
@@ -106,7 +106,7 @@
   
   @media screen and (max-width: 640px) {
     .main__title {
-      font-size: 5.6vmax;
+      font-size: 6.4vmax;
     }
   }
 
