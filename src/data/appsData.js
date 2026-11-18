@@ -8,7 +8,7 @@ const appsData = [
     webp: pulse2,
     png: pulse,
     name: 'Pulse',
-    info: 'Tasks & notes. No AI. No tracking. No bloat.',
+    info: 'Tasks & notes. No AI. No tracking. No\u00A0bloat.',
     installLink: 'https://apps.apple.com/us/app/pulse-tasks-notes/id6754890551',
     infoLink: '/apps/pulse',
     policyLink: '/apps/pulse/privacy-policy',
