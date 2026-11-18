@@ -20,6 +20,7 @@ const Main = () => {
   }
 
   const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
+  const title = `${yearsOfExperience}+ years in interface design. Now building apps with AI.`;
   const description = `Product designer, ${yearsOfExperience}+ years in interface design. Now building apps with AI.`;
 
   return (
@@ -57,11 +58,14 @@ const Main = () => {
               </div>
               <div className="main__headline">
                 <h3 className="main__headline-main">Vladimir Bykov</h3>
+                <small className="main__headline-additional">
+                  Product designer
+                </small>
               </div>
             </div>
           </header>
           <h1 className="main__title">
-            {description}
+            {title}
           </h1>
 
           <section className="main__apps">
