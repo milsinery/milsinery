@@ -68,6 +68,11 @@
     gap: 0.3vmax;
   }
 
+  .main__headline-additional {
+    color: var(--color-text-main);
+    font-size: max(15px, 1.5vmax);
+  }
+
   .main__apps,
   .main__mac-apps,
   .main__extensions,
