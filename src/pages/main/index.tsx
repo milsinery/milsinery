@@ -20,8 +20,8 @@ const Main = () => {
   }
 
   const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
-  const title = `${yearsOfExperience}+ years in\u00A0design. Now AI\u2011native.`;
-  const description = `Product designer, ${yearsOfExperience}+ years in design. Now AI-native.`;
+  const title = `${yearsOfExperience}+ years in\u00A0design. AI\u2011native now.`;
+  const description = `Product designer, ${yearsOfExperience}+ years in design. AI-native now.`;
 
   return (
     <>
