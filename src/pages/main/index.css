@@ -60,6 +60,7 @@
   
   .main__title {
     max-width: 90%;
+    font-size: 6.5vmax;
   }
 
   .main__headline {
@@ -103,10 +104,24 @@
     margin: 0 auto 1vmax 0;
   }
   
+  @media screen and (max-width: 640px) {
+    .main__title {
+      font-size: 5.6vmax;
+    }
+  }
+
   @media screen and (max-width: 480px) {
     .main__title,
     .main__plugins {
       margin: 0 0 8vmax 0;
+    }
+  }
+
+  /* Let the nbsp phrase "in design." fit on very narrow, tall viewports
+     where vmax (and thus the title) is driven by height. */
+  @media screen and (max-width: 360px) {
+    .main__title {
+      max-width: 100%;
     }
   }
   
