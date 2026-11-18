@@ -8,6 +8,8 @@ import MacAppsData from "../../data/macAppsData";
 import avatar from '../../avatar.webp';
 import './index.css';
 
+const CAREER_START_YEAR = 2011;
+
 const Main = () => {
   const [value, setValue] = useState(localStorage.getItem('theme') || 'system');
   document.querySelector('html')?.setAttribute('data-theme', value);
@@ -17,12 +19,15 @@ const Main = () => {
     setValue(e.target.value);
   }
 
+  const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
+  const description = `Product designer, ${yearsOfExperience}+ years in interface design. Now building apps with AI.`;
+
   return (
     <>
       <Helmet>
         <meta
           name="description"
-          content="I develop user interfaces, write texts and draw graphics for them. I also create plug-ins for Figma and write about them on my Telegram channel."
+          content={description}
         />
 
         <meta
@@ -34,7 +39,7 @@ const Main = () => {
         <meta property="og:title" content="Vladimir Bykov" />
         <meta
           property="og:description"
-          content="I develop user interfaces, write texts and draw graphics for them. I also create plug-ins for Figma and write about them on my Telegram channel."
+          content={description}
         />
         <meta property="og:type" content="website" />
         <title>Vladimir Bykov</title>
@@ -52,14 +57,11 @@ const Main = () => {
               </div>
               <div className="main__headline">
                 <h3 className="main__headline-main">Vladimir Bykov</h3>
-                <small className="main__headline-additional">
-                  Interface designer
-                </small>
               </div>
             </div>
           </header>
           <h1 className="main__title">
-            I develop user interfaces, write texts and draw graphics for them.
+            {description}
           </h1>
 
           <section className="main__apps">
