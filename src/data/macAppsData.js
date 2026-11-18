@@ -7,9 +7,11 @@ const macAppsData = [
     png: stayAwake,
     name: 'Stay Awake',
     info: 'Keeps your Mac awake, even with the lid closed.',
+    installLink:
+      'https://github.com/milsinery/stay-awake/releases/latest/download/StayAwake.dmg',
     comments: [],
-    isNewLabel: false,
-    comingSoon: true,
+    isNewLabel: true,
+    comingSoon: false,
   },
 ];
 

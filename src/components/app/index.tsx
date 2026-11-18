@@ -22,9 +22,33 @@ const application = ({
   installLink,
   infoLink,
   aboutLink,
+  comment,
   isNewLabel,
   comingSoon,
 }: applicationProps) => {
+  const symbols = [
+    '🥰',
+    '👏',
+    '😎',
+    '🔥',
+    '💔',
+    '😍',
+    '💪',
+    '🎉',
+    '🥳',
+    '🍾',
+    '😜',
+    '😽',
+    '🤟',
+    '🤌',
+  ];
+
+  const getRandom = (arr: Array<any>) => {
+    return Math.floor(Math.random() * arr.length);
+  };
+
+  const comments = comment ?? [];
+  const content = comments.length > 0 && comments[getRandom(comments)];
 
   return (
     <article className="application">
@@ -84,6 +108,19 @@ const application = ({
           )}
         </div>
       </div>
+
+      {comments.length > 0 && content && (
+        <div className="application__commentary">
+          <h4 className="application__commentary-title">{content.text}</h4>
+          <small className="application__commentary-author">{content.author}</small>
+          <h2 className="application__commentary-sym-1">
+            {symbols[getRandom(symbols)]}
+          </h2>
+          <h1 className="application__commentary-sym-2">
+            {symbols[getRandom(symbols)]}
+          </h1>
+        </div>
+      )}
     </article>
   );
 };
