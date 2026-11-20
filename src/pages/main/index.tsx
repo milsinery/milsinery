@@ -51,11 +51,6 @@ const Main = () => {
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
           <header className="main__hero">
-            <div className="main__title-box">
-              <h1 className="main__title">
-                Product designer, {yearsOfExperience}+&nbsp;years&nbsp;in. AI&#8209;native&nbsp;now.
-              </h1>
-            </div>
             <figure className="main__stamp">
               <img
                 className="main__photo"
@@ -66,6 +61,9 @@ const Main = () => {
               />
               <NameArc className="main__name" role="img" aria-label="Vladimir Bykov" />
             </figure>
+            <h1 className="main__title">
+              Product designer, {yearsOfExperience}+&nbsp;years&nbsp;in. AI&#8209;native now.
+            </h1>
           </header>
 
           <section className="main__apps">
