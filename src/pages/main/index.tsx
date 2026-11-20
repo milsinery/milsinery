@@ -5,7 +5,10 @@ import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
 import AppsList from "../../components/appslist/index"
 import MacAppsData from "../../data/macAppsData";
-import avatar from '../../avatar.webp';
+// Hero photo: swap this one import to change the picture (any square image;
+// it is cropped to a circle in CSS).
+import photo from '../../pictures/hero/photo.webp';
+import { ReactComponent as NameArc } from '../../pictures/hero/name_arc.svg';
 import './index.css';
 
 const CAREER_START_YEAR = 2011;
@@ -20,7 +23,6 @@ const Main = () => {
   }
 
   const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
-  const title = `${yearsOfExperience}+ years in\u00A0design. AI\u2011native now.`;
   const description = `Product designer, ${yearsOfExperience}+ years in design. AI-native now.`;
 
   return (
@@ -48,25 +50,23 @@ const Main = () => {
 
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <header className="main__header">
-            <div className="main__logo">
-              <div className="main__avatar">
-                <picture>
-                  <source srcSet={avatar} type="image/webp" />
-                  <img src={avatar} width="100%" height="100%" alt="Avatar" />
-                </picture>
-              </div>
-              <div className="main__headline">
-                <h3 className="main__headline-main">Vladimir Bykov</h3>
-                <small className="main__headline-additional">
-                  Product designer
-                </small>
-              </div>
+          <header className="main__hero">
+            <div className="main__title-box">
+              <h1 className="main__title">
+                Product designer, {yearsOfExperience}+&nbsp;years&nbsp;in. AI&#8209;native&nbsp;now.
+              </h1>
             </div>
+            <figure className="main__stamp">
+              <img
+                className="main__photo"
+                src={photo}
+                width="200"
+                height="200"
+                alt="Vladimir Bykov"
+              />
+              <NameArc className="main__name" role="img" aria-label="Vladimir Bykov" />
+            </figure>
           </header>
-          <h1 className="main__title">
-            {title}
-          </h1>
 
           <section className="main__apps">
             <h3 className="main__app-title">iOS applications</h3>
