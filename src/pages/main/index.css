@@ -51,21 +51,13 @@
 
   .main__name {
     position: absolute;
-    top: 0;
-    left: 50%;
+    /* Nudged ~4px right and up at the 200px photo size (2% of the photo). */
+    top: calc(var(--photo-size) * -0.02);
+    left: calc(50% + var(--photo-size) * 0.02);
     width: var(--photo-size);
     height: auto;
     transform: translateX(-50%);
     overflow: visible;
-  }
-
-  /* A thin halo in the page colour keeps the name readable where it
-     overlaps the photo (matters in the dark theme). */
-  .main__name path {
-    stroke: var(--color-bg);
-    stroke-width: 3px;
-    stroke-linejoin: round;
-    paint-order: stroke fill;
   }
 
   .main__apps,
