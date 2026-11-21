@@ -172,14 +172,17 @@ a:hover {
 }
 
 /* Underline text links with a line at 20% of the text colour
-   (follows currentColor, so it works in both themes and on hover). */
+   (follows currentColor, so it works in both themes and on hover).
+   Thickness and offset are the computed values of the Install/About
+   links inside cards (1px / 2.88px), applied site-wide so they no
+   longer scale with font size. */
 @supports (text-decoration-color: color-mix(in srgb, red 30%, transparent)) {
   a:link,
   a:visited {
     text-decoration-line: underline;
     text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
-    text-decoration-thickness: max(1px, 0.06em);
-    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2.88px;
     text-decoration-skip-ink: auto;
   }
 
