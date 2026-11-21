@@ -170,10 +170,7 @@ const Main = () => {
                   <span className="visually-hidden"> (opens in new tab)</span>
                 </a>
               </p>
-
             </div>
-
-            <small className="main__version">Updated Nov 17 · Added Stay Awake.</small>
           </footer>
         </div>
       </div>

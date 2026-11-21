@@ -117,12 +117,12 @@
     margin-bottom: 2.5vmax;
   }
   
-  .main__links {
-    margin-bottom: 11vmax;
-  }
-  
   .main__link {
     margin-bottom: 1.5vmax;
+  }
+
+  .main__link:last-child {
+    margin-bottom: 0;
   }
 
   /* Phones and tablets: smaller outdent so the name keeps ~20px from the
