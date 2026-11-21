@@ -14,19 +14,11 @@ import './index.css';
 const CAREER_START_YEAR = 2011;
 
 const Main = () => {
-  const [value, setValue] = useState(localStorage.getItem('theme') || 'system');
-  document.querySelector('html')?.setAttribute('data-theme', value);
-  localStorage.setItem('theme', value);
-
   // Email by default (also without JS); Telegram for visitors from Russia.
   const [contactHref, setContactHref] = useState(EMAIL_HREF);
   useEffect(() => {
     setContactHref(quickContactHref());
   }, []);
-
-  function handleChange(e: any) {
-    setValue(e.target.value);
-  }
 
   const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
   const description = `Product designer, ${yearsOfExperience}+ years in design. AI-native now.`;
@@ -54,130 +46,137 @@ const Main = () => {
         <title>Vladimir Bykov</title>
       </Helmet>
 
-      <main className="main effect-fade-in effect-zoom-in">
+      <div className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
-          <a
-            className="main__contact"
-            href={contactHref}
-            {...(contactHref === TELEGRAM_HREF
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
-          >
-            Contact
-          </a>
-          <header className="main__hero">
-            <figure className="main__stamp">
-              <img
-                className="main__photo"
-                src={photo}
-                width="200"
-                height="200"
-                alt="Vladimir Bykov"
-              />
-              <NameArc className="main__name" role="img" aria-label="Vladimir Bykov" />
-            </figure>
-            <h1 className="main__title">
-              Product designer, {yearsOfExperience}+&nbsp;years&nbsp;in. AI&#8209;native now.
-            </h1>
-          </header>
+          <nav className="main__quick" aria-label="Quick contact">
+            <a
+              className="main__contact"
+              href={contactHref}
+              {...(contactHref === TELEGRAM_HREF
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              Contact
+              <span className="visually-hidden">
+                {contactHref === TELEGRAM_HREF
+                  ? ' on Telegram (opens in new tab)'
+                  : ' by email'}
+              </span>
+            </a>
+          </nav>
 
-          <section className="main__apps">
-            <h3 className="main__app-title">iOS applications</h3>
-            <AppsList></AppsList>
-          </section>
+          <main className="main__content">
+            <header className="main__hero">
+              <figure className="main__stamp">
+                <img
+                  className="main__photo"
+                  src={photo}
+                  width="200"
+                  height="200"
+                  alt="Vladimir Bykov"
+                />
+                <NameArc className="main__name" aria-hidden="true" focusable="false" />
+              </figure>
+              <h1 className="main__title" tabIndex={-1}>
+                Product designer, {yearsOfExperience}+&nbsp;years&nbsp;in. AI&#8209;native now.
+              </h1>
+            </header>
 
-          <section className="main__mac-apps">
-            <h3 className="main__mac-title">Mac applications</h3>
-            <AppsList data={MacAppsData}></AppsList>
-          </section>
+            <section className="main__apps">
+              <h2 className="main__app-title t-h3">iOS applications</h2>
+              <AppsList></AppsList>
+            </section>
 
-          <section className="main__extensions">
-            <h3 className="main__extensions-title">Extensions for browser</h3>
-            <ExtensionsList></ExtensionsList>
-          </section>
+            <section className="main__mac-apps">
+              <h2 className="main__mac-title t-h3">Mac applications</h2>
+              <AppsList data={MacAppsData}></AppsList>
+            </section>
 
-          <section className="main__plugins">
-            <h3 className="main__plugins-title">Plugins for Figma</h3>
-            <PluginsList></PluginsList>
-          </section>
+            <section className="main__extensions">
+              <h2 className="main__extensions-title t-h3">Extensions for browser</h2>
+              <ExtensionsList></ExtensionsList>
+            </section>
 
-          <section className="main__links">
-            <h3 className="main__links-title">Contacts & portfolio</h3>
-            <p className="main__link">
-              <a href={EMAIL_HREF}>{CONTACT_EMAIL}</a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://t.me/milsinery"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Telegram
-              </a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://www.linkedin.com/in/milsinery"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://t.me/areyoureallyadesigner"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Telegram channel
-              </a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://www.vsco.co/milsinery"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                VSCO Profile
-              </a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://www.behance.net/milsinery"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Behance
-              </a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://instagram.com/milsinery"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Instagram
-              </a>
-            </p>
+            <section className="main__plugins">
+              <h2 className="main__plugins-title t-h3">Plugins for Figma</h2>
+              <PluginsList></PluginsList>
+            </section>
 
-          </section>
+          </main>
 
-          <select
-            className="main__themeSwitcher"
-            name="themeSwitcher"
-            onChange={handleChange}
-            value={value}
-            defaultValue={value}
-          >
-            <option value="system">System theme</option>
-            <option value="dark">Dark theme</option>
-            <option value="light">Light theme</option>
-          </select>
+          <footer className="main__footer">
+            <div className="main__links">
+              <h2 className="main__links-title t-h3">Contacts & portfolio</h2>
+              <p className="main__link">
+                <a href={EMAIL_HREF}>{CONTACT_EMAIL}</a>
+              </p>
+              <p className="main__link">
+                <a
+                  href="https://t.me/milsinery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Telegram
+                  <span className="visually-hidden"> (opens in new tab)</span>
+                </a>
+              </p>
+              <p className="main__link">
+                <a
+                  href="https://www.linkedin.com/in/milsinery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                  <span className="visually-hidden"> (opens in new tab)</span>
+                </a>
+              </p>
+              <p className="main__link">
+                <a
+                  href="https://t.me/areyoureallyadesigner"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Telegram channel
+                  <span className="visually-hidden"> (opens in new tab)</span>
+                </a>
+              </p>
+              <p className="main__link">
+                <a
+                  href="https://www.vsco.co/milsinery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  VSCO Profile
+                  <span className="visually-hidden"> (opens in new tab)</span>
+                </a>
+              </p>
+              <p className="main__link">
+                <a
+                  href="https://www.behance.net/milsinery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Behance
+                  <span className="visually-hidden"> (opens in new tab)</span>
+                </a>
+              </p>
+              <p className="main__link">
+                <a
+                  href="https://instagram.com/milsinery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                  <span className="visually-hidden"> (opens in new tab)</span>
+                </a>
+              </p>
 
-          <small className="main__version">Updated Nov 17 · Added Stay Awake.</small>
+            </div>
+
+            <small className="main__version">Updated Nov 17 · Added Stay Awake.</small>
+          </footer>
         </div>
-      </main>
+      </div>
     </>
   );
 };

@@ -5,7 +5,7 @@ import './index.css';
 const ExtensionsList = () => {
   return (
     <>
-      <section className="extensionsList">
+      <div className="extensionsList">
         {ExtensionsData.map((item, key) => {
           return (
             <Extension
@@ -21,7 +21,7 @@ const ExtensionsList = () => {
             ></Extension>
           );
         })}
-      </section>
+      </div>
     </>
   );
 };

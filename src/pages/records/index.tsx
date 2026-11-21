@@ -4,10 +4,6 @@ import RecordList from '../../components/recordsList/index';
 import './index.css';
 
 const records = () => {
-  document
-    .querySelector('html')
-    ?.setAttribute('data-theme', localStorage.getItem('theme') || 'system');
-
   return (
     <>
       <Helmet>

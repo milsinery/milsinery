@@ -18,7 +18,7 @@ type AppItem = {
 const AppList = ({ data = AppsData as AppItem[] }) => {
   return (
     <>
-      <section className="appList">
+      <div className="appList">
         {data.map((item: AppItem, key: number) => {
           return (
             <App
@@ -36,7 +36,7 @@ const AppList = ({ data = AppsData as AppItem[] }) => {
             ></App>
           );
         })}
-      </section>
+      </div>
     </>
   );
 };

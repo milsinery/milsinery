@@ -18,29 +18,29 @@ const Pulse = () => {
         <div className="app__wrapper">
           <header className="app__header">
             <Link to="/apps/pulse">
-              <h3>Back to app</h3>
+              <span className="t-h3">Back to app</span>
             </Link>
           </header>
 
-          <h1 className="app__title">Terms of Use (EULA)</h1>
-          <h2 >Updated May 2, 2026</h2>
+          <h1 className="app__title" tabIndex={-1}>Terms of Use (EULA)</h1>
+          <div className="t-h2">Updated May 2, 2026</div>
 
           <div className="app__section">
-            <h3>Acceptance of Terms</h3>
+            <h2 className="t-h3">Acceptance of Terms</h2>
             <p>
               By downloading or using Pulse, you agree to these Terms.
             </p>
           </div>
 
           <div className="app__section">
-            <h3>Description of Service</h3>
+            <h2 className="t-h3">Description of Service</h2>
             <p>
               Pulse provides tools for task management, note-taking, and interface customization.
             </p>
           </div>
 
           <div className="app__section">
-            <h3>Subscriptions</h3>
+            <h2 className="t-h3">Subscriptions</h2>
             <p>
               Exclusive themes: A monthly subscription provides access to exclusive themes.
             </p>
@@ -59,28 +59,28 @@ const Pulse = () => {
           </div>
 
           <div className="app__section">
-            <h3>Data and Sync</h3>
+            <h2 className="t-h3">Data and Sync</h2>
             <p>
               The App uses iCloud for synchronization. You are responsible for maintaining your iCloud account and device security. The Developer is not liable for data loss resulting from iCloud service interruptions or device failure.
             </p>
           </div>
 
           <div className="app__section">
-            <h3>Prohibited Use</h3>
+            <h2 className="t-h3">Prohibited Use</h2>
             <p>
               You agree not to use the App for any illegal activities or to attempt to reverse-engineer the software.
             </p>
           </div>
 
           <div className="app__section">
-            <h3>Limitation of Liability</h3>
+            <h2 className="t-h3">Limitation of Liability</h2>
             <p>
               The App is provided "as is". The Developer is not liable for any indirect or incidental damages resulting from the use or inability to use the App.
             </p>
           </div>
 
           <div className="app__section">
-            <h3>Relationship with Apple</h3>
+            <h2 className="t-h3">Relationship with Apple</h2>
             <p>
               This agreement is between you and the Developer only, and not with Apple Inc. Apple is not responsible for the App and its content, and expressly disclaims all warranties with respect to the App.
             </p>

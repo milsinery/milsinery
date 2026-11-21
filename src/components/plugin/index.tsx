@@ -44,7 +44,7 @@ const Plugin = ({
 
   return (
     <article className="plugin">
-      {isNewLabel && <h3 className="plugin__isNewLable">New</h3>}
+      {isNewLabel && <span className="plugin__isNewLable t-h3">New</span>}
 
       <div className="plugin__cover">
         <picture>
@@ -54,13 +54,13 @@ const Plugin = ({
             src={png}
             width="100%"
             height="100%"
-            alt="Cover"
+            alt={`${name} icon`}
           />
         </picture>
       </div>
 
       <div className="plugin__info">
-        <h2 className="plugin__title">{name}</h2>
+        <h3 className="plugin__title t-h2">{name}</h3>
         <p className="plugin__description">{info}</p>
         <div className="plugin__links">
           <a
@@ -69,21 +69,23 @@ const Plugin = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h3>Install</h3>
+            <span className="t-h3">Install</span>
+            <span className="visually-hidden"> {name} (opens in new tab)</span>
           </a>
         </div>
       </div>
 
       {comment.length > 0 && (
-        <div className="plugin__commentary">
-          <h4 className="plugin__commentary-title">{content.text}</h4>
+        // Hover-only decoration: hidden from screen readers.
+        <div className="plugin__commentary" aria-hidden="true">
+          <span className="plugin__commentary-title t-h4">{content.text}</span>
           <small className="plugin__commentary-author">{content.author}</small>
-          <h2 className="plugin__commentary-sym-1">
+          <span className="plugin__commentary-sym-1 t-h2">
             {symbols[getRandom(symbols)]}
-          </h2>
-          <h1 className="plugin__commentary-sym-2">
+          </span>
+          <span className="plugin__commentary-sym-2 t-h1">
             {symbols[getRandom(symbols)]}
-          </h1>
+          </span>
         </div>
       )}
     </article>

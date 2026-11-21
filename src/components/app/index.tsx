@@ -52,7 +52,7 @@ const application = ({
 
   return (
     <article className="application">
-      {isNewLabel && <h3 className="application__isNewLable">New</h3>}
+      {isNewLabel && <span className="application__isNewLable t-h3">New</span>}
       
       <div className="application__cover">
         <picture>
@@ -68,12 +68,12 @@ const application = ({
       </div>
 
       <div className="application__info">
-        <h2 className="application__title">{name}</h2>
+        <h3 className="application__title t-h2">{name}</h3>
         <p className="application__description">{info}</p>
         <div className="application__links">
           {comingSoon ? (
             <span className="application__link application__link--soon">
-              <h3>Soon</h3>
+              <span className="t-h3">Soon</span>
             </span>
           ) : (
             <>
@@ -84,13 +84,15 @@ const application = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <h3>Install</h3>
+                  <span className="t-h3">Install</span>
+                  <span className="visually-hidden"> {name} (opens in new tab)</span>
                 </a>
               )}
 
               {infoLink && (
                 <Link to={infoLink}>
-                  <h3 className="application__link">About</h3>
+                  <span className="application__link t-h3">About</span>
+                  <span className="visually-hidden"> {name}</span>
                 </Link>
               )}
 
@@ -101,7 +103,8 @@ const application = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <h3>Making of</h3>
+                  <span className="t-h3">Making of</span>
+                  <span className="visually-hidden"> {name} (opens in new tab)</span>
                 </a>
               )}
             </>
@@ -110,15 +113,16 @@ const application = ({
       </div>
 
       {comments.length > 0 && content && (
-        <div className="application__commentary">
-          <h4 className="application__commentary-title">{content.text}</h4>
+        // Hover-only decoration: hidden from screen readers.
+        <div className="application__commentary" aria-hidden="true">
+          <span className="application__commentary-title t-h4">{content.text}</span>
           <small className="application__commentary-author">{content.author}</small>
-          <h2 className="application__commentary-sym-1">
+          <span className="application__commentary-sym-1 t-h2">
             {symbols[getRandom(symbols)]}
-          </h2>
-          <h1 className="application__commentary-sym-2">
+          </span>
+          <span className="application__commentary-sym-2 t-h1">
             {symbols[getRandom(symbols)]}
-          </h1>
+          </span>
         </div>
       )}
     </article>

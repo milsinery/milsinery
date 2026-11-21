@@ -15,6 +15,13 @@
     margin: 6vmax 4vmax 12vmax 4vmax;
   }
   
+  /* Landmarks inside the wrapper keep the same column layout. */
+  .main__content,
+  .main__footer {
+    display: flex;
+    flex-direction: column;
+  }
+
   /* Quick contact in the top-right corner, level with the top of the name. */
   .main__contact {
     position: absolute;
@@ -118,10 +125,6 @@
     margin-bottom: 1.5vmax;
   }
 
-  .main__themeSwitcher {
-    margin: 0 auto 1vmax 0;
-  }
-  
   /* Phones and tablets: smaller outdent so the name keeps ~20px from the
      screen edge. */
   @media screen and (max-width: 899px) {

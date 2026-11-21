@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import { setMetaTags } from '../src/utils/setMetaTags';
 import Main from './pages/main/index';
@@ -19,8 +19,29 @@ const usePageViews = () => {
   }, [location]);
 };
 
+// After client-side navigation, move focus to the new page's heading so
+// screen readers announce it (not on the first load).
+const useFocusOnRouteChange = () => {
+  const { pathname } = useLocation();
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const id = window.setTimeout(() => {
+      const target =
+        document.querySelector<HTMLElement>('h1[tabindex="-1"]') ||
+        document.querySelector<HTMLElement>('main');
+      target?.focus({ preventScroll: true });
+    }, 0);
+    return () => window.clearTimeout(id);
+  }, [pathname]);
+};
+
 const App = () => {
   usePageViews();
+  useFocusOnRouteChange();
 
   return (
       <Switch>

@@ -46,37 +46,6 @@
   }
 }
 
-/* dark theme tumbler*/
-
-html[data-theme='dark'] {
-    --color-secondary: hsl(207, 100%, 20%);
-
-    --color-text-main: hsl(0, 0%, 85%);
-    --color-text-optional: hsl(198, 10%, 45%);
-    --color-text-invert: hsl(0, 0%, 100%);
-
-    --color-bg: hsl(300, 5%, 11%);
-    --color-border: hsl(0, 0%, 12%);
-    --color-pad: hsl(300, 4%, 10%);
-    --color-over: hsla(197, 10%, 5%, 0.9);
-    --color-picture-over: hsla(197, 10%, 5%, 0.3);
-}
-
-html[data-theme='light'] {
-  --color-primary: hsl(202, 100%, 50%);
-  --color-secondary: hsl(64, 100%, 58%);
-
-  --color-text-main: hsl(0, 0%, 9%);
-  --color-text-optional: hsl(0, 0%, 50%);
-  --color-text-invert: hsl(0, 0%, 100%);
-
-  --color-bg: hsl(0, 0%, 100%);
-  --color-border: hsl(196, 40%, 88%);
-  --color-pad: hsl(0, 0%, 97%);
-  --color-over: hsla(197, 10%, 5%, 0.3);
-  --color-picture-over: hsla(197, 10%, 5%, 0);
-}
-
 /* main style */
 
 * {
@@ -93,8 +62,7 @@ body,
   overflow: hidden;
 }
 
-html,
-select {
+html {
   font-family: 'Montserrat', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
   'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', -apple-system,
   BlinkMacSystemFont, sans-serif;
@@ -113,29 +81,64 @@ code {
     monospace;
 }
 
-h1,
-h2,
-h3,
-h4,
-select {
+/* Heading typography. The element rules use :where() (zero specificity) so
+   the .t-h* classes below can give any element a heading look without
+   changing the document outline (e.g. an <h2> that looks like h3, or a
+   <span> that looks like h3 inside a link). Component classes still win. */
+:where(h1, h2, h3, h4),
+:where(.t-h1, .t-h2, .t-h3, .t-h4) {
   font-weight: 700;
   line-height: 110%;
 }
 
-h1 {
+:where(.t-h1, .t-h2, .t-h3, .t-h4) {
+  display: block;
+}
+
+:where(h1) {
   font-size: 5.8vmax;
 }
 
-h2 {
+:where(h2) {
   font-size: max(20px, 3vmax);
 }
 
-h3 {
+:where(h3) {
   font-size: max(18px, 2vmax);
 }
 
-h4 {
+:where(h4) {
   font-size: max(16px, 1.5vmax);
+}
+
+:where(.t-h1) {
+  font-size: 5.8vmax;
+}
+
+:where(.t-h2) {
+  font-size: max(20px, 3vmax);
+}
+
+:where(.t-h3) {
+  font-size: max(18px, 2vmax);
+}
+
+:where(.t-h4) {
+  font-size: max(16px, 1.5vmax);
+}
+
+/* Hidden visually, still read by screen readers. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 p {
@@ -199,30 +202,11 @@ small a:hover {
   transition: color ease-in 150ms;
 }
 
-select{
-  font-size: max(14px, 1.5vmax);
-  color: var(--color-text-main);
-  appearance: none;
-  background: none;
-  border: none;
-  transition: all 150ms ease-out;
-}
-
-select:hover {
-  cursor: pointer;
-  color: var(--color-primary);
-  transition: all 150ms ease-in;
-}
-
-select:focus {
-  outline: none;
-}
-
-
 /* adaptive */
 
 @media screen and (max-width: 640px) {
-  h1 {
+  :where(h1),
+  :where(.t-h1) {
     font-size: 5vmax;
   }
 }
@@ -342,5 +326,23 @@ select:focus {
   }
   to {
     transform: scale(1);
+  }
+}
+
+/* Respect "reduce motion": no entrance animations, transitions or hover zoom. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .application:hover,
+  .extension:hover,
+  .plugin:hover {
+    transform: none !important;
   }
 }

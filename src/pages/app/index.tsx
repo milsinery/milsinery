@@ -4,10 +4,6 @@ import AppsData from '../../data/appsData';
 import './index.css';
 
 const App = () => {
-  document
-    .querySelector('html')
-    ?.setAttribute('data-theme', localStorage.getItem('theme') || 'system');
-
   const url = useRouteMatch().url;
   const appData = AppsData.filter((item) => item.infoLink === url);
 
@@ -29,7 +25,7 @@ const App = () => {
               <meta property="og:title" content={item.meta.title} />
               <meta property="og:description" content={item.meta.content} />
               <meta property="og:type" content="website" />
-              <title>{item.meta.title}</title>
+              <title>{item.name}</title>
             </Helmet>
           );
         })}
@@ -38,7 +34,7 @@ const App = () => {
         <div className="appPage__wrapper">
           <header className="appPage__header">
             <Link to="/">
-              <h3>Back to main</h3>
+              <span className="t-h3">Back to main</span>
             </Link>
           </header>
 
@@ -55,14 +51,14 @@ const App = () => {
                           src={png}
                           width="100%"
                           height="100%"
-                          alt="Cover"
+                          alt={`${name} icon`}
                         />
                       </picture>
                     </div>
-                    <h1 className="appPage__title-text">{name}</h1>
-                    <h2 className="appPage__short-description">
+                    <h1 className="appPage__title-text" tabIndex={-1}>{name}</h1>
+                    <div className="appPage__short-description t-h2">
                       {meta.content}
-                    </h2>
+                    </div>
                     <div className="appPage__links">
                       <a
                         className="appPage__link"
@@ -70,7 +66,10 @@ const App = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <h2>Install 🚀</h2>
+                        <span className="t-h2">
+                          Install <span aria-hidden="true">🚀</span>
+                        </span>
+                        <span className="visually-hidden"> {name} (opens in new tab)</span>
                       </a>
                          { aboutLink && <a
             className="application__link"
@@ -78,15 +77,16 @@ const App = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2>Making of</h2>
+            <span className="t-h2">Making of</span>
+            <span className="visually-hidden"> {name} (opens in new tab)</span>
           </a>
 }
             <Link to={policyLink}>
-                        <h2 className="appPage__link">Privacy policy</h2>
+                        <span className="appPage__link t-h2">Privacy policy</span>
                       </Link>
 
                       { EULA && <Link to={EULA}>
-                        <h2 className="appPage__link">Terms of Use (EULA)</h2>
+                        <span className="appPage__link t-h2">Terms of Use (EULA)</span>
                       </Link>
             }
                     </div>

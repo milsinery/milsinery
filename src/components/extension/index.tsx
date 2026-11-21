@@ -22,7 +22,7 @@ const Extension = ({
 
   return (
     <article className="extension">
-      {isNewLabel && <h3 className="extension__isNewLable">New</h3>}
+      {isNewLabel && <span className="extension__isNewLable t-h3">New</span>}
       
       <div className="extension__cover">
         <picture>
@@ -32,13 +32,13 @@ const Extension = ({
             src={png}
             width="100%"
             height="100%"
-            alt="Cover"
+            alt={`${name} icon`}
           />
         </picture>
       </div>
 
       <div className="extension__info">
-        <h2 className="extension__title">{name}</h2>
+        <h3 className="extension__title t-h2">{name}</h3>
         <p className="extension__description">{info}</p>
         <div className="extension__links">
           <a
@@ -47,7 +47,8 @@ const Extension = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h3>Install</h3>
+            <span className="t-h3">Install</span>
+            <span className="visually-hidden"> {name} (opens in new tab)</span>
           </a>
         </div>
       </div>

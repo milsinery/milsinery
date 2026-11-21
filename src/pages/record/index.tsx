@@ -5,10 +5,6 @@ import parser from './parser';
 import './index.css';
 
 const Record = () => {
-  document
-    .querySelector('html')
-    ?.setAttribute('data-theme', localStorage.getItem('theme') || 'system');
-
   const url = useRouteMatch().url;
   const recordData = getRecords().filter((item) => item.infoLink === url);
 
