@@ -8,12 +8,24 @@
   }
   
   .main__wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     max-width: 80vmax;
     margin: 6vmax 4vmax 12vmax 4vmax;
   }
   
+  /* Quick contact in the top-right corner, level with the top of the name. */
+  .main__contact {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    font-weight: 700;
+    font-size: max(16px, 1.5vmax);
+    line-height: 1.1;
+  }
+
   /* Hero: round photo with the name stamp above the heading, hanging
      left of the text column (optical outdent). */
   .main__hero {

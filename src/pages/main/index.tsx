@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import PluginsList from '../../components/pluginsList/index';
@@ -9,6 +9,7 @@ import MacAppsData from "../../data/macAppsData";
 // it is cropped to a circle in CSS).
 import photo from '../../pictures/hero/photo.webp';
 import { ReactComponent as NameArc } from '../../pictures/hero/name_arc.svg';
+import { CONTACT_EMAIL, EMAIL_HREF, TELEGRAM_HREF, quickContactHref } from '../../utils/quickContact';
 import './index.css';
 
 const CAREER_START_YEAR = 2011;
@@ -17,6 +18,12 @@ const Main = () => {
   const [value, setValue] = useState(localStorage.getItem('theme') || 'system');
   document.querySelector('html')?.setAttribute('data-theme', value);
   localStorage.setItem('theme', value);
+
+  // Email by default (also without JS); Telegram for visitors from Russia.
+  const [contactHref, setContactHref] = useState(EMAIL_HREF);
+  useEffect(() => {
+    setContactHref(quickContactHref());
+  }, []);
 
   function handleChange(e: any) {
     setValue(e.target.value);
@@ -50,6 +57,15 @@ const Main = () => {
 
       <main className="main effect-fade-in effect-zoom-in">
         <div className="main__wrapper">
+          <a
+            className="main__contact"
+            href={contactHref}
+            {...(contactHref === TELEGRAM_HREF
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {})}
+          >
+            Contact
+          </a>
           <header className="main__hero">
             <figure className="main__stamp">
               <img
@@ -90,6 +106,18 @@ const Main = () => {
 
           <section className="main__links">
             <h3 className="main__links-title">Contacts & portfolio</h3>
+            <p className="main__link">
+              <a href={EMAIL_HREF}>{CONTACT_EMAIL}</a>
+            </p>
+            <p className="main__link">
+              <a
+                href="https://t.me/milsinery"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Telegram
+              </a>
+            </p>
             <p className="main__link">
               <a
                 href="https://www.linkedin.com/in/milsinery"
@@ -133,15 +161,6 @@ const Main = () => {
                 rel="noopener noreferrer"
               >
                 Instagram
-              </a>
-            </p>
-            <p className="main__link">
-              <a
-                href="https://t.me/milsinery"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Telegram
               </a>
             </p>
 
