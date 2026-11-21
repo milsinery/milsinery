@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import PluginsList from '../../components/pluginsList/index';
 import ExtensionsList from '../../components/extensionsList/index';
 import AppsList from "../../components/appslist/index"
@@ -98,9 +97,7 @@ const Main = () => {
           </section>
 
           <section className="main__plugins">
-            <Link to="/plugins">
-              <h3 className="main__plugins-title">Plugins for Figma</h3>
-            </Link>
+            <h3 className="main__plugins-title">Plugins for Figma</h3>
             <PluginsList></PluginsList>
           </section>
 

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './index.css';
 
 type PluginProps = {
@@ -7,7 +6,6 @@ type PluginProps = {
   name: string;
   info: string;
   installLink: string;
-  infoLink: string;
   comment: Array<{ text: string; author: string }>;
   isNewLabel: boolean;
 };
@@ -18,7 +16,6 @@ const Plugin = ({
   name,
   info,
   installLink,
-  infoLink,
   comment,
   isNewLabel,
 }: PluginProps) => {
@@ -74,9 +71,6 @@ const Plugin = ({
           >
             <h3>Install</h3>
           </a>
-          <Link to={infoLink}>
-            <h3 className="plugin__link">About</h3>
-          </Link>
         </div>
       </div>
 

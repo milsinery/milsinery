@@ -14,7 +14,6 @@ const PluginsList = () => {
               name={item.name}
               info={item.info}
               installLink={item.installLink}
-              infoLink={item.infoLink}
               comment={item.comments}
               isNewLabel={item.isNewLabel}
               key={key}

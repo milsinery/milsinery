@@ -20,7 +20,6 @@ const pluginsData = [
     info: 'Just assigns random names to all layers, including groups and frames.',
     installLink:
       'https://www.figma.com/community/plugin/1185219382747213717/Renamer',
-    infoLink: '/plugins/renamer',
     comments: [
       {
         author: 'Настя Кино',
@@ -45,7 +44,6 @@ const pluginsData = [
     info: 'Associates colors to styles if it finds matching or very similar ones. In one click.',
     installLink:
       'https://www.figma.com/community/plugin/1037616212525799012/Color-Fixer',
-    infoLink: '/plugins/colorFixer',
     comments: [],
     page: {
       description: '',
@@ -65,7 +63,6 @@ const pluginsData = [
     info: 'The plugin will create a component from an object, and all other similar objects will make it instances.',
     installLink:
       'https://www.figma.com/community/plugin/946844618678350922/Meow!',
-    infoLink: '/plugins/meow',
     comments: [
       { author: 'Бойко Константин', text: 'Просто магия какая-то' },
       {
@@ -104,7 +101,6 @@ const pluginsData = [
     info: 'You no longer have to write lorem-ipsum-text manually and insert images into layouts — Abracadabra will do it for you.',
     installLink:
       'https://www.figma.com/community/plugin/919546417582505589/Abracadabra!',
-    infoLink: '/plugins/abracadabra',
     comments: [
       { author: 'Tony Shi', text: 'Omg this is magical! Thank you for this!' },
     ],
@@ -126,7 +122,6 @@ const pluginsData = [
     info: 'The plugin creates copies of the selected object or text layers with the changed text in them.',
     installLink:
       'https://www.figma.com/community/plugin/903936058293238810/COFT-%E2%80%94-create-objects-from-text',
-    infoLink: '/plugins/coft',
     comments: [{ author: 'Данила Щаников', text: 'Золото, а не плагин 😍' }],
     page: {
       description: '',
@@ -146,7 +141,6 @@ const pluginsData = [
     info: 'For situations when objects are outside the frame and you want to insert them into it saving their location, but the list of layers is not easy to navigate quickly. ',
     installLink:
       'https://www.figma.com/community/plugin/945329982331973175/Now-inside!',
-    infoLink: '/plugins/now-inside',
     comments: [
       { author: 'Андрей', text: 'Ну вот, теперь идеален 👌' },
       { author: 'Steven', text: 'This one will be a big time saver. Kudos' },

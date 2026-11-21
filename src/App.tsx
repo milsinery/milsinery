@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import { setMetaTags } from '../src/utils/setMetaTags';
 import Main from './pages/main/index';
 import Application from './pages/app/index';
 import PolicyWeather from './pages/app/policy-weather/index';
 import PolicyPulse from './pages/app/policy-pulse/index';
 import EULAPulse from './pages/app/eula-pulse/index';
-import Plugins from './pages/plugins/index';
-import Plugin from './pages/plugin/index';
 import Error from './pages/error/index';
 
 const usePageViews = () => {
@@ -27,8 +25,9 @@ const App = () => {
   return (
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route exact path="/plugins" component={Plugins} />
-        <Route exact path="/plugins/:name" component={Plugin} />
+        {/* The plugins list and plugin pages were removed: send old links
+            (/plugins and /plugins/:name) to the main page. */}
+        <Redirect from="/plugins" to="/" />
         <Route exact path="/apps/:name" component={Application} />
         <Route exact path="/apps/weather/privacy-policy" component={PolicyWeather} />
         <Route exact path="/apps/pulse/privacy-policy" component={PolicyPulse} />
