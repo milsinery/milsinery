@@ -168,6 +168,25 @@ a:hover {
   transition: color ease-in 150ms;
 }
 
+/* Underline text links with a line at 30% of the text colour
+   (follows currentColor, so it works in both themes and on hover). */
+@supports (text-decoration-color: color-mix(in srgb, red 30%, transparent)) {
+  a:link,
+  a:visited {
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+    text-decoration-thickness: max(1px, 0.06em);
+    text-underline-offset: 0.18em;
+    text-decoration-skip-ink: auto;
+  }
+
+  /* Whole-card links (title + description blocks) stay without a line. */
+  a.record__title,
+  a.weather__title {
+    text-decoration-line: none;
+  }
+}
+
 small a:link,
 small a:visited {
   color: var(--color-text-optional);
