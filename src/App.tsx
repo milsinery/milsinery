@@ -54,7 +54,8 @@ const App = () => {
         <Route exact path="/apps/weather/privacy-policy" component={PolicyWeather} />
         <Route exact path="/apps/pulse/privacy-policy" component={PolicyPulse} />
         <Route exact path="/apps/pulse/terms-of-use" component={EULAPulse} />
-        <Route exact path="/lab/puzzle" component={PuzzlePage} />
+        <Route exact path="/balance" component={PuzzlePage} />
+        <Redirect exact from="/lab/puzzle" to="/balance" />
         <Route component={Error} />
       </Switch>
   );

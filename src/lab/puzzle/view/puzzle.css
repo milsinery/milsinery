@@ -284,4 +284,318 @@
   z-index: 4;
   pointer-events: none;
   filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.22));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.puzzle--night {
+  --puzzle-bg: #10151d;
+  --puzzle-board: #1a2330;
+  --puzzle-line: rgba(232, 238, 246, 0.16);
+  --puzzle-text: #e7eef8;
+  --puzzle-muted: rgba(231, 238, 248, 0.66);
+  --puzzle-card: #243044;
+  --puzzle-ok: rgba(126, 176, 214, 0.35);
+  --puzzle-bad: rgba(214, 122, 98, 0.4);
+  --puzzle-anchor: rgba(231, 238, 248, 0.1);
+  --puzzle-button-border: rgba(231, 238, 248, 0.28);
+  --puzzle-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --puzzle-backdrop: rgba(0, 0, 0, 0.62);
+}
+
+.puzzle--landscape {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(156px, 32%);
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    "board hud"
+    "board tray";
+}
+
+.puzzle--landscape .puzzle__board-slot {
+  grid-area: board;
+}
+
+.puzzle--landscape .puzzle__hud {
+  grid-area: hud;
+  border-bottom: 1px solid var(--puzzle-line);
+}
+
+.puzzle--landscape .puzzle__panel {
+  grid-area: tray;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  border-left: 0;
+  max-height: none;
+}
+
+.puzzle--portrait .puzzle__panel {
+  height: auto;
+  min-height: 132px;
+  max-height: 36%;
+}
+
+.puzzle__hud {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px 6px;
+  min-width: 0;
+}
+
+.puzzle__title {
+  font-size: clamp(16px, calc(var(--cell) * 0.4), 22px);
+}
+
+.puzzle__resources {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.puzzle--landscape .puzzle__resources {
+  grid-template-columns: 1fr 1fr;
+}
+
+.puzzle__stat,
+.puzzle__text-button,
+.puzzle__length {
+  font-family: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--puzzle-button-border);
+  border-radius: 10px;
+  min-height: 44px;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+.puzzle__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.15;
+  gap: 1px;
+}
+
+.puzzle__stat-value {
+  font-weight: 700;
+  font-size: clamp(13px, calc(var(--cell) * 0.28), 16px);
+}
+
+.puzzle__stat-delta {
+  color: var(--puzzle-muted);
+  font-size: clamp(11px, calc(var(--cell) * 0.22), 13px);
+}
+
+.puzzle__balance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 4px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+}
+
+.puzzle__balance-track {
+  position: relative;
+  flex: 1 1 auto;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6a8fbf, #d7c27a 50%, #c46a52);
+}
+
+.puzzle__balance-mark {
+  position: absolute;
+  top: -4px;
+  width: 4px;
+  height: 18px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--puzzle-text);
+}
+
+.puzzle__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.puzzle__text-button,
+.puzzle__length {
+  min-width: 44px;
+  font-size: clamp(12px, calc(var(--cell) * 0.24), 14px);
+  font-weight: 600;
+}
+
+.puzzle__length[aria-pressed="true"] {
+  background: var(--puzzle-anchor);
+}
+
+.puzzle__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.puzzle__sky {
+  position: relative;
+  height: 44px;
+}
+
+.puzzle button.puzzle__luminary,
+.puzzle button.puzzle__cloud-tap,
+.puzzle button.puzzle__balance,
+.puzzle button.puzzle__stat,
+.puzzle button.puzzle__text-button,
+.puzzle button.puzzle__length,
+.puzzle button.puzzle__card {
+  flex: 0 0 auto;
+}
+
+.puzzle button.puzzle__luminary,
+.puzzle button.puzzle__cloud-tap {
+  border: 0;
+  background: transparent;
+  min-height: 0;
+  min-width: 0;
+}
+
+.puzzle__luminary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 44px;
+  font-size: 22px;
+  line-height: 44px;
+  padding: 0;
+}
+
+.puzzle__board-wrap {
+  position: relative;
+}
+
+.puzzle__terrain {
+  stroke: var(--puzzle-line);
+  stroke-width: 1;
+}
+
+.puzzle__terrain--earth {
+  fill: #7f9a55;
+}
+
+.puzzle__terrain--forest {
+  fill: #2f6b3a;
+}
+
+.puzzle__terrain--water {
+  fill: #3c7eaa;
+}
+
+.puzzle--night .puzzle__terrain--earth {
+  fill: #3e5340;
+}
+
+.puzzle--night .puzzle__terrain--forest {
+  fill: #1d4630;
+}
+
+.puzzle--night .puzzle__terrain--water {
+  fill: #24506c;
+}
+
+.puzzle__terrain.is-column {
+  filter: brightness(1.12);
+}
+
+.puzzle__emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.puzzle__cloud {
+  fill: rgba(214, 228, 242, 0.42);
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 2;
+}
+
+.puzzle__cloud-tap {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  font-size: 24px;
+  line-height: 44px;
+  padding: 0;
+}
+
+.puzzle__tray {
+  align-content: center;
+}
+
+.puzzle__card {
+  width: 76px;
+  min-width: 44px;
+  min-height: 56px;
+  border: 1px solid var(--puzzle-button-border);
+  border-radius: 12px;
+  background: var(--puzzle-card);
+  color: var(--puzzle-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  touch-action: none;
+}
+
+.puzzle__card-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.puzzle__card-name {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.puzzle__card.is-dragged {
+  opacity: 0.35;
+}
+
+.puzzle__end {
+  position: fixed;
+  inset: 0;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background: var(--puzzle-backdrop);
+}
+
+.puzzle__end-card {
+  width: min(320px, calc(100% - 32px));
+  background: var(--puzzle-card);
+  color: var(--puzzle-text);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.puzzle__end-card h2 {
+  font-size: 22px;
+  line-height: 1.15;
 }

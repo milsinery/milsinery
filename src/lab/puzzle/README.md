@@ -1,33 +1,61 @@
-# Puzzle sandbox
+# Баланс
 
-Hidden page: `/#/lab/puzzle`. It is not in the site navigation. While the page is mounted it sets `<meta name="robots" content="noindex">` and `viewport-fit=cover` on the viewport tag, and removes both changes on the way out.
+Hidden page: `/#/balance`. The old address `/#/lab/puzzle` redirects here. It is not in the site navigation. While the page is mounted it sets `<meta name="robots" content="noindex">` and `viewport-fit=cover`, and removes both on the way out.
 
-This is a layout and input skeleton. There are no win conditions, turns, or puzzle rules. Placeholder pieces are in `sandbox.ts`.
+This is the first playable test of the turn-based grid game. All on-screen text is Russian. There is no win or loss from the balance bar yet.
 
-## Layout
+## Where to edit
 
-`core/` is plain TypeScript. It does not import React, the DOM, or the browser. The intention is that these types port to Swift as structs and enums, and `Game` ports as a reference type that owns a `GameState` value.
+- `core/config.ts` — every tuned number (costs, stocks, chances, season length, day/night length, game lengths). The values are starting placeholders.
+- `core/content.ts` — every popup and label. `describe(state, target)` builds the text for a cell, object, tray card, season, sun, moon, rain, fire, or indicator.
 
-`view/` is the SpriteKit stand-in: an SVG board plus pointer input. Cell size is `min(slotWidth / columns, slotHeight / rows)`, so the whole board fits the space left after the panel. Portrait (the page box is taller than it is wide) puts the board on top and the tray underneath. Landscape puts the board in the remaining space, centered, with the panel on the side. The switch is the box aspect ratio, not a device check. Padding uses `env(safe-area-inset-*)`. If a cell comes out under 44px the board still draws, and the console gets one warning. Strokes and type scale from the cell size.
+`core/` does not import React or the DOM. It is the part to port to Swift: structs for cells and resources, enums for terrain, items, tools, seasons, and events. `view/` is the SpriteKit stand-in (SVG board, cell size from the free space, portrait tray under the board, landscape panel beside it). `audio/` plays oscillators for place, tool, reject, fire, death, and season change. Core never imports audio.
 
-`audio/` listens to core events in the view. Core never imports it. Sounds are oscillators (no audio files). The first pointer down unlocks `AudioContext`, which iOS Safari requires. Mute silences both the tones and `navigator.vibrate`. Vibrate is a stand-in for haptics; on iOS it is missing and the call is skipped. A drag that starts plays a pickup sound from the view, because core has no pointer model.
+## Rules
 
-On iOS later: core becomes Swift types, the view becomes an `SKScene` whose cell size comes from the scene size the same way, and the same events trigger `SKAction` sound plus Core Haptics. Row 0 in core is the top of the board. SpriteKit’s origin is the bottom, so `y = (rows - 1 - row) * cellSize`.
+The board is 6×6. Cells are earth (Земля), forest (Лес), or water (Вода). A fresh board is random and always contains all three. Forests start with a wood stock and a food stock. The player begins with 4 wood, 4 food, 4 water, and one house holding 2 residents.
 
-## Input
+A tap anywhere opens an info popup. A drag from the tray onto a cell is the action. One action is one turn. An illegal drop plays the reject sound and does not spend the turn.
 
-The view reports raw hits. It does not decide what a tap means.
+Tray cards are always shown. Only the wood cost can stop an item. Tools are free and only work on an empty, unburnt cell.
 
-- Movement under 10px is a tap. `game.tap(cell)` emits `objectTapped` when a piece occupies that cell, otherwise `cellTapped`.
-- A drag from one cell to another calls `movePiece(from, to)`. The pluggable validity hook decides. The default, `allowAnyEmptyCell`, allows any in-bounds empty cell. Dropping on the same cell is a no-op. Dropping off the board is cancelled by the view (core is not asked).
-- A drag from the tray calls `placeFromTray`. `TRAY_DROPS_ENABLED` in `sandbox.ts` (and `game.setTrayDropsEnabled`) turns that off. When it is off, the hook is not consulted.
-- The dragged piece is drawn above the finger (`LIFT_GAP_PX` of air under the shape). The highlighted cell is the one under the contact point. A legal drop snaps. An illegal drop animates back.
-- `selectPiece` is on `Game` for later use. The page does not use tap-to-select. Taps open the popover.
+- Дом — 2 wood, earth, +2 residents.
+- Лесопилка — 1 wood, forest. +1 wood per turn and drains that cell’s wood stock. At 0 the forest becomes earth and the building goes away.
+- Дом охотника — 1 wood, forest. +1 food per turn and drains the food stock. The forest stays.
+- Лодка рыбака — 1 wood, water. +2 food per turn.
+- Поле — 1 wood, earth. +1 food per turn if orthogonally next to water, and 0 in winter. Rain adds +1 even in winter.
+- Копать — empty earth becomes water.
+- Засыпать — empty water becomes earth.
+- Вырубить — empty forest becomes earth and gives +2 wood.
 
-## Popover
+Each water cell orthogonally next to at least one house gives +1 water per turn. Water also adds a small regrowth bonus to adjacent forests.
 
-`describeTarget` in `sandbox.ts` returns a title, lines, and actions for a cell or an object. That function is the plug-in point. Action buttons call `chooseAction`, which only emits `actionChosen(actionId, target)` and does not change the board.
+Each resident eats 1 food and 1 water per turn. If either is short, a hunger counter goes up. After 3 consecutive short turns one resident dies and the counter resets. No residents left is the loss screen (Проигрыш). Food above 3 per resident spoils by 1 per turn.
 
-The card anchors beside the tapped cell when it fits entirely inside the safe area (below, then above, then right, then left), shifting along the cell so it does not hang off the screen. If no side can hold it, the same card is a centered sheet over a dimmed board. It closes on an outside tap, Escape, the sheet backdrop, or when a drag starts. An outside tap only dismisses; it does not also hit the cell underneath.
+Time is two clocks:
 
-Replace `describeTarget` when the real menu exists. On iOS the same description can feed a popover, with the sheet as the compact fallback.
+- Day/night: the sun walks columns 1–6, then the moon walks columns 1–6 (12 turns). The moon does nothing yet. The sun restores forest stock in its column (not above the max). Spring doubles that restore. Winter skips it. In summer the sun can set a field in its column on fire.
+- Seasons: Весна, Лето, Осень, Зима, 15 turns each. They do not wait for the day/night cycle. Autumn makes rain more likely. A year is 60 turns.
+
+Rain is one 2×2 cloud. It lasts 2–4 turns and drifts. Fields under it gain food. An earth cell (empty or a field) next to both the cloud and water can flood into water. Rain puts fires out.
+
+Fire spreads to orthogonal forests and fields. After 2 turns the burnt cell becomes earth and loses its building.
+
+Balance is a placeholder from −10 to +10. Surplus food and water push it up, a shortage pushes it down. More buildings than forest-plus-water pushes it up; more nature pushes it down. Nothing is won or lost from it yet.
+
+The length buttons are 60, 120, and 500 turns. Changing the length or pressing Сначала starts a new board. When the turns run out, a summary is shown.
+
+## Turn order
+
+After a legal drop the core, in `rules.ts`:
+
+1. Applies the card.
+2. On a day turn, restores forests in the sun column and may light a summer field.
+3. Maybe spawns rain, puts out fires under the cloud, feeds fields under it, and may flood.
+4. Runs production and drains forest stock.
+5. Feeds residents, counts hunger, maybe kills one, then spoils extra food.
+6. Spreads older fires and ages them. A flame that has just started is not aged on that same resolve.
+7. Drifts the cloud.
+8. Moves the balance bar and advances the turn clock.
+
+Row 0 is the top of the board. In SpriteKit, `y = (rows - 1 - row) * cellSize`.

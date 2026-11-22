@@ -2,58 +2,27 @@ import { GameEvent } from "../core";
 import { hapticForEvent, soundForEvent } from "./cues";
 
 describe("sound and haptic cues", () => {
-  const cases: Array<{ event: GameEvent; sound: string; haptic: number | number[] }> = [
-    {
-      event: { type: "cellTapped", cell: { column: 1, row: 2 } },
-      sound: "tap",
-      haptic: 10,
-    },
-    {
-      event: {
-        type: "objectTapped",
-        objectId: "a",
-        cell: { column: 0, row: 0 },
-      },
-      sound: "select",
-      haptic: 12,
-    },
-    {
-      event: { type: "pieceSelected", pieceId: "a" },
-      sound: "select",
-      haptic: 12,
-    },
-    {
-      event: {
-        type: "piecePlaced",
-        pieceId: "a",
-        cell: { column: 1, row: 1 },
-      },
-      sound: "place",
-      haptic: 20,
-    },
-    {
-      event: {
-        type: "moveRejected",
-        pieceId: "a",
-        cell: { column: 1, row: 1 },
-        reason: "occupied",
-      },
-      sound: "reject",
-      haptic: [14, 30, 18],
-    },
-    {
-      event: {
-        type: "actionChosen",
-        actionId: "action-a",
-        target: { kind: "cell", cell: { column: 0, row: 1 } },
-      },
-      sound: "tap",
-      haptic: 8,
-    },
-  ];
-
-  test.each(cases)("$event.type maps to $sound", (entry) => {
-    expect(soundForEvent(entry.event)).toBe(entry.sound);
-    expect(hapticForEvent(entry.event)).toEqual(entry.haptic);
+  test("places, tools, rejects, fire, death and seasons each have a cue", () => {
+    const placed: GameEvent = {
+      type: "actionAccepted",
+      card: "house",
+      cell: { column: 0, row: 0 },
+      via: "item",
+    };
+    const tool: GameEvent = {
+      type: "actionAccepted",
+      card: "dig",
+      cell: { column: 1, row: 0 },
+      via: "tool",
+    };
+    expect(soundForEvent(placed)).toBe("place");
+    expect(soundForEvent(tool)).toBe("tool");
+    expect(soundForEvent({ type: "actionRejected", reason: "cost" })).toBe("reject");
+    expect(soundForEvent({ type: "fireChanged" })).toBe("fire");
+    expect(soundForEvent({ type: "residentDied" })).toBe("death");
+    expect(soundForEvent({ type: "seasonChanged", season: "summer" })).toBe("season");
+    expect(soundForEvent({ type: "cellTapped", cell: { column: 0, row: 0 } })).toBe("tap");
+    expect(hapticForEvent(placed)).toBe(20);
+    expect(hapticForEvent({ type: "turnResolved" })).toBe(0);
   });
 });

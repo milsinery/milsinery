@@ -1,6 +1,4 @@
-import { ActionTarget, GameState } from "./core";
-
-/** Plain description of a popover. The view renders it; SpriteKit can too. */
+/** Plain description of a popover. The view renders it; a native menu can too. */
 export interface ActionItem {
   id: string;
   label: string;
@@ -11,8 +9,3 @@ export interface PopoverDescription {
   lines: string[];
   actions: ActionItem[];
 }
-
-export type PopoverContentSource = (
-  state: GameState,
-  target: ActionTarget
-) => PopoverDescription;

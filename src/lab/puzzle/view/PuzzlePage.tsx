@@ -9,44 +9,75 @@ import {
 } from "react";
 import { GameAudio } from "../audio/GameAudio";
 import { hapticForEvent, PICKUP_HAPTIC_MS, soundForEvent } from "../audio/cues";
-import { ActionTarget, Cell, Game, GameEvent, Piece } from "../core";
-import { createSandboxGame, describeTarget } from "../sandbox";
+import {
+  CARD_ICON,
+  CARD_LABEL,
+  CardId,
+  Cell,
+  celestialOf,
+  CONFIG,
+  describe,
+  seasonOf,
+  endLines,
+  Game,
+  InfoTarget,
+  SEASON_LABEL,
+  TEXT,
+  TopicId,
+} from "../core";
 import { Board } from "./Board";
 import { cellAtClientPoint, liftedGhostTopLeft } from "./geometry";
 import { isDragGesture } from "./gesture";
-import { PieceShapes } from "./PieceGraphic";
 import { Popover } from "./Popover";
 import { Rect } from "./placement";
 import "./puzzle.css";
 
 const CELL_TARGET_PX = 44;
+const SKY_PX = 44;
+const CARDS: CardId[] = [
+  "house",
+  "sawmill",
+  "hunter",
+  "boat",
+  "field",
+  "dig",
+  "fill",
+  "chop",
+];
 
 interface Point {
   x: number;
   y: number;
 }
 
-type GestureSource = "board" | "tray" | "empty";
-
-interface PendingGesture {
+interface PendingCard {
   kind: "pending";
   pointerId: number;
   startX: number;
   startY: number;
   moved: boolean;
-  pieceId: string | null;
-  from: Cell | null;
-  source: GestureSource;
+  source: "card";
+  card: CardId;
   origin: Point;
   size: number;
 }
 
-interface DraggingGesture {
+interface PendingTap {
+  kind: "pending";
+  pointerId: number;
+  startX: number;
+  startY: number;
+  moved: boolean;
+  source: "tap";
+  topic: TopicId | null;
+  cell: Cell | null;
+  anchor: Rect | null;
+}
+
+interface DraggingCard {
   kind: "dragging";
   pointerId: number;
-  pieceId: string;
-  from: Cell | null;
-  source: "board" | "tray";
+  card: CardId;
   origin: Point;
   size: number;
   x: number;
@@ -55,26 +86,31 @@ interface DraggingGesture {
   allowed: boolean;
 }
 
-interface ReturningGesture {
+interface ReturningCard {
   kind: "returning";
-  pieceId: string;
-  source: "board" | "tray";
+  card: CardId;
   x: number;
   y: number;
   size: number;
   animate: boolean;
 }
 
-type Gesture = PendingGesture | DraggingGesture | ReturningGesture;
+type Gesture = PendingCard | PendingTap | DraggingCard | ReturningCard;
 
-function useSandboxGame(): Game {
+interface OpenPopover {
+  target: InfoTarget;
+  anchor: Rect;
+}
+
+function useBalanceGame(): Game {
   const ref = useRef<Game | null>(null);
   if (ref.current === null) {
-    ref.current = createSandboxGame();
+    const seed = Date.now() % 2147483647;
+    ref.current = new Game({ seed: seed === 0 ? 1 : seed });
   }
   const game = ref.current;
   if (game === null) {
-    throw new Error("Sandbox game was not created.");
+    throw new Error("Game was not created.");
   }
   return game;
 }
@@ -107,39 +143,31 @@ function readSafeBounds(root: HTMLElement): Rect {
   };
 }
 
-function cellAnchor(board: SVGSVGElement, cell: Cell, cellSize: number): Rect {
-  const rect = board.getBoundingClientRect();
-  return {
-    x: rect.left + cell.column * cellSize,
-    y: rect.top + cell.row * cellSize,
-    width: cellSize,
-    height: cellSize,
-  };
+function elementRect(element: Element): Rect {
+  const box = element.getBoundingClientRect();
+  return { x: box.left, y: box.top, width: box.width, height: box.height };
 }
 
-function targetKey(target: ActionTarget): string {
-  const cell = target.cell.column + "-" + target.cell.row;
-  if (target.kind === "cell") {
-    return "cell-" + cell;
+function signed(value: number): string {
+  if (value > 0) {
+    return "+" + value;
   }
-  return "object-" + target.objectId + "-" + cell;
+  return String(value);
 }
 
 const PuzzlePage = () => {
-  const game = useSandboxGame();
+  const game = useBalanceGame();
   const audio = useGameAudio();
   const rootRef = useRef<HTMLElement>(null);
   const slotRef = useRef<HTMLDivElement>(null);
   const boardRef = useRef<SVGSVGElement>(null);
   const gestureRef = useRef<Gesture | null>(null);
-  const popoverRef = useRef<ActionTarget | null>(null);
-  const openPopoverRef = useRef<(target: ActionTarget) => void>(() => undefined);
-  const closePopoverRef = useRef<() => void>(() => undefined);
+  const popoverRef = useRef<OpenPopover | null>(null);
   const returnFrame = useRef<number | null>(null);
   const warned = useRef(false);
 
   const [boardState, setBoardState] = useState(game.state);
-  const [popover, setPopover] = useState<ActionTarget | null>(null);
+  const [popover, setPopoverState] = useState<OpenPopover | null>(null);
   const [gesture, setGestureState] = useState<Gesture | null>(null);
   const [muted, setMuted] = useState(false);
   const [landscape, setLandscape] = useState(() => {
@@ -150,29 +178,18 @@ const PuzzlePage = () => {
   });
   const [cellSize, setCellSize] = useState(0);
 
-  const columns = boardState.grid.width;
-  const rows = boardState.grid.height;
-
   const setGesture = useCallback((next: Gesture | null) => {
     gestureRef.current = next;
     setGestureState(next);
   }, []);
 
-  function closePopover() {
-    popoverRef.current = null;
-    setPopover(null);
-  }
-
-  function openPopover(target: ActionTarget) {
-    popoverRef.current = target;
-    setPopover(target);
-  }
-
-  openPopoverRef.current = openPopover;
-  closePopoverRef.current = closePopover;
+  const setPopover = useCallback((next: OpenPopover | null) => {
+    popoverRef.current = next;
+    setPopoverState(next);
+  }, []);
 
   useEffect(() => {
-    const onEvent = (event: GameEvent) => {
+    const onEvent = (event: Parameters<typeof soundForEvent>[0]) => {
       const sound = soundForEvent(event);
       if (sound !== null) {
         audio.play(sound);
@@ -186,15 +203,6 @@ const PuzzlePage = () => {
         audio.haptic(pattern);
       }
       setBoardState(game.state);
-      if (event.type === "cellTapped") {
-        openPopoverRef.current({ kind: "cell", cell: event.cell });
-      } else if (event.type === "objectTapped") {
-        openPopoverRef.current({
-          kind: "object",
-          objectId: event.objectId,
-          cell: event.cell,
-        });
-      }
     };
     game.addListener(onEvent);
     return () => {
@@ -208,34 +216,34 @@ const PuzzlePage = () => {
     meta.content = "noindex";
     meta.setAttribute("data-puzzle-robots", "true");
     document.head.appendChild(meta);
-
     const viewport = document.querySelector('meta[name="viewport"]');
-    const previous =
-      viewport === null ? null : viewport.getAttribute("content");
+    const previous = viewport === null ? null : viewport.getAttribute("content");
     if (viewport !== null) {
       viewport.setAttribute(
         "content",
         "width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1"
       );
     }
-
+    const previousTitle = document.title;
+    document.title = TEXT.title;
     return () => {
       meta.remove();
       if (viewport !== null && previous !== null) {
         viewport.setAttribute("content", previous);
       }
+      document.title = previousTitle;
     };
   }, []);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closePopoverRef.current();
+        setPopover(null);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [setPopover]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -269,11 +277,7 @@ const PuzzlePage = () => {
   }, [cellSize]);
 
   useEffect(() => {
-    if (
-      gesture === null ||
-      gesture.kind !== "returning" ||
-      gesture.animate === false
-    ) {
+    if (gesture === null || gesture.kind !== "returning" || gesture.animate === false) {
       return undefined;
     }
     const timer = window.setTimeout(() => {
@@ -297,7 +301,10 @@ const PuzzlePage = () => {
         setLandscape(rootRect.width >= rootRect.height);
       }
       const slotRect = slot.getBoundingClientRect();
-      const raw = Math.min(slotRect.width / columns, slotRect.height / rows);
+      const raw = Math.min(
+        slotRect.width / CONFIG.boardSize,
+        (slotRect.height - SKY_PX) / CONFIG.boardSize
+      );
       if (raw > 0 && Number.isFinite(raw)) {
         setCellSize(Math.floor(raw * 100) / 100);
       }
@@ -310,41 +317,15 @@ const PuzzlePage = () => {
     observer.observe(root);
     observer.observe(slot);
     return () => observer.disconnect();
-  }, [columns, rows]);
+  }, []);
 
-  function hoverAt(clientX: number, clientY: number, source: "board" | "tray", pieceId: string, from: Cell | null) {
-    const board = boardRef.current;
-    if (board === null || cellSize <= 0) {
-      return { cell: null as Cell | null, allowed: false };
-    }
-    const cell = cellAtClientPoint(
-      board.getBoundingClientRect(),
-      clientX,
-      clientY,
-      cellSize,
-      columns,
-      rows
-    );
-    if (cell === null) {
-      return { cell: null, allowed: false };
-    }
-    const check =
-      source === "tray"
-        ? game.evaluateTrayDrop(pieceId, cell)
-        : from === null
-        ? { allowed: false as const }
-        : game.evaluateMove(from, cell);
-    return { cell: cell, allowed: check.allowed };
-  }
-
-  function beginReturn(current: DraggingGesture) {
+  function beginReturn(current: DraggingCard) {
     if (returnFrame.current !== null) {
       window.cancelAnimationFrame(returnFrame.current);
     }
     setGesture({
       kind: "returning",
-      pieceId: current.pieceId,
-      source: current.source,
+      card: current.card,
       x: current.x,
       y: current.y,
       size: current.size,
@@ -354,8 +335,7 @@ const PuzzlePage = () => {
       returnFrame.current = null;
       setGesture({
         kind: "returning",
-        pieceId: current.pieceId,
-        source: current.source,
+        card: current.card,
         x: current.origin.x,
         y: current.origin.y,
         size: current.size,
@@ -364,13 +344,41 @@ const PuzzlePage = () => {
     });
   }
 
-  function startPending(event: ReactPointerEvent<HTMLElement>, pending: PendingGesture) {
-    setGesture(pending);
-    const root = rootRef.current;
-    if (root !== null) {
-      root.setPointerCapture(event.pointerId);
+  function openInfo(target: InfoTarget, anchor: Rect) {
+    setPopover({ target: target, anchor: anchor });
+  }
+
+  function cellAnchor(cell: Cell): Rect | null {
+    const board = boardRef.current;
+    if (board === null || cellSize <= 0) {
+      return null;
     }
-    event.preventDefault();
+    const rect = board.getBoundingClientRect();
+    return {
+      x: rect.left + cell.column * cellSize,
+      y: rect.top + cell.row * cellSize,
+      width: cellSize,
+      height: cellSize,
+    };
+  }
+
+  function hoverAt(clientX: number, clientY: number, card: CardId): { cell: Cell | null; allowed: boolean } {
+    const board = boardRef.current;
+    if (board === null || cellSize <= 0) {
+      return { cell: null, allowed: false };
+    }
+    const cell = cellAtClientPoint(
+      board.getBoundingClientRect(),
+      clientX,
+      clientY,
+      cellSize,
+      CONFIG.boardSize,
+      CONFIG.boardSize
+    );
+    if (cell === null) {
+      return { cell: null, allowed: false };
+    }
+    return { cell: cell, allowed: game.preview(card, cell).allowed };
   }
 
   function onPointerDown(event: ReactPointerEvent<HTMLElement>) {
@@ -379,74 +387,89 @@ const PuzzlePage = () => {
     }
     audio.unlock();
     const target = event.target;
-    if (target instanceof Element) {
-      if (target.closest("[data-popover-root]") !== null) {
-        return;
-      }
-      if (target.closest("[data-no-gesture]") !== null) {
-        return;
-      }
-      const token = target.closest("[data-tray-piece]");
-      if (token instanceof HTMLElement) {
-        const pieceId = token.getAttribute("data-tray-piece");
-        if (pieceId === null || game.trayDropsEnabled === false) {
-          if (popoverRef.current !== null) {
-            closePopover();
-          }
-          return;
-        }
-        const rect = token.getBoundingClientRect();
-        startPending(event, {
-          kind: "pending",
-          pointerId: event.pointerId,
-          startX: event.clientX,
-          startY: event.clientY,
-          moved: false,
-          pieceId: pieceId,
-          from: null,
-          source: "tray",
-          origin: { x: rect.left, y: rect.top },
-          size: cellSize > 0 ? cellSize : rect.width,
-        });
-        return;
-      }
+    if (!(target instanceof Element)) {
+      return;
     }
-
+    if (target.closest("[data-popover-root]") !== null) {
+      return;
+    }
+    if (target.closest("[data-no-gesture]") !== null) {
+      return;
+    }
+    const cardNode = target.closest("[data-card]");
+    if (cardNode instanceof HTMLElement) {
+      const card = cardNode.getAttribute("data-card");
+      if (card === null) {
+        return;
+      }
+      const rect = cardNode.getBoundingClientRect();
+      setGesture({
+        kind: "pending",
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        moved: false,
+        source: "card",
+        card: card as CardId,
+        origin: { x: rect.left, y: rect.top },
+        size: Math.max(rect.width, 44),
+      });
+      capture(event);
+      return;
+    }
+    const topicNode = target.closest("[data-topic]");
+    if (topicNode instanceof HTMLElement) {
+      setGesture({
+        kind: "pending",
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        moved: false,
+        source: "tap",
+        topic: topicNode.getAttribute("data-topic") as TopicId,
+        cell: null,
+        anchor: elementRect(topicNode),
+      });
+      capture(event);
+      return;
+    }
     const board = boardRef.current;
     if (board !== null && cellSize > 0) {
-      const boardRect = board.getBoundingClientRect();
       const cell = cellAtClientPoint(
-        boardRect,
+        board.getBoundingClientRect(),
         event.clientX,
         event.clientY,
         cellSize,
-        columns,
-        rows
+        CONFIG.boardSize,
+        CONFIG.boardSize
       );
       if (cell !== null) {
-        const piece = game.state.pieceAt(cell);
-        startPending(event, {
+        setGesture({
           kind: "pending",
           pointerId: event.pointerId,
           startX: event.clientX,
           startY: event.clientY,
           moved: false,
-          pieceId: piece === null ? null : piece.id,
-          from: cell,
-          source: piece === null ? "empty" : "board",
-          origin: {
-            x: boardRect.left + cell.column * cellSize,
-            y: boardRect.top + cell.row * cellSize,
-          },
-          size: cellSize,
+          source: "tap",
+          topic: null,
+          cell: cell,
+          anchor: null,
         });
+        capture(event);
         return;
       }
     }
-
     if (popoverRef.current !== null) {
-      closePopover();
+      setPopover(null);
     }
+  }
+
+  function capture(event: ReactPointerEvent<HTMLElement>) {
+    const root = rootRef.current;
+    if (root !== null) {
+      root.setPointerCapture(event.pointerId);
+    }
+    event.preventDefault();
   }
 
   function onPointerMove(event: ReactPointerEvent<HTMLElement>) {
@@ -463,42 +486,19 @@ const PuzzlePage = () => {
       if (isDragGesture(deltaX, deltaY) === false) {
         return;
       }
-      if (
-        current.pieceId === null ||
-        current.source === "empty" ||
-        (current.source === "board" && current.from === null)
-      ) {
-        setGesture({
-          kind: "pending",
-          pointerId: current.pointerId,
-          startX: current.startX,
-          startY: current.startY,
-          moved: true,
-          pieceId: current.pieceId,
-          from: current.from,
-          source: current.source,
-          origin: current.origin,
-          size: current.size,
-        });
+      if (current.source === "tap") {
+        setGesture({ ...current, moved: true });
         return;
       }
-      closePopover();
+      setPopover(null);
       audio.play("pickup");
       audio.haptic(PICKUP_HAPTIC_MS);
       const point = liftedGhostTopLeft(event.clientX, event.clientY, current.size);
-      const hover = hoverAt(
-        event.clientX,
-        event.clientY,
-        current.source,
-        current.pieceId,
-        current.from
-      );
+      const hover = hoverAt(event.clientX, event.clientY, current.card);
       setGesture({
         kind: "dragging",
         pointerId: current.pointerId,
-        pieceId: current.pieceId,
-        from: current.from,
-        source: current.source,
+        card: current.card,
         origin: current.origin,
         size: current.size,
         x: point.x,
@@ -508,21 +508,12 @@ const PuzzlePage = () => {
       });
       return;
     }
-
     const point = liftedGhostTopLeft(event.clientX, event.clientY, current.size);
-    const hover = hoverAt(
-      event.clientX,
-      event.clientY,
-      current.source,
-      current.pieceId,
-      current.from
-    );
+    const hover = hoverAt(event.clientX, event.clientY, current.card);
     setGesture({
       kind: "dragging",
       pointerId: current.pointerId,
-      pieceId: current.pieceId,
-      from: current.from,
-      source: current.source,
+      card: current.card,
       origin: current.origin,
       size: current.size,
       x: point.x,
@@ -541,35 +532,59 @@ const PuzzlePage = () => {
       return;
     }
     if (current.kind === "pending") {
-      const popoverWasOpen = popoverRef.current !== null;
-      if (current.moved || popoverWasOpen) {
-        if (popoverWasOpen) {
-          closePopover();
-        }
+      if (current.moved) {
         setGesture(null);
         return;
       }
-      if (current.source !== "tray" && current.from !== null) {
-        game.tap(current.from);
+      if (current.source === "card") {
+        const node = event.target instanceof Element ? event.target.closest("[data-card]") : null;
+        const anchor =
+          node instanceof Element
+            ? elementRect(node)
+            : {
+                x: current.origin.x,
+                y: current.origin.y,
+                width: current.size,
+                height: current.size,
+              };
+        openInfo({ kind: "card", card: current.card }, anchor);
+        game.tapCard(current.card);
+        setGesture(null);
+        return;
+      }
+      if (current.topic !== null && current.anchor !== null) {
+        openInfo({ kind: "topic", topic: current.topic }, current.anchor);
+        game.tapTopic(current.topic);
+        setGesture(null);
+        return;
+      }
+      if (current.cell !== null) {
+        const anchor = cellAnchor(current.cell);
+        const events = game.tapCell(current.cell);
+        if (anchor !== null && events.length > 0) {
+          const first = events[0];
+          if (first.type === "objectTapped") {
+            openInfo(
+              { kind: "item", item: first.item, cell: first.cell },
+              anchor
+            );
+          } else if (first.type === "cellTapped") {
+            openInfo({ kind: "cell", cell: first.cell }, anchor);
+          }
+        }
       }
       setGesture(null);
       return;
     }
-
     if (current.hover === null) {
       audio.play("reject");
       audio.haptic([14, 30, 18]);
       beginReturn(current);
       return;
     }
-    const events =
-      current.source === "tray"
-        ? game.placeFromTray(current.pieceId, current.hover)
-        : current.from === null
-        ? []
-        : game.movePiece(current.from, current.hover);
-    const placed = events.length > 0 && events[0].type === "piecePlaced";
-    if (placed) {
+    const events = game.play(current.card, current.hover);
+    const accepted = events.length > 0 && events[0].type === "actionAccepted";
+    if (accepted) {
       setGesture(null);
       return;
     }
@@ -591,85 +606,60 @@ const PuzzlePage = () => {
     setGesture(null);
   }
 
-  function onReset() {
-    if (returnFrame.current !== null) {
-      window.cancelAnimationFrame(returnFrame.current);
-      returnFrame.current = null;
-    }
-    game.reset();
+  function refresh() {
     setBoardState(game.state);
-    closePopover();
+    setPopover(null);
     setGesture(null);
   }
 
-  function onToggleMute() {
-    audio.unlock();
-    audio.muted = audio.muted === false;
-    setMuted(audio.muted);
-  }
-
-  function onAction(actionId: string) {
-    const target = popoverRef.current;
-    if (target === null) {
-      return;
-    }
-    game.chooseAction(actionId, target);
-    closePopover();
-  }
-
-  const hiddenBoardId =
-    gesture !== null &&
-    gesture.kind !== "pending" &&
-    gesture.source === "board"
-      ? gesture.pieceId
-      : null;
-  const hiddenTrayId =
-    gesture !== null &&
-    gesture.kind !== "pending" &&
-    gesture.source === "tray"
-      ? gesture.pieceId
-      : null;
-  const hover =
-    gesture !== null && gesture.kind === "dragging" && gesture.hover !== null
-      ? { cell: gesture.hover, allowed: gesture.allowed }
-      : null;
-  const anchorCell = popover === null ? null : popover.cell;
-  const tray = boardState.trayPieces();
-  const tokenSize = cellSize > 0 ? Math.min(cellSize * 0.92, 64) : 48;
+  const sky = celestialOf(boardState.turn);
+  const night = sky.phase === "night";
+  const season = SEASON_LABEL[seasonOf(boardState.turn)];
+  const balanceSpan = CONFIG.balanceMax - CONFIG.balanceMin;
+  const balancePercent =
+    ((boardState.resources.balance - CONFIG.balanceMin) / balanceSpan) * 100;
+  const hasFire = boardHasFire(boardState);
   const cellVariable = (cellSize > 0 ? cellSize : 48) + "px";
   const pageStyle = { "--cell": cellVariable } as CSSProperties;
+  const draggedCard =
+    gesture !== null && (gesture.kind === "dragging" || gesture.kind === "returning")
+      ? gesture.card
+      : gesture !== null && gesture.kind === "pending" && gesture.source === "card" && gesture.moved
+      ? gesture.card
+      : null;
 
   let popoverNode = null;
-  if (
-    popover !== null &&
-    rootRef.current !== null &&
-    boardRef.current !== null &&
-    cellSize > 0
-  ) {
+  if (popover !== null && rootRef.current !== null) {
+    const description = describe(boardState, popover.target);
     popoverNode = (
       <Popover
-        key={targetKey(popover)}
-        description={describeTarget(boardState, popover)}
-        anchor={cellAnchor(boardRef.current, popover.cell, cellSize)}
+        key={popoverKey(popover.target)}
+        description={{ title: description.title, lines: description.lines, actions: [] }}
+        anchor={popover.anchor}
         bounds={readSafeBounds(rootRef.current)}
-        onAction={onAction}
-        onDismiss={closePopover}
+        onAction={() => undefined}
+        onDismiss={() => setPopover(null)}
       />
     );
   }
 
   const ghost =
-    gesture !== null && gesture.kind !== "pending" ? gesture : null;
-  let ghostPiece: Piece | null = null;
-  if (ghost !== null) {
-    ghostPiece = boardState.pieceById(ghost.pieceId);
-  }
+    gesture !== null && (gesture.kind === "dragging" || gesture.kind === "returning")
+      ? gesture
+      : null;
 
   return (
     <main
       ref={rootRef}
-      className={"puzzle " + (landscape ? "puzzle--landscape" : "puzzle--portrait")}
+      className={
+        "puzzle " +
+        (landscape ? "puzzle--landscape" : "puzzle--portrait") +
+        (night ? " puzzle--night" : "")
+      }
       data-layout={landscape ? "landscape" : "portrait"}
+      data-phase={sky.phase}
+      data-cloud={boardState.cloud === null ? "0" : "1"}
+      data-turn={boardState.turn}
       data-testid="puzzle-root"
       style={pageStyle}
       onPointerDown={onPointerDown}
@@ -678,58 +668,165 @@ const PuzzlePage = () => {
       onPointerCancel={onPointerCancel}
       onContextMenu={(event) => event.preventDefault()}
     >
+      <header className="puzzle__hud">
+        <h1 className="puzzle__title" tabIndex={-1}>
+          {TEXT.title}
+        </h1>
+        <div className="puzzle__resources">
+          <Stat
+            topic="wood"
+            icon="🪵"
+            label={TEXT.wood}
+            value={boardState.resources.wood}
+            delta={boardState.lastDeltas.wood}
+          />
+          <Stat
+            topic="food"
+            icon="🌾"
+            label={TEXT.food}
+            value={boardState.resources.food}
+            delta={boardState.lastDeltas.food}
+          />
+          <Stat
+            topic="water"
+            icon="💧"
+            label={TEXT.water}
+            value={boardState.resources.water}
+            delta={boardState.lastDeltas.water}
+          />
+          <Stat
+            topic="residents"
+            icon="👥"
+            label={TEXT.residents}
+            value={boardState.resources.residents}
+            delta={boardState.lastDeltas.residents}
+          />
+        </div>
+        <button type="button" className="puzzle__balance" data-topic="balance">
+          <span className="puzzle__balance-track" aria-hidden="true">
+            <span className="puzzle__balance-mark" style={{ left: balancePercent + "%" }} />
+          </span>
+          <span>
+            {TEXT.balance} {signed(boardState.resources.balance)} {signed(boardState.lastDeltas.balance)}
+          </span>
+        </button>
+        <div className="puzzle__meta">
+          <button type="button" className="puzzle__text-button" data-topic="season">
+            {season}
+          </button>
+          <button type="button" className="puzzle__text-button" data-topic="time">
+            {TEXT.turn} {boardState.turn + (boardState.outcome === "playing" ? 1 : 0)}/{boardState.length}
+          </button>
+          {hasFire && (
+            <button type="button" className="puzzle__text-button" data-topic="fire">
+              🔥
+            </button>
+          )}
+          {CONFIG.gameLengths.map((length) => (
+            <button
+              key={length}
+              type="button"
+              className="puzzle__length"
+              data-no-gesture="true"
+              aria-pressed={boardState.length === length}
+              onClick={() => {
+                game.setLength(length);
+                refresh();
+              }}
+            >
+              {length}
+            </button>
+          ))}
+        </div>
+      </header>
+
       <div className="puzzle__board-slot" ref={slotRef}>
         {cellSize > 0 && (
-          <Board
-            state={boardState}
-            cellSize={cellSize}
-            hover={hover}
-            anchorCell={anchorCell}
-            hiddenPieceId={hiddenBoardId}
-            boardRef={boardRef}
-          />
+          <div className="puzzle__stack" style={{ width: cellSize * CONFIG.boardSize }}>
+            <div className="puzzle__sky">
+              <button
+                type="button"
+                className="puzzle__luminary"
+                data-topic={sky.phase === "day" ? "sun" : "moon"}
+                style={{
+                  width: cellSize,
+                  transform: "translateX(" + sky.column * cellSize + "px)",
+                }}
+              >
+                {sky.phase === "day" ? "☀️" : "🌙"}
+              </button>
+            </div>
+            <div className="puzzle__board-wrap">
+              <Board
+                state={boardState}
+                cellSize={cellSize}
+                hover={
+                  gesture !== null && gesture.kind === "dragging" && gesture.hover !== null
+                    ? { cell: gesture.hover, allowed: gesture.allowed }
+                    : null
+                }
+                anchorCell={anchorCellOf(popover)}
+                boardRef={boardRef}
+              />
+              {boardState.cloud !== null && (
+                <button
+                  type="button"
+                  className="puzzle__cloud-tap"
+                  data-topic="rain"
+                  style={{
+                    left: boardState.cloud.column * cellSize,
+                    top: boardState.cloud.row * cellSize,
+                  }}
+                >
+                  ☁️
+                </button>
+              )}
+            </div>
+          </div>
         )}
       </div>
+
       <aside className="puzzle__panel">
-        <h1 className="puzzle__title" tabIndex={-1}>
-          Sandbox
-        </h1>
-        <p className="puzzle__tray-label">Tray</p>
-        <div className="puzzle__tray" aria-label="Tray">
-          {tray.map((piece) => (
-            <div
-              key={piece.id}
-              className="puzzle__token"
-              data-tray-piece={piece.id}
-              style={{ width: tokenSize, height: tokenSize }}
-              hidden={hiddenTrayId === piece.id}
+        <p className="puzzle__tray-label">{TEXT.tray}</p>
+        <div className="puzzle__tray" aria-label={TEXT.tray}>
+          {CARDS.map((card) => (
+            <button
+              key={card}
+              type="button"
+              className={"puzzle__card" + (draggedCard === card ? " is-dragged" : "")}
+              data-card={card}
             >
-              <svg
-                width={tokenSize}
-                height={tokenSize}
-                viewBox={"0 0 " + tokenSize + " " + tokenSize}
-                aria-hidden="true"
-              >
-                <PieceShapes piece={piece} size={tokenSize} />
-              </svg>
-            </div>
+              <span className="puzzle__card-icon">{CARD_ICON[card]}</span>
+              <span className="puzzle__card-name">{CARD_LABEL[card]}</span>
+            </button>
           ))}
         </div>
         <div className="puzzle__controls" data-no-gesture="true">
-          <button type="button" onClick={onReset}>
-            Reset
+          <button
+            type="button"
+            onClick={() => {
+              game.restart();
+              refresh();
+            }}
+          >
+            {TEXT.restart}
           </button>
           <button
             type="button"
-            onClick={onToggleMute}
             aria-pressed={muted}
+            onClick={() => {
+              audio.unlock();
+              audio.muted = audio.muted === false;
+              setMuted(audio.muted);
+            }}
           >
-            {muted ? "Unmute" : "Mute"}
+            {muted ? TEXT.unmute : TEXT.mute}
           </button>
         </div>
       </aside>
+
       {popoverNode}
-      {ghost !== null && ghostPiece !== null && (
+      {ghost !== null && (
         <div
           className="puzzle__ghost"
           data-dragging="true"
@@ -747,23 +844,84 @@ const PuzzlePage = () => {
             height: ghost.size,
             transform: "translate3d(" + ghost.x + "px, " + ghost.y + "px, 0)",
             transition:
-              ghost.kind === "returning" && ghost.animate
-                ? "transform 160ms ease-out"
-                : "none",
+              ghost.kind === "returning" && ghost.animate ? "transform 160ms ease-out" : "none",
           }}
         >
-          <svg
-            width={ghost.size}
-            height={ghost.size}
-            viewBox={"0 0 " + ghost.size + " " + ghost.size}
-            aria-hidden="true"
-          >
-            <PieceShapes piece={ghostPiece} size={ghost.size} />
-          </svg>
+          <span>{CARD_ICON[ghost.card]}</span>
+        </div>
+      )}
+      {boardState.outcome !== "playing" && (
+        <div className="puzzle__end" data-no-gesture="true">
+          <div className="puzzle__end-card">
+            <h2>{boardState.outcome === "lost" ? TEXT.lossTitle : TEXT.endTitle}</h2>
+            {endLines(boardState).map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+            <button
+              type="button"
+              onClick={() => {
+                game.restart();
+                refresh();
+              }}
+            >
+              {TEXT.again}
+            </button>
+          </div>
         </div>
       )}
     </main>
   );
 };
+
+function Stat(props: {
+  topic: TopicId;
+  icon: string;
+  label: string;
+  value: number;
+  delta: number;
+}) {
+  return (
+    <button type="button" className="puzzle__stat" data-topic={props.topic}>
+      <span className="puzzle__stat-value">
+        {props.icon} {props.value}
+      </span>
+      <span className="puzzle__stat-delta">
+        {props.label} {signed(props.delta)}
+      </span>
+    </button>
+  );
+}
+
+function boardHasFire(state: { cells: Array<{ fireAge: number }> }): boolean {
+  for (let index = 0; index < state.cells.length; index++) {
+    if (state.cells[index].fireAge > 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function anchorCellOf(popover: OpenPopover | null): Cell | null {
+  if (popover === null) {
+    return null;
+  }
+  if (popover.target.kind === "cell" || popover.target.kind === "item") {
+    return popover.target.cell;
+  }
+  return null;
+}
+
+function popoverKey(target: InfoTarget): string {
+  if (target.kind === "cell") {
+    return "cell-" + target.cell.column + "-" + target.cell.row;
+  }
+  if (target.kind === "item") {
+    return "item-" + target.item + "-" + target.cell.column + "-" + target.cell.row;
+  }
+  if (target.kind === "card") {
+    return "card-" + target.card;
+  }
+  return "topic-" + target.topic;
+}
 
 export default PuzzlePage;
