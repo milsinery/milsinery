@@ -90,17 +90,19 @@ export function Popover(props: {
           {line}
         </p>
       ))}
-      <div className="puzzle__popover-actions">
-        {props.description.actions.map((action) => (
-          <button
-            key={action.id}
-            type="button"
-            onClick={() => props.onAction(action.id)}
-          >
-            {action.label}
-          </button>
-        ))}
-      </div>
+      {props.description.actions.length > 0 && (
+        <div className="puzzle__popover-actions">
+          {props.description.actions.map((action) => (
+            <button
+              key={action.id}
+              type="button"
+              onClick={() => props.onAction(action.id)}
+            >
+              {action.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 

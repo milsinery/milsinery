@@ -67,6 +67,25 @@ export class GameAudio {
       this.noise(context, now, 0.04, 0.04);
       return;
     }
+    if (kind === "tool") {
+      this.tone(context, 240, now, 0.04, "square", 0.03);
+      this.tone(context, 180, now + 0.05, 0.06, "triangle", 0.04);
+      return;
+    }
+    if (kind === "fire") {
+      this.noise(context, now, 0.12, 0.05);
+      this.tone(context, 90, now, 0.14, "sawtooth", 0.02);
+      return;
+    }
+    if (kind === "death") {
+      this.tone(context, 220, now, 0.16, "sine", 0.05, 70);
+      return;
+    }
+    if (kind === "season") {
+      this.tone(context, 523, now, 0.08, "sine", 0.04);
+      this.tone(context, 659, now + 0.09, 0.12, "sine", 0.04);
+      return;
+    }
     this.tone(context, 196, now, 0.05, "square", 0.03);
     this.tone(context, 140, now + 0.07, 0.06, "square", 0.03);
   }

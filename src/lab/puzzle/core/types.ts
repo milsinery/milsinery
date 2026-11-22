@@ -1,50 +1,102 @@
-/**
- * Plain data for the board. These shapes map to Swift structs and enums.
- * Row 0 is the top of the board. Units are cells, never pixels.
- */
-
 export interface Cell {
   column: number;
   row: number;
 }
 
-export function cellsEqual(a: Cell, b: Cell): boolean {
-  return a.column === b.column && a.row === b.row;
+export type Terrain = "earth" | "forest" | "water";
+
+export type ItemKind = "house" | "sawmill" | "hunter" | "boat" | "field";
+
+export type ToolKind = "dig" | "fill" | "chop";
+
+export type CardId = ItemKind | ToolKind;
+
+export type SeasonName = "spring" | "summer" | "autumn" | "winter";
+
+export type PhaseName = "day" | "night";
+
+export type TopicId =
+  | "wood"
+  | "food"
+  | "water"
+  | "residents"
+  | "balance"
+  | "season"
+  | "sun"
+  | "moon"
+  | "rain"
+  | "fire"
+  | "time";
+
+export interface CellData {
+  terrain: Terrain;
+  forestWood: number;
+  forestFood: number;
+  item: ItemKind | null;
+  /** 0 means not burning. */
+  fireAge: number;
 }
 
-export function copyCell(cell: Cell): Cell {
-  return { column: cell.column, row: cell.row };
+export interface Cloud {
+  column: number;
+  row: number;
+  turnsLeft: number;
+  driftColumn: number;
+  driftRow: number;
 }
 
-export type Shape = "circle" | "square" | "triangle" | "diamond";
-
-export interface Piece {
-  id: string;
-  shape: Shape;
-  colorToken: string;
-  label: string;
+export interface Resources {
+  wood: number;
+  food: number;
+  water: number;
+  residents: number;
+  hunger: number;
+  balance: number;
 }
 
-export interface Placement {
-  pieceId: string;
-  cell: Cell;
+export interface Deltas {
+  wood: number;
+  food: number;
+  water: number;
+  residents: number;
+  balance: number;
 }
 
-/** What a popover action refers to. The view chooses the id; core does not. */
-export type ActionTarget =
+export type Outcome = "playing" | "lost" | "ended";
+
+export interface GameState {
+  cells: CellData[];
+  resources: Resources;
+  /** Completed actions. The column and season shown are for this index. */
+  turn: number;
+  length: number;
+  cloud: Cloud | null;
+  lastDeltas: Deltas;
+  outcome: Outcome;
+}
+
+export type InfoTarget =
   | { kind: "cell"; cell: Cell }
-  | { kind: "object"; objectId: string; cell: Cell };
+  | { kind: "item"; cell: Cell; item: ItemKind }
+  | { kind: "card"; card: CardId }
+  | { kind: "topic"; topic: TopicId };
 
 export type GameEvent =
-  | { type: "pieceSelected"; pieceId: string }
-  | { type: "piecePlaced"; pieceId: string; cell: Cell }
-  | { type: "moveRejected"; pieceId: string; cell: Cell; reason: string }
   | { type: "cellTapped"; cell: Cell }
-  | { type: "objectTapped"; objectId: string; cell: Cell }
-  | { type: "actionChosen"; actionId: string; target: ActionTarget };
-
-export type Validity =
-  | { allowed: true }
-  | { allowed: false; reason: string };
+  | { type: "objectTapped"; item: ItemKind; cell: Cell }
+  | { type: "trayTapped"; card: CardId }
+  | { type: "topicTapped"; topic: TopicId }
+  | { type: "actionRejected"; reason: string }
+  | { type: "actionAccepted"; card: CardId; cell: Cell; via: "item" | "tool" }
+  | { type: "residentDied" }
+  | { type: "seasonChanged"; season: SeasonName }
+  | { type: "fireChanged" }
+  | { type: "gameLost" }
+  | { type: "gameEnded" }
+  | { type: "turnResolved" };
 
 export type GameListener = (event: GameEvent) => void;
+
+export interface RandomSource {
+  next(): number;
+}

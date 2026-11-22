@@ -17,20 +17,20 @@ function viewportMeta(): HTMLMetaElement {
   return created;
 }
 
-describe("puzzle route", () => {
+describe("balance route", () => {
   test("is reachable and marked noindex, then clears that tag", () => {
     const viewport = viewportMeta();
     viewport.content = "width=device-width, initial-scale=1";
 
     const view = render(
-      <MemoryRouter initialEntries={["/lab/puzzle"]}>
+      <MemoryRouter initialEntries={["/balance"]}>
         <App />
       </MemoryRouter>
     );
 
-    expect(screen.getByRole("heading", { name: "Sandbox" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Reset" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Mute" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Баланс" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Сначала" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Тише" })).toBeInTheDocument();
     expect(screen.queryByText("Not found")).not.toBeInTheDocument();
 
     // eslint-disable-next-line testing-library/no-node-access
@@ -50,14 +50,24 @@ describe("puzzle route", () => {
     );
   });
 
+  test("the old lab route redirects here", () => {
+    render(
+      <MemoryRouter initialEntries={["/lab/puzzle"]}>
+        <App />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("heading", { name: "Баланс" })).toBeInTheDocument();
+    expect(screen.queryByText("Not found")).not.toBeInTheDocument();
+  });
+
   test("is not linked from the home page", () => {
     render(
       <MemoryRouter>
         <App />
       </MemoryRouter>
     );
-    expect(screen.queryByRole("link", { name: /puzzle/i })).not.toBeInTheDocument();
-    expect(screen.queryByRole("heading", { name: "Sandbox" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /puzzle|balance|баланс/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Баланс" })).not.toBeInTheDocument();
     expect(
       // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('meta[name="robots"]')
