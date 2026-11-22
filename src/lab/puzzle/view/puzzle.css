@@ -305,7 +305,20 @@
   --puzzle-backdrop: rgba(0, 0, 0, 0.62);
 }
 
+.puzzle--portrait,
 .puzzle--landscape {
+  flex-direction: column;
+}
+
+.puzzle__stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.puzzle--landscape .puzzle__stage {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(156px, 32%);
   grid-template-rows: auto minmax(0, 1fr);
@@ -360,48 +373,160 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.puzzle__stat,
 .puzzle__text-button,
-.puzzle__length {
+.puzzle__length,
+.puzzle__turn {
   font-family: inherit;
   color: inherit;
   background: transparent;
   border: 1px solid var(--puzzle-button-border);
   border-radius: 10px;
-  min-height: 44px;
+  min-height: 36px;
   padding: 4px 6px;
   text-align: center;
 }
 
-.puzzle__stat {
+.puzzle button.puzzle__stat {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  line-height: 1.15;
-  gap: 1px;
-}
-
-.puzzle__stat-value {
-  font-weight: 700;
-  font-size: clamp(13px, calc(var(--cell) * 0.28), 16px);
-}
-
-.puzzle__stat-delta {
-  color: var(--puzzle-muted);
-  font-size: clamp(11px, calc(var(--cell) * 0.22), 13px);
-}
-
-.puzzle__balance {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 4px;
   min-height: 44px;
-  padding: 0 4px;
-  background: transparent;
+  padding: 0 2px;
   border: 0;
+  background: transparent;
+  line-height: 1;
+  font-weight: 700;
+  font-size: clamp(14px, calc(var(--cell) * 0.3), 18px);
+}
+
+.puzzle__stat-icon {
+  font-size: 1.05em;
+}
+
+.puzzle__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin-left: 3px;
+  color: var(--puzzle-muted);
+  font-size: 0.82em;
+  font-weight: 700;
+}
+
+.puzzle__delta--up {
+  color: #1f8a45;
+}
+
+.puzzle__delta--down {
+  color: #d04532;
+}
+
+.puzzle--night .puzzle__delta--up {
+  color: #5dce7a;
+}
+
+.puzzle--night .puzzle__delta--down {
+  color: #ff7a68;
+}
+
+.puzzle__arrow {
+  display: inline-block;
+}
+
+.puzzle__arrow--up {
+  animation: puzzle-arrow-up 0.9s ease-in-out infinite;
+}
+
+.puzzle__arrow--down {
+  animation: puzzle-arrow-down 0.9s ease-in-out infinite;
+}
+
+@keyframes puzzle-arrow-up {
+  0%,
+  100% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes puzzle-arrow-down {
+  0%,
+  100% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.puzzle__balance-block {
+  padding: 6px 10px 0;
+}
+
+.puzzle button.puzzle__balance {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: inherit;
   font-family: inherit;
+}
+
+.puzzle__balance-sides {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: clamp(11px, calc(var(--cell) * 0.22), 13px);
+  font-weight: 600;
+  color: var(--puzzle-muted);
+  line-height: 1.2;
+}
+
+.puzzle__balance-sides span:last-child {
+  text-align: right;
+}
+
+.puzzle__meta {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 6px;
+}
+
+.puzzle button.puzzle__season {
+  grid-column: 2;
+  justify-self: center;
+  border: 0;
+  background: transparent;
+  min-height: 44px;
+  padding: 0 8px;
+  font-weight: 700;
+  font-size: clamp(16px, calc(var(--cell) * 0.36), 22px);
+  color: inherit;
+}
+
+.puzzle button.puzzle__turn {
+  justify-self: start;
+  border: 0;
+  background: transparent;
+  min-height: 44px;
+  font-size: clamp(12px, calc(var(--cell) * 0.24), 14px);
+}
+
+.puzzle__meta-end {
+  justify-self: end;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .puzzle__balance-track {
@@ -598,4 +723,77 @@
 .puzzle__end-card h2 {
   font-size: 22px;
   line-height: 1.15;
+}
+
+.puzzle__rain {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.puzzle__drop {
+  position: absolute;
+  top: -12px;
+  width: 2px;
+  height: 10px;
+  border-radius: 2px;
+  background: rgba(236, 246, 255, 0.92);
+  box-shadow: 0 0 0 1px rgba(80, 130, 170, 0.25);
+  animation: puzzle-rain 0.9s linear infinite;
+}
+
+@keyframes puzzle-rain {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.95;
+  }
+  75% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(120px);
+    opacity: 0;
+  }
+}
+
+.puzzle__yields {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.puzzle__yield {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 1px 3px;
+  border-radius: 6px;
+  background: rgba(16, 20, 16, 0.5);
+  color: #fff;
+  font-size: clamp(9px, calc(var(--cell) * 0.2), 12px);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+.puzzle__cloud-tap {
+  z-index: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puzzle__arrow,
+  .puzzle__drop {
+    animation: none !important;
+  }
+
+  .puzzle__drop {
+    top: 35%;
+    opacity: 0.8;
+  }
 }

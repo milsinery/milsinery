@@ -53,10 +53,10 @@ export function Board(props: {
           {data.item !== null && (
             <text
               x={cellSize / 2}
-              y={cellSize / 2}
+              y={cellSize * 0.42}
               textAnchor="middle"
               dominantBaseline="central"
-              fontSize={cellSize * 0.42}
+              fontSize={cellSize * 0.38}
               className="puzzle__emoji"
             >
               {itemIcon(data.item)}
@@ -78,21 +78,6 @@ export function Board(props: {
     }
   }
 
-  const cloud = state.cloud;
-  let cloudRect = null;
-  if (cloud !== null) {
-    cloudRect = (
-      <rect
-        x={cloud.column * cellSize}
-        y={cloud.row * cellSize}
-        width={cellSize * 2}
-        height={cellSize * 2}
-        className="puzzle__cloud"
-        data-cloud-rect="true"
-      />
-    );
-  }
-
   return (
     <svg
       ref={props.boardRef}
@@ -105,7 +90,6 @@ export function Board(props: {
       data-testid="puzzle-board"
     >
       {cells}
-      {cloudRect}
     </svg>
   );
 }

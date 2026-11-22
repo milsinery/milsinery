@@ -16,11 +16,14 @@ import {
   Cell,
   celestialOf,
   CONFIG,
+  CellYield,
+  cellYields,
   describe,
   seasonOf,
   endLines,
   Game,
   InfoTarget,
+  RESOURCE_ICON,
   SEASON_LABEL,
   TEXT,
   TopicId,
@@ -668,75 +671,94 @@ const PuzzlePage = () => {
       onPointerCancel={onPointerCancel}
       onContextMenu={(event) => event.preventDefault()}
     >
+      <h1 className="visually-hidden" tabIndex={-1}>
+        {TEXT.title}
+      </h1>
+      <div className="puzzle__balance-block">
+        <button
+          type="button"
+          className="puzzle__balance"
+          data-topic="balance"
+          aria-label={
+            TEXT.balance +
+            " " +
+            boardState.resources.balance +
+            ", " +
+            TEXT.balanceLeft +
+            ", " +
+            TEXT.balanceRight
+          }
+        >
+          <span className="puzzle__balance-track" aria-hidden="true">
+            <span className="puzzle__balance-mark" style={{ left: balancePercent + "%" }} />
+          </span>
+          <span className="puzzle__balance-sides">
+            <span>{TEXT.balanceLeft}</span>
+            <span>{TEXT.balanceRight}</span>
+          </span>
+        </button>
+      </div>
+      <div className="puzzle__stage">
       <header className="puzzle__hud">
-        <h1 className="puzzle__title" tabIndex={-1}>
-          {TEXT.title}
-        </h1>
         <div className="puzzle__resources">
           <Stat
             topic="wood"
-            icon="🪵"
+            icon={RESOURCE_ICON.wood}
             label={TEXT.wood}
             value={boardState.resources.wood}
             delta={boardState.lastDeltas.wood}
           />
           <Stat
             topic="food"
-            icon="🌾"
+            icon={RESOURCE_ICON.food}
             label={TEXT.food}
             value={boardState.resources.food}
             delta={boardState.lastDeltas.food}
           />
           <Stat
             topic="water"
-            icon="💧"
+            icon={RESOURCE_ICON.water}
             label={TEXT.water}
             value={boardState.resources.water}
             delta={boardState.lastDeltas.water}
           />
           <Stat
             topic="residents"
-            icon="👥"
+            icon={RESOURCE_ICON.residents}
             label={TEXT.residents}
             value={boardState.resources.residents}
             delta={boardState.lastDeltas.residents}
           />
         </div>
-        <button type="button" className="puzzle__balance" data-topic="balance">
-          <span className="puzzle__balance-track" aria-hidden="true">
-            <span className="puzzle__balance-mark" style={{ left: balancePercent + "%" }} />
-          </span>
-          <span>
-            {TEXT.balance} {signed(boardState.resources.balance)} {signed(boardState.lastDeltas.balance)}
-          </span>
-        </button>
         <div className="puzzle__meta">
-          <button type="button" className="puzzle__text-button" data-topic="season">
-            {season}
-          </button>
-          <button type="button" className="puzzle__text-button" data-topic="time">
+          <button type="button" className="puzzle__turn" data-topic="time">
             {TEXT.turn} {boardState.turn + (boardState.outcome === "playing" ? 1 : 0)}/{boardState.length}
           </button>
-          {hasFire && (
-            <button type="button" className="puzzle__text-button" data-topic="fire">
-              🔥
-            </button>
-          )}
-          {CONFIG.gameLengths.map((length) => (
-            <button
-              key={length}
-              type="button"
-              className="puzzle__length"
-              data-no-gesture="true"
-              aria-pressed={boardState.length === length}
-              onClick={() => {
-                game.setLength(length);
-                refresh();
-              }}
-            >
-              {length}
-            </button>
-          ))}
+          <button type="button" className="puzzle__season" data-topic="season">
+            {season}
+          </button>
+          <span className="puzzle__meta-end">
+            {hasFire && (
+              <button type="button" className="puzzle__text-button" data-topic="fire">
+                🔥
+              </button>
+            )}
+            {CONFIG.gameLengths.map((length) => (
+              <button
+                key={length}
+                type="button"
+                className="puzzle__length"
+                data-no-gesture="true"
+                aria-pressed={boardState.length === length}
+                onClick={() => {
+                  game.setLength(length);
+                  refresh();
+                }}
+              >
+                {length}
+              </button>
+            ))}
+          </span>
         </div>
       </header>
 
@@ -768,6 +790,14 @@ const PuzzlePage = () => {
                 anchorCell={anchorCellOf(popover)}
                 boardRef={boardRef}
               />
+              <YieldLayer cellSize={cellSize} yields={cellYields(boardState)} />
+              {boardState.cloud !== null && (
+                <Rain
+                  cellSize={cellSize}
+                  column={boardState.cloud.column}
+                  row={boardState.cloud.row}
+                />
+              )}
               {boardState.cloud !== null && (
                 <button
                   type="button"
@@ -824,6 +854,7 @@ const PuzzlePage = () => {
           </button>
         </div>
       </aside>
+      </div>
 
       {popoverNode}
       {ghost !== null && (
@@ -881,14 +912,108 @@ function Stat(props: {
   delta: number;
 }) {
   return (
-    <button type="button" className="puzzle__stat" data-topic={props.topic}>
-      <span className="puzzle__stat-value">
-        {props.icon} {props.value}
+    <button
+      type="button"
+      className="puzzle__stat"
+      data-topic={props.topic}
+      aria-label={props.label + " " + props.value + " " + signed(props.delta)}
+    >
+      <span className="puzzle__stat-icon" aria-hidden="true">
+        {props.icon}
       </span>
-      <span className="puzzle__stat-delta">
-        {props.label} {signed(props.delta)}
-      </span>
+      <span className="puzzle__stat-value">{props.value}</span>
+      <Delta value={props.delta} />
     </button>
+  );
+}
+
+function Delta(props: { value: number }) {
+  if (props.value === 0) {
+    return null;
+  }
+  const up = props.value > 0;
+  return (
+    <span className={"puzzle__delta " + (up ? "puzzle__delta--up" : "puzzle__delta--down")}>
+      <span
+        className={"puzzle__arrow " + (up ? "puzzle__arrow--up" : "puzzle__arrow--down")}
+        aria-hidden="true"
+      >
+        {up ? "▲" : "▼"}
+      </span>
+      {Math.abs(props.value)}
+    </span>
+  );
+}
+
+function YieldLayer(props: { cellSize: number; yields: CellYield[] }) {
+  const groups: CellYield[][] = [];
+  for (let index = 0; index < props.yields.length; index++) {
+    const item = props.yields[index];
+    let group: CellYield[] | null = null;
+    for (let groupIndex = 0; groupIndex < groups.length; groupIndex++) {
+      const existing = groups[groupIndex];
+      if (existing[0].column === item.column && existing[0].row === item.row) {
+        group = existing;
+        break;
+      }
+    }
+    if (group === null) {
+      group = [];
+      groups.push(group);
+    }
+    group.push(item);
+  }
+  return (
+    <div className="puzzle__yields" aria-hidden="true">
+      {groups.map((group) =>
+        group.map((item, index) => (
+          <span
+            key={item.column + "-" + item.row + "-" + item.resource}
+            className="puzzle__yield"
+            data-yield={item.column + "," + item.row}
+            style={{
+              left: item.column * props.cellSize + 2,
+              top: (item.row + 1) * props.cellSize - 16 - index * 14,
+            }}
+          >
+            <span>{RESOURCE_ICON[item.resource]}</span>
+            <Delta value={item.amount} />
+          </span>
+        ))
+      )}
+    </div>
+  );
+}
+
+function Rain(props: { cellSize: number; column: number; row: number }) {
+  const drops = [];
+  const count = 18;
+  for (let index = 0; index < count; index++) {
+    drops.push(
+      <span
+        key={index}
+        className="puzzle__drop"
+        style={{
+          left: (index * 19) % 92 + "%",
+          animationDelay: index * 0.11 + "s",
+          animationDuration: 0.75 + (index % 4) * 0.12 + "s",
+        }}
+      />
+    );
+  }
+  return (
+    <div
+      className="puzzle__rain"
+      data-rain="true"
+      style={{
+        left: props.column * props.cellSize,
+        top: props.row * props.cellSize,
+        width: props.cellSize * CONFIG.cloudSize,
+        height: props.cellSize * CONFIG.cloudSize,
+      }}
+    >
+      {drops}
+    </div>
   );
 }
 
