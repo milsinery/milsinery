@@ -7,6 +7,7 @@ import PolicyWeather from './pages/app/policy-weather/index';
 import PolicyPulse from './pages/app/policy-pulse/index';
 import EULAPulse from './pages/app/eula-pulse/index';
 import Error from './pages/error/index';
+import PuzzlePage from './lab/puzzle/view/PuzzlePage';
 
 const usePageViews = () => {
   const location = useLocation();
@@ -53,6 +54,7 @@ const App = () => {
         <Route exact path="/apps/weather/privacy-policy" component={PolicyWeather} />
         <Route exact path="/apps/pulse/privacy-policy" component={PolicyPulse} />
         <Route exact path="/apps/pulse/terms-of-use" component={EULAPulse} />
+        <Route exact path="/lab/puzzle" component={PuzzlePage} />
         <Route component={Error} />
       </Switch>
   );
