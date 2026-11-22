@@ -34,6 +34,17 @@ export const TEXT = {
   day: "День",
   night: "Ночь",
   close: "Закрыть",
+  /** Left end of the bar: what pulls the value down. */
+  balanceLeft: "Нехватка и природа",
+  /** Right end of the bar: what pulls the value up. */
+  balanceRight: "Излишек и постройки",
+};
+
+export const RESOURCE_ICON = {
+  wood: "🪵",
+  food: "🌾",
+  water: "💧",
+  residents: "👥",
 };
 
 export const SEASON_LABEL: { [key in SeasonName]: string } = {

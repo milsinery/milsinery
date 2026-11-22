@@ -1,5 +1,13 @@
 export { CONFIG } from "./config";
-export { describe, endLines, TEXT, SEASON_LABEL, CARD_LABEL, CARD_ICON } from "./content";
+export {
+  describe,
+  endLines,
+  TEXT,
+  SEASON_LABEL,
+  CARD_LABEL,
+  CARD_ICON,
+  RESOURCE_ICON,
+} from "./content";
 export type { Description } from "./content";
 export { Game } from "./Game";
 export type { GameOptions } from "./Game";
@@ -7,6 +15,8 @@ export { cellOf } from "./Game";
 export { createLcg } from "./random";
 export { celestialOf, seasonOf, SEASON_ORDER } from "./time";
 export { cellIndex, inBounds, makeTerrain } from "./board";
+export { cellYields } from "./yields";
+export type { CellYield, YieldResource } from "./yields";
 export type {
   CardId,
   Cell,
