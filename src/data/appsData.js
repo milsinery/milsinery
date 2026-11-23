@@ -40,15 +40,73 @@ const appsData = [
         text: "I’ve really enjoyed using Pulse so far. It’s simple, clean and easy to come back to throughout the day. \n\nI like that any note can become a task and any task can become a note. No due dates, no pressure, no unnecessary noise.\n\nThere’s something satisfying about writing down new tasks and crossing out the ones I’ve finished. The app feels light and natural to use, which makes me actually want to keep opening it.",
       },
     ],
+    aiLink: '/apps/pulse/ai',
     page: {
-      description: '',
+      // App Store description. Lead-in lines are headings; wording unchanged.
+      description: [
+        {
+          heading: 'Everything in its own time',
+          paragraphs: [
+            'Organize tasks into lists: today, this week, someday — or pick a specific date. Tasks appear in the right place when their time comes.',
+          ],
+        },
+        {
+          heading: "See what you've done",
+          paragraphs: [
+            "Completed tasks stay in the list until the end of the day — appreciate your progress. The next day you'll find them in the Done list.",
+          ],
+        },
+        {
+          heading: 'Running behind — reschedule',
+          paragraphs: [
+            'One move and the task shifts to tomorrow or next week.',
+          ],
+        },
+        {
+          heading: 'Notifications on your terms',
+          paragraphs: [
+            'Reminders only for the tasks that matter to you.',
+          ],
+        },
+        {
+          heading: 'Notes are here too',
+          paragraphs: [
+            'Thoughts, goals, ideas — no deadlines. Any note can be turned into a task, and vice versa.',
+          ],
+        },
+        {
+          heading: 'Nothing gets lost',
+          paragraphs: [
+            'Built-in search and Spotlight support — across all your tasks and notes at once.',
+          ],
+        },
+        {
+          heading: 'Your records are yours alone',
+          paragraphs: [
+            'Pulse collects no data. Everything is stored on your devices and synced via iCloud.',
+          ],
+        },
+        {
+          heading: 'Your progress',
+          paragraphs: [
+            'Pulse has no AI features, but you can analyze your progress or learn about your productivity by sharing your records with your AI assistant and asking it to put together some stats.',
+          ],
+        },
+        {
+          heading: 'Pulse on all your devices',
+          paragraphs: [
+            'On iPhone, iPad and Mac. Now on iPhone Duo too — more room for your tasks and notes.',
+          ],
+        },
+      ],
       instruction: {},
     },
     meta: {
       content:
         "Tasks and notes in one place. No projects, no labels, no clutter. Just what needs to get done and the thoughts you don't want to lose.",
     },
-    isNewLabel: true
+    label: 'Updated',
+    isNewLabel: false
   },
   {
     webp: weather2,
@@ -138,7 +196,26 @@ const appsData = [
       },
     ],
     page: {
-      description: '',
+      // App Store description. "Features" is the only lead-in line. Wording unchanged.
+      description: [
+        {
+          paragraphs: [
+            'Weather without numbers, charts or AI—just the essentials.',
+            'The app sums up the temperature in a single headline and gives you a quick tip on what to wear. Need more details? There’s a short note on the weather and wind.',
+            'Next, a forecast for the rest of the day—will it get warmer or colder? Do you need an umbrella?',
+            'And finally, a brief look at tomorrow.',
+          ],
+        },
+        {
+          heading: 'Features',
+          paragraphs: [],
+          list: [
+            'Instead of raw numbers, the app uses “feels like” temperature, factoring in wind, humidity, and more.',
+            'If you tend to feel colder than others, there’s an option just for you—turn it on for a better experience.',
+            'The app uses your location for accurate forecasts (powered by OpenWeather).',
+          ],
+        },
+      ],
       instruction: {},
     },
     meta: {

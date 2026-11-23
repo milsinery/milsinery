@@ -35,6 +35,11 @@
   flex-direction: column;
 }
 
+/* Same gap as the paragraphs in a section. No marker, no extra indent. */
+ul.app__section {
+  list-style: none;
+}
+
 @media screen and (max-width: 480px) {
   .app__title {
     margin: 0 0 8vmax 0;
