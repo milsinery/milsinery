@@ -1,7 +1,14 @@
+import { useCallback, useEffect, useMemo, useState, CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  buildHoverPool,
+  pickHoverItem,
+  Screenshot,
+  HoverItem,
+} from './pickHoverItem';
 import './index.css';
 
-type applicationProps = {
+type ApplicationProps = {
   webp: string;
   png: string;
   name: string;
@@ -9,12 +16,39 @@ type applicationProps = {
   installLink?: string;
   infoLink?: string;
   comment?: Array<{ text: string; author: string }>;
+  screenshots?: Screenshot[];
   isNewLabel: boolean;
   label?: string;
   comingSoon?: boolean;
 };
 
-const application = ({
+const HOVER_MQ = '(hover: hover) and (pointer: fine)';
+
+const canHoverNow = () =>
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia(HOVER_MQ).matches;
+
+const symbols = [
+  '🥰',
+  '👏',
+  '😎',
+  '🔥',
+  '💔',
+  '😍',
+  '💪',
+  '🎉',
+  '🥳',
+  '🍾',
+  '😜',
+  '😽',
+  '🤟',
+  '🤌',
+];
+
+const randomSymbol = () => symbols[Math.floor(Math.random() * symbols.length)];
+
+const Application = ({
   webp,
   png,
   name,
@@ -22,39 +56,67 @@ const application = ({
   installLink,
   infoLink,
   comment,
+  screenshots,
   isNewLabel,
   label,
   comingSoon,
-}: applicationProps) => {
-  const symbols = [
-    '🥰',
-    '👏',
-    '😎',
-    '🔥',
-    '💔',
-    '😍',
-    '💪',
-    '🎉',
-    '🥳',
-    '🍾',
-    '😜',
-    '😽',
-    '🤟',
-    '🤌',
-  ];
+}: ApplicationProps) => {
+  const pool = useMemo(
+    () => buildHoverPool(comment ?? [], screenshots ?? []),
+    [comment, screenshots]
+  );
+  const [canHover, setCanHover] = useState(canHoverNow);
+  const [item, setItem] = useState<HoverItem | null>(null);
+  const [isIn, setIsIn] = useState(false);
+  const [emoji, setEmoji] = useState<[string, string]>(['🎉', '✨']);
 
-  const getRandom = (arr: Array<any>) => {
-    return Math.floor(Math.random() * arr.length);
-  };
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return;
+    }
+    const mql = window.matchMedia(HOVER_MQ);
+    const onChange = () => setCanHover(mql.matches);
+    onChange();
+    if (typeof mql.addEventListener === 'function') {
+      mql.addEventListener('change', onChange);
+      return () => mql.removeEventListener('change', onChange);
+    }
+    mql.addListener(onChange);
+    return () => mql.removeListener(onChange);
+  }, []);
 
-  const comments = comment ?? [];
-  const content = comments.length > 0 && comments[getRandom(comments)];
+  const onMouseEnter = useCallback(() => {
+    if (!canHover || pool.length === 0) {
+      return;
+    }
+    setIsIn(false);
+    setItem((current) => pickHoverItem(pool, current));
+    setEmoji([randomSymbol(), randomSymbol()]);
+  }, [canHover, pool]);
+
+  const onMouseLeave = useCallback(() => {
+    setIsIn(false);
+  }, []);
+
+  useEffect(() => {
+    if (!item || !canHover) {
+      return;
+    }
+    const id = window.requestAnimationFrame(() => setIsIn(true));
+    return () => window.cancelAnimationFrame(id);
+  }, [item, canHover, emoji]);
+
   const badge = label || (isNewLabel ? 'New' : '');
 
   return (
-    <article className="application">
+    <article
+      className="application"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className="application__shell">
       {badge && <span className="application__isNewLable t-h3">{badge}</span>}
-      
+
       <div className="application__cover">
         <picture>
           <source srcSet={webp} type="image/webp" />
@@ -100,22 +162,52 @@ const application = ({
           )}
         </div>
       </div>
+      </div>
 
-      {comments.length > 0 && content && (
+      {item && (
         // Hover-only decoration: hidden from screen readers.
-        <div className="application__commentary" aria-hidden="true">
-          <span className="application__commentary-title t-h4">{content.text}</span>
-          <small className="application__commentary-author">{content.author}</small>
-          <span className="application__commentary-sym-1 t-h2">
-            {symbols[getRandom(symbols)]}
-          </span>
-          <span className="application__commentary-sym-2 t-h1">
-            {symbols[getRandom(symbols)]}
-          </span>
+        <div
+          className={
+            'application__commentary' +
+            (item.type === 'fan' ? ' application__commentary--fan' : '') +
+            (isIn ? ' is-in' : '')
+          }
+          aria-hidden="true"
+        >
+          {item.type === 'review' ? (
+            <>
+              <div className="application__commentary-card">
+                <span className="application__commentary-title t-h4">{item.text}</span>
+                <small className="application__commentary-author">{item.author}</small>
+              </div>
+              <span className="application__commentary-sym-1 t-h2">{emoji[0]}</span>
+              <span className="application__commentary-sym-2 t-h1">{emoji[1]}</span>
+            </>
+          ) : (
+            <div
+              className="application__fan"
+              style={
+                {
+                  '--fan-count': item.shots.length,
+                } as CSSProperties
+              }
+            >
+              {item.shots.map((shot, index) => (
+                <picture
+                  className="application__fan-card"
+                  key={shot.src}
+                  style={{ '--fan-index': index } as CSSProperties}
+                >
+                  <source srcSet={shot.webp} type="image/webp" />
+                  <img src={shot.src} alt="" width="1242" height="2688" />
+                </picture>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </article>
   );
 };
 
-export default application;
+export default Application;

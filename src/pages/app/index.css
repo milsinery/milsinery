@@ -4,6 +4,7 @@
     height: 100%;
     width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   
   .appPage__wrapper {
@@ -68,3 +69,85 @@
     margin-bottom: 0.2vmax;
   }
   
+
+/* Horizontal iPhone screenshot strip: snaps per shot, no scrollbar,
+   next shot always peeks past the right edge of the screen. */
+.appPage__shots {
+  --shot-gap: 1.25vmax;
+  display: flex;
+  gap: var(--shot-gap);
+  width: calc(100vw - 4vmax);
+  max-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 5vmax 0;
+}
+
+.appPage__shots::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.appPage__shots:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+.appPage__shots:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.appPage__shot {
+  flex: 0 0 auto;
+  /* One full screenshot + a sliver of the next. */
+  width: calc((100% - var(--shot-gap)) / 1.25);
+  margin: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.appPage__shot:last-child {
+  /* At the end, flush the last shot to the right edge. */
+  scroll-snap-align: end;
+}
+
+.appPage__shot picture,
+.appPage__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1242 / 2688;
+  border-radius: 1vmax;
+  border: 1px solid var(--color-border);
+  background: var(--color-pad);
+}
+
+@media screen and (min-width: 600px) {
+  .appPage__shot {
+    width: calc((100% - 2 * var(--shot-gap)) / 2.25);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .appPage__shot {
+    width: calc((100% - 3 * var(--shot-gap)) / 3.25);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .appPage__shot {
+    width: calc((100% - 4 * var(--shot-gap)) / 4.25);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .appPage__shot {
+    width: calc((100% - 5 * var(--shot-gap)) / 5.25);
+  }
+}

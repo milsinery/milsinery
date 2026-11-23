@@ -344,6 +344,7 @@ small a:hover {
   }
 
   .application:hover,
+  .application:hover .application__shell,
   .extension:hover,
   .plugin:hover {
     transform: none !important;
