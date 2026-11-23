@@ -1,13 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.f863fc06.css",
-    "main.js": "/static/js/main.e0f5c963.js",
+    "main.css": "/static/css/main.44477cbc.css",
+    "main.js": "/static/js/main.e5614d6b.js",
     "static/js/787.ec6ca389.chunk.js": "/static/js/787.ec6ca389.chunk.js",
+    "static/media/08-thoughts.jpg": "/static/media/08-thoughts.5f59dc784bcfb89176c3.jpg",
     "static/media/weather_hyf.png": "/static/media/weather_hyf.8397156c75e83c483636.png",
     "static/media/picture2.jpeg": "/static/media/picture2.bf082b271bb4934f39e2.jpeg",
+    "static/media/01-pulse.jpg": "/static/media/01-pulse.6ebc8694842b2eaa410a.jpg",
+    "static/media/03-timing.jpg": "/static/media/03-timing.2fb035fdf35457273310.jpg",
+    "static/media/04-create.jpg": "/static/media/04-create.3c38da9fb78b1b8ab53c.jpg",
+    "static/media/10-themes.jpg": "/static/media/10-themes.b59489b627e750b29690.jpg",
+    "static/media/06-postpone.jpg": "/static/media/06-postpone.417f7a1e142cf4c3a0af.jpg",
+    "static/media/07-notes.jpg": "/static/media/07-notes.3e47ff61c1c2f217ff98.jpg",
+    "static/media/09-done.jpg": "/static/media/09-done.8b234d86c572cc38bc84.jpg",
+    "static/media/02-tasks.jpg": "/static/media/02-tasks.0e53ecfbeefa72b33efa.jpg",
+    "static/media/05-today.jpg": "/static/media/05-today.f0fa3c505be27cdf5e6b.jpg",
     "static/media/picture1.jpeg": "/static/media/picture1.f454a2d6b6948aa4ac21.jpeg",
+    "static/media/08-thoughts.webp": "/static/media/08-thoughts.a79cad8c86af63b3efa2.webp",
     "static/media/abracadabra.png": "/static/media/abracadabra.112703682413c2fa2dc3.png",
+    "static/media/10-themes.webp": "/static/media/10-themes.cc1ea5bff8701b9d9c77.webp",
+    "static/media/01-pulse.webp": "/static/media/01-pulse.abaab5e2fab5af1a7ca5.webp",
+    "static/media/03-timing.webp": "/static/media/03-timing.a11de0167040533de443.webp",
+    "static/media/04-create.webp": "/static/media/04-create.3c025f1214d24b7e50b6.webp",
     "static/media/colorFixer.png": "/static/media/colorFixer.1aef749cfb57fb6f0df2.png",
+    "static/media/07-notes.webp": "/static/media/07-notes.9f72c9298666b7bade57.webp",
+    "static/media/05-today.webp": "/static/media/05-today.916ad9389172c420a903.webp",
+    "static/media/06-postpone.webp": "/static/media/06-postpone.99a8cca83d96d061f9bf.webp",
+    "static/media/09-done.webp": "/static/media/09-done.2661a0c1c0e15ae3a2dc.webp",
+    "static/media/02-tasks.webp": "/static/media/02-tasks.30e0a462cfb769690b52.webp",
     "static/media/weather_hyf.webp": "/static/media/weather_hyf.89dc6ba33b2c7646cd87.webp",
     "static/media/pulse.png": "/static/media/pulse.7d35a6b1ccada687cc35.png",
     "static/media/coft.png": "/static/media/coft.34b13ff10c8afeb772cb.png",
@@ -26,12 +46,12 @@
     "static/media/renamer.webp": "/static/media/renamer.ddf289c22638e4719142.webp",
     "static/media/advertiser.webp": "/static/media/advertiser.3becc7cc97bb86996287.webp",
     "index.html": "/index.html",
-    "main.f863fc06.css.map": "/static/css/main.f863fc06.css.map",
-    "main.e0f5c963.js.map": "/static/js/main.e0f5c963.js.map",
+    "main.44477cbc.css.map": "/static/css/main.44477cbc.css.map",
+    "main.e5614d6b.js.map": "/static/js/main.e5614d6b.js.map",
     "787.ec6ca389.chunk.js.map": "/static/js/787.ec6ca389.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f863fc06.css",
-    "static/js/main.e0f5c963.js"
+    "static/css/main.44477cbc.css",
+    "static/js/main.e5614d6b.js"
   ]
 }
