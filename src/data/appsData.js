@@ -3,6 +3,7 @@ import weather2 from '../pictures/apps/weather_hyf.webp';
 import pulse from '../pictures/apps/pulse.png';
 import pulse2 from '../pictures/apps/pulse.webp';
 import pulseScreenshots from './pulseScreenshots';
+import weatherScreenshots from './weatherScreenshots';
 
 const appsData = [
    {
@@ -197,6 +198,7 @@ const appsData = [
         text: "This is a cool concept to just provide text on the weather and what to wear. It will take some getting used to with not seeing the temp numbers but I’m liking this so far. I like the music in the background as well. Needs widgets which I’m sure is on the roadmap, I hope 😊",
       },
     ],
+    screenshots: weatherScreenshots,
     page: {
       // App Store description. "Features" is the only lead-in line. Wording unchanged.
       description: [
