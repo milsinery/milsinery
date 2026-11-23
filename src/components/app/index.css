@@ -172,6 +172,9 @@
   border: 1px solid var(--color-border);
   box-shadow: 0 0.8vmax 2.8vmax rgba(0, 0, 0, 0.08),
     0 0.15vmax 0.6vmax rgba(0, 0, 0, 0.04);
+  /* First App Store shot is on top and on the left; later shots sit
+     behind it in order, fanning to the right. */
+  z-index: calc(var(--fan-count) - var(--fan-index));
   transform-origin: 50% 120%;
   transform: translateX(-50%)
     rotate(
