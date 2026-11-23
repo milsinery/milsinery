@@ -8,9 +8,9 @@ type applicationProps = {
   info: string;
   installLink?: string;
   infoLink?: string;
-  aboutLink?: string;
   comment?: Array<{ text: string; author: string }>;
   isNewLabel: boolean;
+  label?: string;
   comingSoon?: boolean;
 };
 
@@ -21,9 +21,9 @@ const application = ({
   info,
   installLink,
   infoLink,
-  aboutLink,
   comment,
   isNewLabel,
+  label,
   comingSoon,
 }: applicationProps) => {
   const symbols = [
@@ -49,10 +49,11 @@ const application = ({
 
   const comments = comment ?? [];
   const content = comments.length > 0 && comments[getRandom(comments)];
+  const badge = label || (isNewLabel ? 'New' : '');
 
   return (
     <article className="application">
-      {isNewLabel && <span className="application__isNewLable t-h3">New</span>}
+      {badge && <span className="application__isNewLable t-h3">{badge}</span>}
       
       <div className="application__cover">
         <picture>
@@ -94,18 +95,6 @@ const application = ({
                   <span className="application__link t-h3">About</span>
                   <span className="visually-hidden"> {name}</span>
                 </Link>
-              )}
-
-              {aboutLink && (
-                <a
-                  className="application__link"
-                  href={aboutLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="t-h3">Making of</span>
-                  <span className="visually-hidden"> {name} (opens in new tab)</span>
-                </a>
               )}
             </>
           )}

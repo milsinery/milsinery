@@ -39,7 +39,7 @@ const App = () => {
           </header>
 
           {appData &&
-            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, aiLink, meta, page }) => (
+            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, aiLink, page }) => (
               <div className="appPage__content">
                 <div className="appPage__head">
                   <div className="appPage__title">
@@ -56,9 +56,6 @@ const App = () => {
                       </picture>
                     </div>
                     <h1 className="appPage__title-text" tabIndex={-1}>{name}</h1>
-                    <div className="appPage__short-description t-h2">
-                      {meta.content}
-                    </div>
                     <div className="appPage__links">
                       <a
                         className="appPage__link"
@@ -109,16 +106,17 @@ const App = () => {
 function AppStoreDescription({
   blocks,
 }: {
-  blocks?: Array<{ paragraphs: string[]; list?: string[] }>;
+  blocks?: Array<{ heading?: string; paragraphs: string[]; list?: string[] }>;
 }) {
   if (!blocks || blocks.length === 0) {
     return null;
   }
 
   return (
-    <div className="app__section">
+    <div className="app__wrapper">
       {blocks.map((block) => (
-        <div className="app__section" key={block.paragraphs[0]}>
+        <div className="app__section" key={block.heading || block.paragraphs[0]}>
+          {block.heading && <h2 className="t-h3">{block.heading}</h2>}
           {block.paragraphs.map((text) => (
             <p key={text}>{text}</p>
           ))}

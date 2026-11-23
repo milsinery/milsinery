@@ -9,9 +9,9 @@ type AppItem = {
   info: string;
   installLink?: string;
   infoLink?: string;
-  aboutLink?: string;
   comments?: Array<{ text: string; author: string }>;
   isNewLabel: boolean;
+  label?: string;
   comingSoon?: boolean;
 };
 
@@ -28,9 +28,9 @@ const AppList = ({ data = AppsData as AppItem[] }) => {
               info={item.info}
               installLink={item.installLink}
               infoLink={item.infoLink}
-              aboutLink={item.aboutLink}
               comment={item.comments}
               isNewLabel={item.isNewLabel}
+              label={item.label}
               comingSoon={item.comingSoon}
               key={key}
             ></App>
