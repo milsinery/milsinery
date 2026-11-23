@@ -39,7 +39,7 @@ const App = () => {
           </header>
 
           {appData &&
-            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, meta }) => (
+            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, aiLink, meta, page }) => (
               <div className="appPage__content">
                 <div className="appPage__head">
                   <div className="appPage__title">
@@ -71,6 +71,11 @@ const App = () => {
                         </span>
                         <span className="visually-hidden"> {name} (opens in new tab)</span>
                       </a>
+                      {aiLink && (
+                        <Link to={aiLink}>
+                          <span className="appPage__link t-h2">For AI assistants</span>
+                        </Link>
+                      )}
                          { aboutLink && <a
             className="application__link"
             href={aboutLink}
@@ -92,6 +97,7 @@ const App = () => {
                     </div>
                   </div>
                 </div>
+                <AppStoreDescription blocks={page && page.description} />
               </div>
             ))}
         </div>
@@ -99,5 +105,36 @@ const App = () => {
     </>
   );
 };
+
+function AppStoreDescription({
+  blocks,
+}: {
+  blocks?: Array<{ paragraphs: string[]; list?: string[] }>;
+}) {
+  if (!blocks || blocks.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="app__section">
+      {blocks.map((block) => (
+        <div className="app__section" key={block.paragraphs[0]}>
+          {block.paragraphs.map((text) => (
+            <p key={text}>{text}</p>
+          ))}
+          {block.list && (
+            <ul className="app__section">
+              {block.list.map((item) => (
+                <li key={item}>
+                  <p>{item}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default App;
