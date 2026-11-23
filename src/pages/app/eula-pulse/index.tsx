@@ -23,7 +23,7 @@ const Pulse = () => {
           </header>
 
           <h1 className="app__title" tabIndex={-1}>Terms of Use (EULA)</h1>
-          <div className="t-h2">Updated May 2, 2026</div>
+          <div className="t-h2">Updated November 23, 2026</div>
 
           <div className="app__section">
             <h2 className="t-h3">Acceptance of Terms</h2>
@@ -35,7 +35,20 @@ const Pulse = () => {
           <div className="app__section">
             <h2 className="t-h3">Description of Service</h2>
             <p>
-              Pulse provides tools for task management, note-taking, and interface customization.
+              Pulse provides tools for tasks, notes, reminders, and interface customization. You can also automate Pulse through its URL scheme and through Shortcuts (App Intents).
+            </p>
+          </div>
+
+          <div className="app__section">
+            <h2 className="t-h3">Automation and Third-Party Assistants</h2>
+            <p>
+              Pulse can be controlled through its URL scheme, through Shortcuts, and through third-party AI assistants or apps you choose. Adding, editing, completing, and deleting are done on your behalf and at your direction.
+            </p>
+            <p>
+              You are responsible for which tools you grant access, and for reviewing the changes they make. The Developer is not responsible for third-party services, their availability, or how they handle data.
+            </p>
+            <p>
+              How an assistant can use Pulse is described on the <Link to="/apps/pulse/ai">For AI assistants</Link> page.
             </p>
           </div>
 
