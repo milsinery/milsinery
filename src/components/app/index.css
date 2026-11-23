@@ -1,7 +1,13 @@
 .application {
   position: relative;
+  overflow: visible;
+}
+
+/* Visual card lives on the shell so hover scale + radius don't clip
+   the review sticker and screenshot fan that overflow it. */
+.application__shell {
+  position: relative;
   display: flex;
-  transition: all ease-out 300ms;
   background-color: var(--color-pad);
   border-radius: 1.35vmax;
   padding: 3vmax 3vmax 4vmax 3vmax;
@@ -50,17 +56,35 @@
   bottom: 60%;
   display: flex;
   flex-direction: column;
+  transform: translate(1vmax, 1vmax) rotate(0);
+  transition: all 100ms ease-in;
+  pointer-events: none;
+}
+
+/* Glass lives on the inner card so overflowing emojis are not clipped
+   by backdrop-filter. */
+.application__commentary-card {
+  display: flex;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(24px);
   padding: 2vmax;
   max-width: 20vmax;
   border-radius: 1vmax;
-  transform: translate(1vmax, 1vmax) rotate(0);
-  transition: all 100ms ease-in;
+  overflow: hidden;
+}
+
+.application__commentary--fan {
+  right: 4vmax;
+  bottom: 50%;
 }
 
 .application__commentary-title {
   margin: 0 0 1vmax 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  overflow: hidden;
 }
 
 .application__commentary-author {
@@ -88,19 +112,26 @@
 
 .application:hover {
   z-index: 1;
+}
+
+.application:hover .application__isNewLable {
+  opacity: 0;
+}
+
+.application:hover .application__shell {
   background-color: var(--color-secondary);
   transform: scale(1.05);
   transition: all 300ms ease-in-out;
 }
 
-.application:hover .application__commentary-sym-1 {
+.application__commentary.is-in .application__commentary-sym-1 {
   opacity: 1;
   top: -1.5vmax;
   left: -1.5vmax;
   transition: all 600ms ease-out;
 }
 
-.application:hover .application__commentary-sym-2 {
+.application__commentary.is-in .application__commentary-sym-2 {
   opacity: 1;
   right: -5vmax;
   bottom: 3vmax;
@@ -122,13 +153,44 @@
   transition: all 300ms ease-in-out;
 }
 
+/* Screenshots fan: a small hand of cards, same enter motion as the review. */
+.application__fan {
+  position: relative;
+  width: 11vmax;
+  height: 18vmax;
+}
+
+.application__fan-card {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 9vmax;
+  aspect-ratio: 1242 / 2688;
+  border-radius: 0.7vmax;
+  overflow: hidden;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0.4vmax 1.2vmax var(--color-over);
+  transform-origin: 50% 120%;
+  transform: translateX(-50%)
+    rotate(
+      calc((var(--fan-index) - (var(--fan-count) - 1) / 2) * 11deg)
+    );
+}
+
+.application__fan-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* application card for mobile */
 @media screen and (max-width: 480px) {
-  .application {
+  .application__shell {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-bottom: 5vmax; */
   }
 
   .application__cover {
@@ -150,12 +212,18 @@
   }
 }
 
-/* disable commentary on touchscreen devices */
+/* Show the hover sticker / fan only on fine pointers that can hover. */
 @media (hover: hover) and (pointer: fine) {
-  .application:hover .application__commentary {
+  .application__commentary.is-in {
     opacity: 1;
     transform: translate(0, 0) rotate(6deg);
     transition: all 300ms ease-in-out 150ms;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .application__commentary {
+    display: none;
   }
 }
 

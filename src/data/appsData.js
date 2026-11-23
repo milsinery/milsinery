@@ -2,6 +2,7 @@ import weather from '../pictures/apps/weather_hyf.png';
 import weather2 from '../pictures/apps/weather_hyf.webp';
 import pulse from '../pictures/apps/pulse.png';
 import pulse2 from '../pictures/apps/pulse.webp';
+import pulseScreenshots from './pulseScreenshots';
 
 const appsData = [
    {
@@ -40,6 +41,7 @@ const appsData = [
         text: "I’ve really enjoyed using Pulse so far. It’s simple, clean and easy to come back to throughout the day. \n\nI like that any note can become a task and any task can become a note. No due dates, no pressure, no unnecessary noise.\n\nThere’s something satisfying about writing down new tasks and crossing out the ones I’ve finished. The app feels light and natural to use, which makes me actually want to keep opening it.",
       },
     ],
+    screenshots: pulseScreenshots,
     aiLink: '/apps/pulse/ai',
     page: {
       // App Store description. Lead-in lines are headings; wording unchanged.

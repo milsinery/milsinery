@@ -39,7 +39,7 @@ const App = () => {
           </header>
 
           {appData &&
-            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, aiLink, page }) => (
+            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, aiLink, page, screenshots }) => (
               <div className="appPage__content">
                 <div className="appPage__head">
                   <div className="appPage__title">
@@ -94,6 +94,9 @@ const App = () => {
                     </div>
                   </div>
                 </div>
+                {screenshots && screenshots.length > 0 && (
+                  <ScreenshotStrip name={name} shots={screenshots} />
+                )}
                 <AppStoreDescription blocks={page && page.description} />
               </div>
             ))}
@@ -102,6 +105,35 @@ const App = () => {
     </>
   );
 };
+
+
+type Shot = { webp: string; src: string; alt: string };
+
+function ScreenshotStrip({ name, shots }: { name: string; shots: Shot[] }) {
+  return (
+    <div
+      className="appPage__shots"
+      role="region"
+      aria-label={`${name} screenshots`}
+      tabIndex={0}
+    >
+      {shots.map((shot) => (
+        <div className="appPage__shot" key={shot.src}>
+          <picture>
+            <source srcSet={shot.webp} type="image/webp" />
+            <img
+              src={shot.src}
+              alt={shot.alt}
+              width={1242}
+              height={2688}
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function AppStoreDescription({
   blocks,
