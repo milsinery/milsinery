@@ -133,6 +133,36 @@ const PulseForAI = () => {
               Pulse is local-first. It collects no data. Tasks and notes stay on the device and sync through the person’s iCloud.
             </p>
           </div>
+
+          <div className="app__section">
+            <h2 className="t-h3">A tested scenario</h2>
+            <p>
+              Tested on November 24, 2026 by an AI assistant on a Mac running Pulse.
+            </p>
+            <ul className="app__section">
+              <li>
+                <p>
+                  On a locked Mac, adding still works if Pulse is already running:
+                </p>
+                <p>
+                  <code>open -g -a /Applications/pulse.app "pulse://add?text=...&amp;remind=HH:mm"</code>
+                </p>
+                <p>
+                  <code>-g</code> keeps Pulse in the background. The lock screen blocks bringing the app to the front, but the add is processed. An <code>open</code> exit status of 0 is not proof that the task was created.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Shortcuts that read, edit, or delete — Get Tasks, Edit Task, Delete Task, Get Notes, and Delete Note — require the Mac to be unlocked. That is a macOS authentication policy. Creating a task or note with a URL does not.
+                </p>
+              </li>
+              <li>
+                <p>
+                  For a recurring task, check for an existing or postponed copy first so you do not add a duplicate. When the Mac is unlocked, use Get Tasks. When it is locked, ask the person or skip the check. Then add with a URL, and verify after a short delay: tasks sync through iCloud across devices.
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </main>
     </>
