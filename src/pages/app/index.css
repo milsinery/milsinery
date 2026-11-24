@@ -74,6 +74,7 @@
    next shot always peeks past the right edge of the screen. */
 .appPage__shots {
   --shot-gap: 1.25vmax;
+  --shot-end: 4vmax; /* same as the page's side margin */
   display: flex;
   gap: var(--shot-gap);
   width: calc(100vw - 4vmax);
@@ -81,11 +82,19 @@
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline-end: var(--shot-end);
   scrollbar-width: none;
   -ms-overflow-style: none;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   margin: 0 0 5vmax 0;
+}
+
+/* Trailing space after the last shot. A flex spacer, not padding-right:
+   Safari often ignores padding on overflow flex scrollers. */
+.appPage__shots::after {
+  content: '';
+  flex: 0 0 var(--shot-end);
 }
 
 .appPage__shots::-webkit-scrollbar {
@@ -113,10 +122,12 @@
   overflow: hidden;
   border-radius: 2rem;
   background: var(--color-pad);
+  aspect-ratio: 1242 / 2688;
+  line-height: 0;
 }
 
 .appPage__shot:last-child {
-  /* At the end, flush the last shot to the right edge. */
+  /* Snap with the trailing spacer, not flush to the viewport edge. */
   scroll-snap-align: end;
 }
 
@@ -124,9 +135,8 @@
 .appPage__shot img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1242 / 2688;
-  border-radius: 2rem;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media screen and (min-width: 600px) {

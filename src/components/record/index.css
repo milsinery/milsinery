@@ -3,7 +3,7 @@
   display: flex;
   transition: all ease-out 300ms;
   background-color: var(--color-pad);
-  border-radius: 2rem;
+  border-radius: 1vmax;
   padding: 2vmax 3vmax 2vmax 3vmax;
   transition: all 150ms ease-out;
   justify-content: stretch;
