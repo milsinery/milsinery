@@ -9,7 +9,7 @@
   position: relative;
   display: flex;
   background-color: var(--color-pad);
-  border-radius: 1.35vmax;
+  border-radius: 2rem;
   padding: 3vmax 3vmax 4vmax 3vmax;
   transition: all 150ms ease-out;
 }
@@ -147,7 +147,7 @@
   justify-content: center;
   white-space: nowrap;
   line-height: 1;
-  border-radius: 0 1.35vmax 0 1.35vmax;
+  border-radius: 0 2rem 0 2rem;
   background: var(--color-secondary);
   padding: 0.55vmax 1.2vmax;
   transition: all 300ms ease-in-out;
