@@ -3,7 +3,7 @@
   display: flex;
   transition: all ease-out 300ms;
   background-color: var(--color-pad);
-  border-radius: 1.35vmax;
+  border-radius: 2rem;
   padding: 3vmax 3vmax 4vmax 3vmax;
   transition: all 150ms ease-out;
 }
@@ -113,7 +113,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  border-radius: 0 1.35vmax 0 1.35vmax;
+  border-radius: 0 2rem 0 2rem;
   overflow: hidden;
   background: var(--color-secondary);
   padding: 0.5vmax 1.2vmax 0.6vmax 1.2vmax;
