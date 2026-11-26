@@ -65,6 +65,10 @@ const Application = ({
     () => buildHoverPool(comment ?? [], screenshots ?? []),
     [comment, screenshots]
   );
+  const fanShots = useMemo(() => {
+    const fan = pool.find((entry) => entry.type === 'fan');
+    return fan && fan.type === 'fan' ? fan.shots : [];
+  }, [pool]);
   const [canHover, setCanHover] = useState(canHoverNow);
   const [item, setItem] = useState<HoverItem | null>(null);
   const [isIn, setIsIn] = useState(false);
@@ -84,6 +88,64 @@ const Application = ({
     mql.addListener(onChange);
     return () => mql.removeListener(onChange);
   }, []);
+
+  // Warm the hover-fan images before the first mouse enter so they don't flash in.
+  // Use the same WebP URLs the fan <picture> uses, and only on hover-capable pointers.
+  useEffect(() => {
+    if (!canHover || fanShots.length === 0) {
+      return;
+    }
+
+    const links: HTMLLinkElement[] = [];
+    const win = window as Window & {
+      requestIdleCallback?: (
+        cb: () => void,
+        opts?: { timeout: number }
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    const preload = () => {
+      fanShots.forEach((shot) => {
+        const href = shot.webp;
+        const already = Array.from(
+          document.head.querySelectorAll('link[rel="preload"][as="image"]')
+        ).some((el) => el.getAttribute('href') === href);
+        if (!already) {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.type = 'image/webp';
+          link.href = href;
+          document.head.appendChild(link);
+          links.push(link);
+        }
+        const img = new Image();
+        img.src = href;
+        if (typeof img.decode === 'function') {
+          img.decode().catch(() => undefined);
+        }
+      });
+    };
+
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
+    if (typeof win.requestIdleCallback === 'function') {
+      idleId = win.requestIdleCallback(preload, { timeout: 2000 });
+    } else {
+      timeoutId = window.setTimeout(preload, 1);
+    }
+
+    return () => {
+      if (idleId !== undefined && typeof win.cancelIdleCallback === 'function') {
+        win.cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== undefined) {
+        window.clearTimeout(timeoutId);
+      }
+      links.forEach((link) => link.remove());
+    };
+  }, [canHover, fanShots]);
 
   const onMouseEnter = useCallback(() => {
     if (!canHover || pool.length === 0) {
