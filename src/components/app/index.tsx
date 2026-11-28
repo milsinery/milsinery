@@ -6,6 +6,7 @@ import {
   Screenshot,
   HoverItem,
 } from './pickHoverItem';
+import NativeShelfBadge from '../../pages/app/NativeShelfBadge';
 import './index.css';
 
 type ApplicationProps = {
@@ -220,6 +221,7 @@ const Application = ({
                   <span className="visually-hidden"> {name}</span>
                 </Link>
               )}
+              {infoLink === '/apps/pulse' && <NativeShelfBadge />}
             </>
           )}
         </div>

@@ -41,8 +41,16 @@
 
 .application__links {
   display: flex;
+  align-items: center;
   gap: 1.5vmax;
   flex-wrap: wrap;
+}
+
+/* Match .t-h3 link text on the Pulse card. */
+.application__links .appPage__shelf {
+  font-size: max(18px, 2vmax);
+  line-height: 1.1;
+  flex-shrink: 0;
 }
 
 .application__link:last-child {

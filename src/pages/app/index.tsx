@@ -32,7 +32,8 @@ const App = () => {
         })}
 
       <main className="appPage effect-fade-in effect-zoom-in">
-        <div className="appPage__wrapper">
+        <div className={'appPage__wrapper' + (url === '/apps/pulse' ? ' appPage__wrapper--pulse' : '')}>
+          {url === '/apps/pulse' && <NativeShelfBadge className="main__contact" />}
           <header className="appPage__header">
             <Link to="/">
               <span className="t-h3">Back to main</span>
@@ -92,7 +93,6 @@ const App = () => {
                         <span className="appPage__link t-h2">Terms of Use (EULA)</span>
                       </Link>
             }
-                      {url === '/apps/pulse' && <NativeShelfBadge />}
                     </div>
                   </div>
                 </div>

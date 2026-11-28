@@ -8,10 +8,26 @@
   }
   
   .appPage__wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     max-width: 1280px;
     margin: 6vmax 4vmax 12vmax 4vmax;
+  }
+
+  /* Same corner placement as the homepage .main__contact link. */
+  .appPage__wrapper > .main__contact {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    font-weight: 700;
+    font-size: max(16px, 1.5vmax);
+    line-height: 1.1;
+  }
+
+  .appPage__wrapper--pulse .appPage__header {
+    padding-right: max(96px, 8em);
   }
   
   .appPage__header {
@@ -170,13 +186,11 @@
   }
 }
 
-/* NativeShelf badge sits in the Pulse links stack, sized like .t-h2 text. */
 .appPage__shelf {
   display: block;
   width: fit-content;
-  line-height: 110%;
-  font-size: max(20px, 3vmax);
   color: var(--color-text-main);
+  line-height: 1.1;
 }
 
 .appPage__shelf-mark,
