@@ -170,22 +170,21 @@
   }
 }
 
+/* NativeShelf badge sits in the Pulse links stack, sized like .t-h2 text. */
 .appPage__shelf {
-  margin-top: 2vmax;
-  width: fit-content;
-}
-
-.appPage__shelf a {
-  display: inline-block;
-  line-height: 0;
-  background: #fff;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-.appPage__shelf img {
   display: block;
-  width: 232px;
-  max-width: 100%;
-  height: auto;
+  width: fit-content;
+  line-height: 110%;
+  font-size: max(20px, 3vmax);
+  color: var(--color-text-main);
+}
+
+.appPage__shelf-mark,
+.appPage__shelf svg {
+  display: block;
+}
+
+.appPage__shelf svg {
+  height: 1.1em;
+  width: auto;
 }
