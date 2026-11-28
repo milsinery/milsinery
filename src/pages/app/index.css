@@ -22,12 +22,13 @@
     right: 0;
     z-index: 1;
     font-weight: 700;
-    font-size: max(16px, 1.5vmax);
+    font-size: calc(max(16px, 1.5vmax) * 1.5);
     line-height: 1.1;
   }
 
   .appPage__wrapper--pulse .appPage__header {
-    padding-right: max(96px, 8em);
+    /* Room for the 1.5× corner badge (~77px at 320px) without wrapping "Back to main". */
+    padding-right: max(96px, 6em);
   }
   
   .appPage__header {
