@@ -140,6 +140,8 @@
   position: relative;
   overflow: hidden;
   border-radius: 2rem;
+  /* Same hairline as .appPage__cover (the circular app icon). */
+  border: 1px solid hsl(0, 10%, 95%);
   background: var(--color-pad);
   aspect-ratio: 1242 / 2688;
   line-height: 0;
