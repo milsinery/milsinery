@@ -39,7 +39,7 @@ const App = () => {
           </header>
 
           {appData &&
-            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, aiLink, page, screenshots }) => (
+            appData.map(({ webp, png, info, name, installLink, policyLink, EULA, aboutLink, aiLink, page, screenshots, infoLink }) => (
               <div className="appPage__content">
                 <div className="appPage__head">
                   <div className="appPage__title">
@@ -92,6 +92,11 @@ const App = () => {
                       </Link>
             }
                     </div>
+                    {infoLink === '/apps/pulse' && (
+                      <div className="appPage__shelf">
+                        <a href="https://nativeshelf.com?ref=badge" target="_blank" title="Featured on NativeShelf.com"><img src="https://nativeshelf.com/badge/dark.png?v=6" alt="Featured on NativeShelf.com" width="232" height="68" /></a>
+                      </div>
+                    )}
                   </div>
                 </div>
                 {screenshots && screenshots.length > 0 && (

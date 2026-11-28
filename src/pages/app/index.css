@@ -169,3 +169,23 @@
     width: calc((100% - 5 * var(--shot-gap)) / 5.25);
   }
 }
+
+.appPage__shelf {
+  margin-top: 2vmax;
+  width: fit-content;
+}
+
+.appPage__shelf a {
+  display: inline-block;
+  line-height: 0;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.appPage__shelf img {
+  display: block;
+  width: 232px;
+  max-width: 100%;
+  height: auto;
+}
